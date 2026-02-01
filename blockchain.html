@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Promesa - Tecnología Blockchain | Miel Litueche</title>
+    <meta name="description"
+        content="Descubre cómo usamos blockchain para garantizar la pureza y trazabilidad de nuestra miel. Explicado de forma simple y empática.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="public/scripts/tailwind-config.js"></script>
+
+    <link rel="stylesheet" href="public/styles/blockchain.css">
+</head>
+
+<body class="min-h-screen bg-cream text-gray-800 selection:bg-honey-500 selection:text-white pb-20">
+
+    <!-- Navegación Simple -->
+    <nav
+        class="sticky top-0 z-50 bg-cream/90 backdrop-blur-md px-6 py-4 flex items-center gap-4 border-b border-forest-700/10">
+        <button onclick="goBack()"
+            class="p-2 -ml-2 hover:bg-forest-700/5 rounded-full transition-colors text-forest-700">
+            <svg class="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+        <span class="font-serif font-bold text-lg text-forest-700">Nuestra Promesa</span>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-6 pt-8">
+
+        <!-- Encabezado Empático -->
+        <header class="mb-12 text-center">
+            <div class="inline-flex items-center justify-center p-3 bg-honey-500/10 rounded-full mb-6">
+                <svg class="w-10 h-10 text-honey-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+            </div>
+            <h1 class="font-serif text-3xl md:text-5xl text-forest-700 mb-4 leading-tight">
+                No confíes en palabras.<br />Confía en el Código.
+            </h1>
+            <p class="text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+                Hemos eliminado la "fe ciega" de la ecuación. Usamos criptografía para garantizar que lo que comes es
+                puro, ético y de Litueche.
+            </p>
+        </header>
+
+        <!-- SECCIÓN INTERACTIVA: CLICK TO FLIP -->
+        <section class="mb-16">
+            <h2 class="text-center font-serif text-slate-400 mb-8 uppercase tracking-widest text-xs">
+                Toca las tarjetas para descubrir la verdad
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Card 1: El Problema Oculto -->
+                <div class="flip-card cursor-pointer" onclick="flipCard(this)">
+                    <div class="flip-card-inner">
+                        <!-- Front -->
+                        <div
+                            class="flip-card-front bg-white rounded-3xl p-8 flex flex-col items-center justify-center text-center shadow-lg border-2 border-amber-200">
+                            <div class="mb-6 p-4 bg-white rounded-full shadow-sm">
+                                <svg class="w-8 h-8 text-amber-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-gray-900 mb-4">El Problema Oculto</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                ¿Sabías que la miel es uno de los 3 alimentos más adulterados del mundo? Muchas veces se
+                                mezcla con jarabe de maíz.
+                            </p>
+                            <div
+                                class="mt-auto pt-4 flex items-center gap-2 text-forest-700 text-xs font-bold uppercase tracking-wider animate-pulse-subtle">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                                Toca para girar
+                            </div>
+                        </div>
+                        <!-- Back -->
+                        <div
+                            class="flip-card-back bg-forest-700 rounded-3xl p-8 flex flex-col items-center justify-center text-center shadow-xl text-white">
+                            <svg class="w-12 h-12 mb-4 text-honey-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                            <h3 class="font-serif text-xl font-bold text-honey-500 mb-4">La Solución Litu Labs</h3>
+                            <p class="text-sm text-white/90 leading-relaxed font-medium">
+                                Nuestra solución: Registramos la cosecha EN VIVO. La cantidad producida por colmena se
+                                bloquea matemáticamente. No podemos vender más de lo que las abejas realmente
+                                produjeron.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: El Libro Imborrable -->
+                <div class="flip-card cursor-pointer" onclick="flipCard(this)">
+                    <div class="flip-card-inner">
+                        <!-- Front -->
+                        <div
+                            class="flip-card-front bg-white rounded-3xl p-8 flex flex-col items-center justify-center text-center shadow-lg border-2 border-blue-200">
+                            <div class="mb-6 p-4 bg-white rounded-full shadow-sm">
+                                <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                                </svg>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-gray-900 mb-4">El Libro Imborrable</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                ¿Qué pasa si alguien quiere cambiar la fecha de vencimiento o el origen de la miel para
+                                venderla más cara?
+                            </p>
+                            <div
+                                class="mt-auto pt-4 flex items-center gap-2 text-forest-700 text-xs font-bold uppercase tracking-wider animate-pulse-subtle">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                                Toca para girar
+                            </div>
+                        </div>
+                        <!-- Back -->
+                        <div
+                            class="flip-card-back bg-forest-700 rounded-3xl p-8 flex flex-col items-center justify-center text-center shadow-xl text-white">
+                            <svg class="w-12 h-12 mb-4 text-honey-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                            <h3 class="font-serif text-xl font-bold text-honey-500 mb-4">La Solución Litu Labs</h3>
+                            <p class="text-sm text-white/90 leading-relaxed font-medium">
+                                Imposible. Usamos Blockchain (Polygon). Una vez que el dato entra, se convierte en
+                                piedra
+                                digital. Ni nosotros, ni un hacker, ni el gobierno puede cambiar esa fecha. Es confianza
+                                absoluta.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Comercio Justo Real -->
+                <div class="flip-card cursor-pointer" onclick="flipCard(this)">
+                    <div class="flip-card-inner">
+                        <!-- Front -->
+                        <div
+                            class="flip-card-front bg-white rounded-3xl p-8 flex flex-col items-center justify-center text-center shadow-lg border-2 border-green-200">
+                            <div class="mb-6 p-4 bg-white rounded-full shadow-sm">
+                                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-gray-900 mb-4">Comercio Justo Real</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                ¿Realmente le pagan lo justo al apicultor o se queda todo en el intermediario?
+                            </p>
+                            <div
+                                class="mt-auto pt-4 flex items-center gap-2 text-forest-700 text-xs font-bold uppercase tracking-wider animate-pulse-subtle">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                                Toca para girar
+                            </div>
+                        </div>
+                        <!-- Back -->
+                        <div
+                            class="flip-card-back bg-forest-700 rounded-3xl p-8 flex flex-col items-center justify-center text-center shadow-xl text-white">
+                            <svg class="w-12 h-12 mb-4 text-honey-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                            <h3 class="font-serif text-xl font-bold text-honey-500 mb-4">La Solución Litu Labs</h3>
+                            <p class="text-sm text-white/90 leading-relaxed font-medium">
+                                Transparencia total. El Smart Contract registra automáticamente la trazabilidad. Tú
+                                sabes
+                                exactamente quién cosechó tu frasco. Sin intermediarios oscuros.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LÍNEA DE TIEMPO VISUAL -->
+        <section class="bg-white rounded-3xl p-8 shadow-xl shadow-forest-700/5 mb-16 border border-forest-700/5">
+            <h2 class="font-serif text-2xl text-gray-900 mb-12 text-center">El Viaje del Dato (Paso a Paso)</h2>
+
+            <div class="relative pl-4 md:pl-0">
+                <!-- Línea conectora -->
+                <div class="absolute left-6 top-4 bottom-4 w-0.5 bg-slate-200 md:left-1/2 md:-ml-px"></div>
+
+                <!-- Paso 1 -->
+                <div class="relative flex flex-col md:flex-row items-start md:items-center mb-16 md:justify-between">
+                    <div
+                        class="absolute left-0 md:left-1/2 md:-ml-7 w-14 h-14 bg-cream border-4 border-white shadow-md rounded-full flex items-center justify-center z-10">
+                        <svg class="w-6 h-6 text-honey-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                        </svg>
+                    </div>
+                    <div class="ml-20 md:ml-0 md:w-[45%] md:text-right md:pr-12">
+                        <div class="bg-cream p-6 rounded-2xl border border-honey-500/20 relative">
+                            <div
+                                class="hidden md:block absolute top-1/2 -right-3 w-4 h-4 bg-cream border-t border-r border-honey-500/20 transform rotate-45 -translate-y-1/2">
+                            </div>
+                            <div
+                                class="md:hidden block absolute top-6 -left-3 w-4 h-4 bg-cream border-b border-l border-honey-500/20 transform rotate-45">
+                            </div>
+                            <h4 class="font-bold text-forest-700 mb-2 text-lg">1. Cosecha & Envasado</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">Don Héctor llena el frasco. En ese
+                                instante,
+                                registramos GPS, fecha y tipo de flor en nuestra App.</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:block md:w-[45%]"></div>
+                </div>
+
+                <!-- Paso 2 -->
+                <div class="relative flex flex-col md:flex-row items-start md:items-center mb-16 md:justify-between">
+                    <div
+                        class="absolute left-0 md:left-1/2 md:-ml-7 w-14 h-14 bg-forest-700 border-4 border-white shadow-md rounded-full flex items-center justify-center z-10">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <div class="hidden md:block md:w-[45%]"></div>
+                    <div class="ml-20 md:ml-0 md:w-[45%] md:pl-12">
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 relative">
+                            <div
+                                class="hidden md:block absolute top-1/2 -left-3 w-4 h-4 bg-slate-50 border-b border-l border-slate-200 transform rotate-45 -translate-y-1/2">
+                            </div>
+                            <div
+                                class="md:hidden block absolute top-6 -left-3 w-4 h-4 bg-slate-50 border-b border-l border-slate-200 transform rotate-45">
+                            </div>
+                            <h4 class="font-bold text-gray-900 mb-2 text-lg">2. Encriptación (Hashing)</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">El sistema convierte esa info en un código
+                                único (Hash). Es como una huella digital matemática.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paso 3 -->
+                <div class="relative flex flex-col md:flex-row items-start md:items-center mb-16 md:justify-between">
+                    <div
+                        class="absolute left-0 md:left-1/2 md:-ml-7 w-14 h-14 bg-cream border-4 border-white shadow-md rounded-full flex items-center justify-center z-10">
+                        <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                        </svg>
+                    </div>
+                    <div class="ml-20 md:ml-0 md:w-[45%] md:text-right md:pr-12">
+                        <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 relative">
+                            <div
+                                class="hidden md:block absolute top-1/2 -right-3 w-4 h-4 bg-blue-50 border-t border-r border-blue-100 transform rotate-45 -translate-y-1/2">
+                            </div>
+                            <div
+                                class="md:hidden block absolute top-6 -left-3 w-4 h-4 bg-blue-50 border-b border-l border-blue-100 transform rotate-45">
+                            </div>
+                            <h4 class="font-bold text-blue-800 mb-2 text-lg">3. Bloqueo en Blockchain</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">Esa huella se envía a miles de
+                                computadoras
+                                (Nodos) en la red Polygon. Ya nadie puede borrarla.</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:block md:w-[45%]"></div>
+                </div>
+
+                <!-- Paso 4 -->
+                <div class="relative flex flex-col md:flex-row items-start md:items-center md:justify-between">
+                    <div
+                        class="absolute left-0 md:left-1/2 md:-ml-7 w-14 h-14 bg-honey-500 border-4 border-white shadow-md rounded-full flex items-center justify-center z-10 animate-pulse">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div class="hidden md:block md:w-[45%]"></div>
+                    <div class="ml-20 md:ml-0 md:w-[45%] md:pl-12">
+                        <div class="bg-amber-50 p-6 rounded-2xl border border-amber-200 shadow-md relative">
+                            <div
+                                class="hidden md:block absolute top-1/2 -left-3 w-4 h-4 bg-amber-50 border-b border-l border-amber-200 transform rotate-45 -translate-y-1/2">
+                            </div>
+                            <div
+                                class="md:hidden block absolute top-6 -left-3 w-4 h-4 bg-amber-50 border-b border-l border-amber-200 transform rotate-45">
+                            </div>
+                            <h4 class="font-bold text-forest-700 mb-2 text-lg">4. Tu Verificación</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">Tú escaneas el QR. Tu celular consulta a
+                                la
+                                Blockchain y confirma: "Sí, este frasco es legítimo".</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Amigable -->
+        <section class="space-y-4 mb-16">
+            <h2 class="font-serif text-2xl text-gray-900 mb-8 text-center">Preguntas Frecuentes</h2>
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <div
+                    class="bg-white p-6 rounded-2xl border border-gray-100 hover:border-honey-500/30 transition-colors cursor-default shadow-sm hover:shadow-md">
+                    <h3 class="font-bold text-forest-700 mb-3 flex items-start gap-2 text-sm md:text-base">
+                        <svg class="w-5 h-5 flex-shrink-0 mt-0.5 text-honey-500" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        ¿Tengo que pagar en criptomonedas?
+                    </h3>
+                    <p class="text-slate-600 text-sm ml-7 leading-relaxed">¡Para nada! Tú pagas en pesos chilenos como
+                        siempre. La tecnología trabaja invisiblemente detrás para protegerte.</p>
+                </div>
+
+                <div
+                    class="bg-white p-6 rounded-2xl border border-gray-100 hover:border-honey-500/30 transition-colors cursor-default shadow-sm hover:shadow-md">
+                    <h3 class="font-bold text-forest-700 mb-3 flex items-start gap-2 text-sm md:text-base">
+                        <svg class="w-5 h-5 flex-shrink-0 mt-0.5 text-honey-500" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        ¿Por qué Litueche?
+                    </h3>
+                    <p class="text-slate-600 text-sm ml-7 leading-relaxed">Es una zona de rezago con una biodiversidad
+                        única. Usamos esta tecnología para darle valor global a nuestro tesoro local.</p>
+                </div>
+
+                <div
+                    class="bg-white p-6 rounded-2xl border border-gray-100 hover:border-honey-500/30 transition-colors cursor-default shadow-sm hover:shadow-md">
+                    <h3 class="font-bold text-forest-700 mb-3 flex items-start gap-2 text-sm md:text-base">
+                        <svg class="w-5 h-5 flex-shrink-0 mt-0.5 text-honey-500" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        ¿Qué pasa si escaneo un código falso?
+                    </h3>
+                    <p class="text-slate-600 text-sm ml-7 leading-relaxed">Nuestra aplicación te alertará inmediatamente
+                        con
+                        una pantalla roja indicando que el producto no está verificado en nuestra base de datos segura.
+                    </p>
+                </div>
+
+                <div
+                    class="bg-white p-6 rounded-2xl border border-gray-100 hover:border-honey-500/30 transition-colors cursor-default shadow-sm hover:shadow-md">
+                    <h3 class="font-bold text-forest-700 mb-3 flex items-start gap-2 text-sm md:text-base">
+                        <svg class="w-5 h-5 flex-shrink-0 mt-0.5 text-honey-500" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        ¿Mis datos quedan guardados?
+                    </h3>
+                    <p class="text-slate-600 text-sm ml-7 leading-relaxed">No. La consulta es anónima. Tú ves la
+                        información
+                        del producto, pero nosotros no rastreamos quién eres. Respetamos tu privacidad al 100%.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Final -->
+        <div class="mt-16 mb-12 text-center bg-forest-700 rounded-3xl p-10 text-white relative overflow-hidden">
+            <div class="absolute -left-10 -bottom-10 w-48 h-48 hexagon bg-white/5 rotate-12"></div>
+            <div class="relative z-10">
+                <h2 class="font-serif text-2xl mb-4">¿Listo para probar la diferencia?</h2>
+                <p class="text-white/80 mb-8 max-w-md mx-auto">
+                    Únete a la revolución de la alimentación transparente.
+                </p>
+                <button onclick="goBack()"
+                    class="bg-honey-500 text-gray-900 px-8 py-3 rounded-xl font-bold hover:bg-white transition-colors shadow-lg active:scale-95 transform">
+                    Volver a mi Miel
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script src="public/scripts/blockchain.js"></script>
+
+</body>
+
+</html>

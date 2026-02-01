@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo - Panal de Litu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="public/scripts/tailwind-config.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        @keyframes slide-up {
+            from {
+                transform: translate(-50%, 100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+        }
+
+        .animate-slide-up {
+            animation: slide-up 0.5s ease-out forwards;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-[#faf9f6] font-sans text-gray-900">
+
+    <!-- Header -->
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md shadow-sm z-50 border-b border-amber-100 px-4">
+        <div class="max-w-5xl mx-auto h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='index.html'">
+                <i data-lucide="hexagon" class="text-amber-600 fill-amber-600 w-6 h-6"></i>
+                <span class="text-xl font-bold tracking-tighter uppercase italic">Panal de Litu</span>
+            </div>
+            <div id="cart-btn" class="relative cursor-pointer bg-amber-100 p-2 rounded-full hidden"
+                onclick="toggleCart()">
+                <i data-lucide="shopping-bag" class="text-amber-900 w-5 h-5"></i>
+                <span id="cart-count"
+                    class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero: Lote Cero -->
+    <section class="pt-24 px-4 max-w-5xl mx-auto mb-12">
+        <div
+            class="bg-neutral-900 rounded-[2.5rem] overflow-hidden shadow-2xl text-white flex flex-col md:flex-row border border-white/10">
+            <div class="p-8 md:p-16 md:w-1/2 space-y-6 flex flex-col justify-center">
+                <div
+                    class="inline-flex items-center gap-2 bg-amber-500/20 text-amber-400 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-amber-500/30">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Exclusividad Litueche
+                </div>
+                <h1 id="hero-name" class="text-5xl font-serif font-bold leading-[1.1]"></h1>
+                <p id="hero-desc" class="text-gray-400 text-lg leading-relaxed"></p>
+                <div class="flex flex-col gap-4 pt-4">
+                    <span id="hero-price" class="text-4xl font-light"></span>
+                    <div class="flex flex-wrap gap-3">
+                        <button id="hero-add"
+                            class="bg-amber-500 text-black px-6 py-3 rounded-full font-bold hover:scale-105 transition flex items-center gap-2 text-sm md:text-base shadow-lg shadow-amber-500/20">
+                            RESERVAR AHORA <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                        <button onclick="toggleInfoHero()"
+                            class="border border-white/20 bg-white/5 backdrop-blur-sm text-white px-6 py-3 rounded-full font-bold hover:bg-white/10 transition flex items-center gap-2 text-sm md:text-base">
+                            <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i> ¿Por qué es única?
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 relative min-h-[400px]">
+                <img id="hero-image" src="" alt="Hero Honey"
+                    class="absolute inset-0 w-full h-full object-cover opacity-80" />
+                <div class="absolute inset-0 bg-gradient-to-r from-neutral-900 via-transparent to-transparent"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seccion Packs Promocionales -->
+    <section class="px-4 max-w-5xl mx-auto mb-20 overflow-hidden">
+        <div class="flex flex-col mb-8 text-center">
+            <h2 class="text-3xl font-serif font-bold text-gray-900 mb-2 italic">Promociones de Temporada</h2>
+            <div class="h-1 w-20 bg-amber-500 mx-auto rounded-full"></div>
+        </div>
+
+        <div id="promotions-container" class="flex overflow-x-auto pb-8 gap-6 snap-x no-scrollbar">
+            <!-- Rendered by JS -->
+        </div>
+    </section>
+
+    <!-- Seccion Mieles -->
+    <section class="px-4 max-w-5xl mx-auto mb-20">
+        <div class="flex items-center gap-4 mb-8">
+            <h2 class="text-3xl font-serif font-bold">Variedades en Stock</h2>
+            <div class="flex-1 h-[1px] bg-gray-200"></div>
+        </div>
+
+        <div id="honey-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Rendered by JS -->
+        </div>
+    </section>
+
+    <!-- Seccion Velas -->
+    <section class="px-4 max-w-5xl mx-auto mb-24">
+        <div class="bg-orange-600 rounded-[3rem] p-8 md:p-12 text-white relative overflow-hidden mb-12">
+            <i data-lucide="flame" class="absolute -right-8 -bottom-8 opacity-20 w-60 h-60"></i>
+            <div class="relative z-10 max-w-md">
+                <h2 class="text-4xl font-serif font-bold mb-4">Luz de Panal</h2>
+                <p class="text-orange-100 mb-0 italic">"Cera virgen recolectada de forma ética, para iluminar tus
+                    espacios con el aroma puro de la colmena."</p>
+            </div>
+        </div>
+
+        <div id="candles-container" class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <!-- Rendered by JS -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 text-white py-12 px-4 mt-20 relative z-40 rounded-t-[3rem] pb-32">
+        <div
+            class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+            <div>
+                <div class="flex items-center gap-2 justify-center md:justify-start mb-2">
+                    <i data-lucide="hexagon" class="text-amber-500 fill-amber-500 w-6 h-6"></i>
+                    <span class="text-2xl font-serif font-bold italic">Panal de Litu</span>
+                </div>
+                <p class="text-gray-500 text-sm">Litueche, VI Región, Chile</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://www.tiktok.com/@panal.de.litu" target="_blank"
+                    class="flex items-center gap-2 bg-white/5 border border-white/10 px-5 py-3 rounded-2xl hover:bg-black hover:text-[#00f2ea] hover:border-[#00f2ea] transition-all group">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                    </svg>
+                    <span class="font-bold text-sm">@panal.de.litu</span>
+                </a>
+
+                <a href="https://www.instagram.com/panal.litu" target="_blank"
+                    class="flex items-center gap-2 bg-white/5 border border-white/10 px-5 py-3 rounded-2xl hover:bg-gradient-to-br hover:from-purple-600 hover:to-orange-500 hover:border-transparent transition-all">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                    <span class="font-bold text-sm">@panal.litu</span>
+                </a>
+
+                <a href="https://wa.me/56953665863" target="_blank"
+                    class="flex items-center gap-2 bg-white/5 border border-white/10 px-5 py-3 rounded-2xl hover:bg-green-500 hover:text-black hover:border-green-500 transition-all">
+                    <i data-lucide="message-circle" class="w-5 h-5"></i>
+                    <span class="font-bold text-sm">WhatsApp</span>
+                </a>
+            </div>
+        </div>
+        <div class="border-t border-white/5 mt-12 pt-8 text-center">
+            <p class="text-gray-600 text-xs">© 2024 Panal de Litu. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Checkout Bar -->
+    <div id="checkout-bar"
+        class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-neutral-900 text-white p-4 rounded-[2rem] shadow-2xl z-50 flex items-center justify-between border border-white/10 animate-slide-up">
+        <div class="pl-4">
+            <p class="text-[10px] text-gray-400 uppercase font-black">Tu pedido</p>
+            <p id="total-amount" class="text-xl font-bold"></p>
+        </div>
+        <button onclick="toggleCart()"
+            class="bg-amber-500 text-black px-6 py-3 rounded-2xl font-black text-sm flex items-center gap-2">
+            VER CANASTA <i data-lucide="shopping-bag" class="w-4 h-4 ml-2"></i>
+        </button>
+    </div>
+
+    <!-- Notificacion -->
+    <div id="notification"
+        class="hidden fixed top-20 right-4 bg-green-500 text-white px-6 py-3 rounded-2xl shadow-2xl z-[60] font-bold flex items-center gap-2 text-sm transition-opacity duration-300">
+        <i data-lucide="star" class="w-4 h-4 fill-white"></i> Item Agregado
+    </div>
+
+    <!-- CART MODAL / SIDEBAR -->
+    <div id="cart-modal" class="hidden fixed inset-0 z-[70]">
+        <!-- Backdrop -->
+        <div onclick="toggleCart()" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"></div>
+
+        <!-- Sidebar -->
+        <div
+            class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col transform transition-transform duration-300 translate-x-full cart-slide">
+
+            <!-- Cart Header -->
+            <div class="p-6 border-b border-gray-100 flex items-center justify-between bg-white z-10">
+                <h2 class="text-2xl font-serif font-bold text-gray-900">Tu Canasta</h2>
+                <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                    <i data-lucide="x" class="w-6 h-6 text-gray-400"></i>
+                </button>
+            </div>
+
+            <!-- Cart Items -->
+            <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-6">
+                <!-- Items rendered by JS -->
+                <div class="flex flex-col items-center justify-center h-full text-center space-y-4 text-gray-400">
+                    <i data-lucide="shopping-bag" class="w-16 h-16 opacity-20"></i>
+                    <p>Tu canasta está vacía</p>
+                    <button onclick="toggleCart()" class="text-amber-500 font-bold text-sm hover:underline">Seguir
+                        comprando</button>
+                </div>
+            </div>
+
+            <!-- Cart Footer -->
+            <div class="p-6 border-t border-gray-100 bg-gray-50">
+                <div class="flex justify-between items-center mb-6">
+                    <span class="text-gray-500 font-medium">Total Estimado</span>
+                    <span id="cart-total" class="text-3xl font-serif font-bold text-gray-900">$0</span>
+                </div>
+                <button onclick="checkoutWhatsApp()"
+                    class="w-full bg-neutral-900 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-neutral-800 transition-all active:scale-95 shadow-xl">
+                    <i data-lucide="message-circle" class="w-5 h-5"></i>
+                    CONFIRMAR PEDIDO
+                </button>
+            </div>
+        </div>
+    </div>
+    <style>
+        .cart-open .cart-slide {
+            transform: translateX(0);
+        }
+
+        .cart-open #cart-modal {
+            display: block;
+        }
+    </style>
+
+    <script>
+        // DATA
+        const products = {
+            hero: {
+                id: 'genesis',
+                name: 'Lote Cero: La Primera Gota',
+                price: 10000,
+                description: 'Una edición irrepetible. Miel cruda de floración nativa única de Litueche. Cosechada bajo la luna llena de marzo. Solo 50 unidades.',
+                tag: 'Edición Limitada',
+                image: 'public/images/lote_0.png'
+            },
+            honey: [
+                { id: 1, name: 'Miel de Corontillo', price: 7000, weight: '1KG', origin: 'Litueche, Bosque Esclerófilo', image: "public/images/catalog_coron.png" },
+                { id: 2, name: 'Miel de Corontillo', price: 4500, weight: '1/2KG', origin: 'Litueche, Bosque Esclerófilo', image: 'public/images/catalog_coron.png' },
+                { id: 3, name: 'Miel de Quillay', price: 7000, weight: '1KG', origin: 'Litueche, Ladera Norte', image: 'public/images/catalog_quillay.jpg' },
+                { id: 4, name: 'Miel de Quillay', price: 4500, weight: '1/2KG', origin: 'Litueche, Ladera Norte', image: 'public/images/catalog_quillay.jpg' },
+                { id: 5, name: 'Miel Multifloral', price: 7000, weight: '1KG', origin: 'Litueche, Praderas Silvestres', image: 'public/images/catalog_multi.png' },
+                { id: 6, name: 'Miel Multifloral', price: 4500, weight: '1/2KG', origin: 'Litueche, Praderas Silvestres', image: 'public/images/catalog_multi.png' },
+                { id: 7, name: 'Miel de Arrope', price: 7500, weight: '1KG', origin: 'Tradición Ancestral Litueche', image: 'public/images/catalog_arrope.png' },
+            ],
+            promotions: [
+                { id: 201, name: 'Pack Dúo Regalo', price: 15500, desc: 'Corontillo 1KG + Quillay 1KG + 1 Vela de cera de abeja + Palita de madera', discount: 'Regalo' },
+                { id: 202, name: 'Trío Degusta', price: 12000, desc: '3 Variedades de 1/2KG a elección', discount: 'Más Vendido' },
+                { id: 203, name: 'Kit Emprendedor', price: 29000, desc: '5 Mieles de 1KG', discount: '27% OFF' },
+                { id: 204, name: 'Pack Arrope Intenso', price: 25900, desc: '2 Mieles de 1KG + 1 KG de Arrope', discount: 'Vela de regalo' },
+            ],
+            candles: [
+                { id: 101, name: 'Vela Abeja real', price: 7000, image: 'public/images/vela_abejareina.png' },
+                { id: 102, name: 'Vela Muñeco de Nieve', price: 5200, image: 'public/images/vela_muñeco.png' },
+                { id: 103, name: 'Vela Navideña', price: 6500, image: 'public/images/vela_navidad.png' },
+                { id: 104, name: 'Vela Love', price: 6000, image: 'public/images/vela_love.png' },
+                { id: 105, name: 'Vela Papa Noel', price: 6500, image: 'public/images/vela_papanoel.png' },
+                { id: 106, name: 'Vela Pascuero', price: 6400, image: 'public/images/vela_pascuero.png' },
+                { id: 107, name: 'Vela Perro', price: 4300, image: 'public/images/vela_perro.png' },
+                { id: 108, name: 'Vela Reno', price: 7200, image: 'public/images/vela_reno.png' },
+                { id: 109, name: 'Vela Perrita', price: 4500, image: 'public/images/vela_perrita.png' },
+                { id: 110, name: 'Vela Perrito', price: 4500, image: 'public/images/vela_perrito.png' }
+            ]
+        };
+
+        let cart = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderHero();
+            renderPromotions();
+            renderHoney();
+            renderCandles();
+            lucide.createIcons();
+        });
+
+        function renderHero() {
+            document.getElementById('hero-name').textContent = products.hero.name;
+            document.getElementById('hero-desc').textContent = products.hero.description;
+            document.getElementById('hero-price').textContent = '$' + products.hero.price.toLocaleString();
+            document.getElementById('hero-image').src = products.hero.image;
+            document.getElementById('hero-add').onclick = () => addToCart(products.hero);
+        }
+
+        function renderPromotions() {
+            const container = document.getElementById('promotions-container');
+            container.innerHTML = products.promotions.map(pack => `
+                <div class="min-w-[280px] md:min-w-[320px] bg-white p-6 rounded-3xl shadow-xl border border-amber-100 snap-center flex flex-col justify-between group hover:-translate-y-2 transition-transform duration-300">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <div class="bg-amber-100 text-amber-800 p-2 rounded-2xl"><i data-lucide="package" class="w-6 h-6"></i></div>
+                            <span class="text-[10px] font-black uppercase tracking-tighter bg-amber-500 text-white px-3 py-1 rounded-full">${pack.discount}</span>
+                        </div>
+                        <h3 class="text-xl font-bold leading-tight">${pack.name}</h3>
+                        <p class="text-gray-500 text-sm">${pack.desc}</p>
+                    </div>
+                    <div class="mt-6 flex items-center justify-between">
+                        <span class="text-2xl font-black text-amber-600">$${pack.price.toLocaleString()}</span>
+                        <button onclick='addToCart(${JSON.stringify(pack).replace(/'/g, "&#39;")})' class="bg-neutral-900 text-white p-3 rounded-2xl hover:bg-amber-600 transition shadow-lg active:scale-90 flex items-center justify-center">
+                            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderHoney() {
+            const container = document.getElementById('honey-container');
+            container.innerHTML = products.honey.map(miel => `
+                <div class="bg-white rounded-[2rem] p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all group">
+                    <div class="aspect-square bg-amber-50 rounded-2xl mb-4 overflow-hidden relative">
+                        <img src="${miel.image}" alt="${miel.name}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+                        <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold shadow-sm">
+                            ${miel.weight}
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold mb-1">${miel.name}</h3>
+                    <p class="text-gray-400 text-xs mb-4 flex items-center gap-1"><i data-lucide="qr-code" class="w-3 h-3"></i> ${miel.origin}</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-2xl font-black">$${miel.price.toLocaleString()}</span>
+                        <button onclick='addToCart(${JSON.stringify(miel).replace(/'/g, "&#39;")})' class="bg-amber-100 text-amber-900 px-4 py-2 rounded-xl font-bold text-sm hover:bg-amber-500 hover:text-white transition">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderCandles() {
+            const container = document.getElementById('candles-container');
+            container.innerHTML = products.candles.map(candle => `
+                <div class="group">
+                    <div class="aspect-[4/5] bg-gray-100 rounded-3xl overflow-hidden mb-3 relative">
+                        <img src="${candle.image}" alt="${candle.name}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                            <button onclick='addToCart(${JSON.stringify(candle).replace(/'/g, "&#39;")})' class="bg-white text-black p-4 rounded-full opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition shadow-2xl flex items-center justify-center">
+                                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="text-sm font-bold truncate">${candle.name}</h3>
+                    <p class="text-sm text-amber-600 font-black">$${candle.price.toLocaleString()}</p>
+                </div>
+            `).join('');
+        }
+
+        function addToCart(product) {
+            cart.push(product);
+            updateCartUI();
+            showNotification();
+            lucide.createIcons();
+
+            // If modal is open, re-render
+            const modal = document.getElementById('cart-modal');
+            if (modal && !modal.classList.contains('hidden')) {
+                renderCartList();
+            }
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cart-modal');
+            const sidebar = modal.querySelector('.cart-slide');
+
+            if (modal.classList.contains('hidden')) {
+                // Open
+                modal.classList.remove('hidden');
+                setTimeout(() => sidebar.classList.remove('translate-x-full'), 10);
+                renderCartList();
+            } else {
+                // Close
+                sidebar.classList.add('translate-x-full');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            }
+        }
+
+        function renderCartList() {
+            const container = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total');
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center h-full text-center space-y-4 text-gray-400">
+                        <i data-lucide="shopping-bag" class="w-16 h-16 opacity-20"></i>
+                        <p>Tu canasta está vacía</p>
+                        <button onclick="toggleCart()" class="text-amber-500 font-bold text-sm hover:underline">Seguir comprando</button>
+                    </div>`;
+                totalEl.textContent = '$0';
+                return;
+            }
+
+            // Group items
+            const grouped = {};
+            cart.forEach(item => {
+                if (!grouped[item.id]) {
+                    grouped[item.id] = { ...item, quantity: 0 };
+                }
+                grouped[item.id].quantity++;
+            });
+
+            const itemsHtml = Object.values(grouped).map(item => `
+                <div class="flex gap-4 items-center">
+                    <div class="w-20 h-20 rounded-xl bg-gray-100 overflow-hidden flex-shrink-0">
+                        <img src="${item.image}" class="w-full h-full object-cover" alt="${item.name}">
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-gray-900 text-sm leading-tight mb-1">${item.name}</h4>
+                        <p class="text-xs text-gray-500 mb-2">${item.weight || item.desc || ''}</p>
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-amber-600">$${(item.price * item.quantity).toLocaleString()}</span>
+                            
+                            <!-- Controls -->
+                            <div class="flex items-center gap-3 bg-gray-100 rounded-lg px-2 py-1">
+                                <button onclick="removeFromCart('${item.id}')" class="p-1 hover:text-red-500 transition-colors">
+                                    <i data-lucide="minus" class="w-3 h-3"></i>
+                                </button>
+                                <span class="text-xs font-bold w-4 text-center">${item.quantity}</span>
+                                <button onclick="addToCartById('${item.id}')" class="p-1 hover:text-green-500 transition-colors">
+                                    <i data-lucide="plus" class="w-3 h-3"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = itemsHtml;
+
+            const total = cart.reduce((sum, i) => sum + i.price, 0);
+            totalEl.textContent = '$' + total.toLocaleString();
+
+            lucide.createIcons();
+        }
+
+        function addToCartById(id) {
+            // Find product in data
+            let product = products.hero.id === id ? products.hero : null;
+            if (!product) product = products.honey.find(p => p.id == id);
+            if (!product) product = products.promotions.find(p => p.id == id);
+            if (!product) product = products.candles.find(p => p.id == id);
+
+            if (product) {
+                cart.push(product);
+                updateCartUI();
+                if (document.getElementById('cart-modal').classList.contains('hidden') === false) {
+                    renderCartList();
+                }
+            }
+        }
+
+        function removeFromCart(id) {
+            const index = cart.findIndex(item => item.id == id);
+            if (index > -1) {
+                cart.splice(index, 1);
+                updateCartUI();
+                renderCartList();
+            }
+        }
+
+        function updateCartUI() {
+            const btn = document.getElementById('cart-btn');
+            const count = document.getElementById('cart-count');
+            const checkout = document.getElementById('checkout-bar');
+            const total = document.getElementById('total-amount');
+
+            if (cart.length > 0) {
+                btn.classList.remove('hidden');
+                btn.onclick = toggleCart; // Open modal
+                count.textContent = cart.length;
+            } else {
+                btn.classList.add('hidden');
+            }
+
+            // Update Floating Bar
+            const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
+            if (total) total.textContent = '$' + totalAmount.toLocaleString();
+
+            if (cart.length > 0) {
+                checkout.classList.remove('hidden');
+                // Change action to open modal
+                const cBtn = checkout.querySelector('button');
+                cBtn.onclick = toggleCart;
+                cBtn.innerHTML = 'VER CANASTA <i data-lucide="shopping-bag" class="w-4 h-4 ml-2"></i>';
+            } else {
+                checkout.classList.add('hidden');
+            }
+        }
+
+        function showNotification() {
+            const el = document.getElementById('notification');
+            el.classList.remove('hidden');
+            el.classList.add('opacity-100');
+            setTimeout(() => {
+                el.classList.remove('opacity-100');
+                el.classList.add('opacity-0');
+                setTimeout(() => el.classList.add('hidden'), 300);
+            }, 3000);
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) return;
+
+            // Group for clearer message
+            const grouped = {};
+            cart.forEach(item => {
+                if (!grouped[item.id]) grouped[item.id] = { ...item, quantity: 0 };
+                grouped[item.id].quantity++;
+            });
+
+            const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
+            const itemsList = Object.values(grouped)
+                .map(i => `- (${i.quantity}) ${i.name} ${i.weight || ''} ($${(i.price * i.quantity).toLocaleString()})`)
+                .join('\n');
+
+            const message = `Hola Panal de Litu, quiero realizar este pedido:\n\n${itemsList}\n\n*Total: $${totalAmount.toLocaleString()}*`;
+            const url = `https://wa.me/56983665863?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+    <!-- Hero Info Modal -->
+    <div id="hero-info-modal" class="hidden fixed inset-0 z-[80] overflow-y-auto">
+        <!-- Backdrop -->
+        <div onclick="toggleInfoHero()" class="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity"></div>
+
+        <!-- Content -->
+        <div class="min-h-screen w-full flex items-start justify-center px-3 py-4 pt-12 md:pt-16 md:px-4 md:pb-8">
+            <div
+                class="relative bg-neutral-900 border border-white/10 text-white rounded-2xl md:rounded-[2rem] w-full max-w-lg p-4 md:p-8 shadow-2xl mx-auto">
+            <!-- Decorative Background -->
+            <div class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10">
+                <div class="flex justify-between items-start mb-4 md:mb-6">
+                    <div>
+                        <span class="text-amber-500 font-bold text-xs tracking-widest uppercase mb-1 block">La
+                            Excelencia</span>
+                        <h3 class="text-3xl font-serif font-bold">¿Por qué Lote Cero?</h3>
+                    </div>
+                    <button onclick="toggleInfoHero()"
+                        class="p-2 hover:bg-white/10 rounded-full transition text-gray-400 hover:text-white">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+
+                <div class="space-y-4 md:space-y-6 text-gray-300">
+                    <div class="flex gap-3 md:gap-4">
+                        <div class="bg-amber-500/10 p-2 md:p-3 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
+                            <i data-lucide="award" class="w-5 h-5 md:w-6 md:h-6 text-amber-500"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold mb-1 text-sm md:text-base">El "Lote Cero": Origen de la Red</h4>
+                            <p class="text-xs md:text-sm leading-relaxed">Este es el primer lote certificado en la historia de
+                                nuestra plataforma. Al adquirirlo, no solo compras miel, te conviertes en parte del
+                                grupo fundador que valida el modelo de trazabilidad inmutable en Chile.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 md:gap-4">
+                        <div class="bg-amber-500/10 p-2 md:p-3 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
+                            <i data-lucide="link" class="w-5 h-5 md:w-6 md:h-6 text-amber-500"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold mb-1 text-sm md:text-base">Inmutabilidad Blockchain</h4>
+                            <p class="text-xs md:text-sm leading-relaxed">Sello digital único en la red. El hash generado al cerrar
+                                este lote garantiza que la fecha de cosecha y el origen son verídicos y permanentes para
+                                siempre.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 md:gap-4">
+                        <div class="bg-amber-500/10 p-2 md:p-3 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
+                            <i data-lucide="map" class="w-5 h-5 md:w-6 md:h-6 text-amber-500"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold mb-1 text-sm md:text-base">Pasaporte Digital de Origen</h4>
+                            <p class="text-xs md:text-sm leading-relaxed">Escanea el QR para acceder a la ubicación satelital
+                                exacta del apiario en Litueche y ver el video cinematográfico del apicultor responsable.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 md:gap-4">
+                        <div class="bg-amber-500/10 p-2 md:p-3 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
+                            <i data-lucide="sparkles" class="w-5 h-5 md:w-6 md:h-6 text-amber-500"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold mb-1 text-sm md:text-base">Análisis Sensorial IA</h4>
+                            <p class="text-xs md:text-sm leading-relaxed">Nuestra IA procesa los datos de floración y humedad para
+                                generar una nota de cata personalizada, describiendo notas que solo este lote posee.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-white/10 flex justify-center">
+                    <button onclick="toggleInfoHero(); addToCart(products.hero)"
+                        class="w-full bg-white text-black font-bold py-3 md:py-4 rounded-xl hover:bg-amber-500 hover:scale-[1.02] transition shadow-lg flex justify-center items-center gap-2 text-sm md:text-base">
+                        Quiero reservar mi frasco <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleInfoHero() {
+            const el = document.getElementById('hero-info-modal');
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                el.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+    </script>
+</body>
+
+</html>

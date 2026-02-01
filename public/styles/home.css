@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.font-serif {
+    font-family: 'Crimson Pro', serif;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(245, 158, 11, 0.5);
+    }
+}
+
+.pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.underline-svg {
+    position: relative;
+}
+
+.hero-gradient {
+    background: linear-gradient(to right, #FFFCF2 0%, rgba(255, 252, 242, 0.95) 40%, rgba(255, 252, 242, 0.7) 70%, transparent 100%);
+}
+
+.card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+    transform: translateY(-8px);
+}
+
+.icon-rotate {
+    transition: transform 0.3s ease;
+}
+
+.group:hover .icon-rotate {
+    transform: rotate(90deg);
+}
+
+/* Hexagon decoration */
+.hexagon {
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}

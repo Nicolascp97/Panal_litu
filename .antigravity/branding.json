@@ -1,0 +1,33 @@
+{
+  "name": "Miel Litueche",
+  "tagline": "Trazabilidad real, del campo a tu mesa.",
+  "designSystem": {
+    "colors": {
+      "primary": "#22c55e",
+      "secondary": "#f59e0b",
+      "accent": "#d97706",
+      "neutral": {
+        "50": "#FFFCF2",
+        "100": "#f0fdf4",
+        "900": "#052e16"
+      },
+      "success": "#10B981",
+      "error": "#EF4444",
+      "warning": "#F59E0B"
+    },
+    "typography": {
+      "fontFamily": {
+        "sans": "Inter, system-ui, sans-serif",
+        "serif": "Crimson Pro, serif",
+        "mono": "JetBrains Mono, monospace"
+      }
+    }
+  },
+  "inspiration": {
+    "references": [
+      "Stripe - Clarity and trust",
+      "Honey product landings"
+    ],
+    "mood": ["organic", "premium", "transparent", "trustworthy"]
+  }
+}

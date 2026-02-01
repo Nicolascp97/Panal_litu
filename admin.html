@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin - Litu Labs</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+
+    <script src="public/scripts/tailwind-config.js"></script>
+
+    <link rel="stylesheet" href="public/styles/admin.css">
+</head>
+
+<body class="min-h-screen bg-slate-950 text-slate-200">
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-md">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center gap-2 mb-4">
+                    <svg class="w-8 h-8 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                    <h1 class="text-2xl font-serif text-white">Litu Labs</h1>
+                </div>
+                <p class="text-slate-400 text-sm">Panel de Administración</p>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                <h2 class="text-lg font-medium text-white mb-6">Iniciar Sesión</h2>
+                <form onsubmit="login(event)">
+                    <div class="mb-4">
+                        <label class="block text-xs text-slate-400 mb-2 uppercase font-mono">Contraseña</label>
+                        <input type="password" id="password-input"
+                            class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-colors"
+                            placeholder="Ingresa tu contraseña" required>
+                    </div>
+                    <div id="login-error" class="hidden mb-4 p-3 bg-red-500/10 border border-red-500/30 rounded-lg">
+                        <p class="text-red-400 text-xs">Contraseña incorrecta</p>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition-colors">
+                        Acceder
+                    </button>
+                </form>
+                <p class="text-xs text-slate-500 mt-4 text-center">Demo: usa "litu2024" como contraseña</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <div id="admin-dashboard" class="hidden">
+        <!-- Header -->
+        <header class="bg-slate-900/80 backdrop-blur-xl border-b border-slate-800 sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                        </svg>
+                        <h1 class="text-xl font-serif text-white">Litu Labs Admin</h1>
+                    </div>
+                    <button onclick="logout()"
+                        class="text-slate-400 hover:text-white text-sm transition-colors flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        Salir
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto px-4 py-8">
+            <!-- Tab Navigation -->
+            <div class="mb-8">
+                <div class="flex gap-2 border-b border-slate-800">
+                    <button onclick="showAdminTab('create')" id="tab-btn-create"
+                        class="px-4 py-3 text-sm font-medium border-b-2 border-amber-500 text-amber-500">
+                        Crear Lote
+                    </button>
+                    <button onclick="showAdminTab('manage')" id="tab-btn-manage"
+                        class="px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-white transition-colors">
+                        Gestionar Lotes
+                    </button>
+                </div>
+            </div>
+
+            <!-- CREATE LOT TAB -->
+            <div id="admin-tab-create" class="fade-in">
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Form Column -->
+                    <div>
+                        <h2 class="text-2xl font-serif text-white mb-6">Crear Nuevo Lote</h2>
+
+                        <form id="lot-form" class="space-y-6">
+                            <!-- Basic Info -->
+                            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                                <h3 class="text-sm font-bold text-amber-500 uppercase mb-4">Información Básica</h3>
+
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-xs text-slate-400 mb-2 uppercase font-mono">Variedad
+                                            Principal</label>
+                                        <select id="variety"
+                                            class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
+                                            required>
+                                            <option value="">Seleccionar...</option>
+                                            <option value="QUILLAY">Quillay</option>
+                                            <option value="ULMO">Ulmo</option>
+                                            <option value="TINEO">Tineo</option>
+                                            <option value="MULTIFLORAL">Multifloral</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-xs text-slate-400 mb-2 uppercase font-mono">Fecha de
+                                            Cosecha</label>
+                                        <input type="date" id="harvest-date"
+                                            class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
+                                            required>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-xs text-slate-400 mb-2 uppercase font-mono">Nombre del
+                                            Fundo</label>
+                                        <input type="text" id="farm-name"
+                                            class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
+                                            placeholder="Ej: Fundo Sta. María" required>
+                                    </div>
+
+                                    <div>
+                                        <label
+                                            class="block text-xs text-slate-400 mb-2 uppercase font-mono">Región</label>
+                                        <input type="text" id="region"
+                                            class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
+                                            placeholder="Ej: Litueche, O'Higgins" required>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label
+                                                class="block text-xs text-slate-400 mb-2 uppercase font-mono">Latitud</label>
+                                            <input type="number" step="0.0001" id="latitude"
+                                                class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
+                                                placeholder="-34.1500" required>
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block text-xs text-slate-400 mb-2 uppercase font-mono">Longitud</label>
+                                            <input type="number" step="0.0001" id="longitude"
+                                                class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
+                                                placeholder="-71.7500" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Beekeeper Info -->
+                            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                                <h3 class="text-sm font-bold text-amber-500 uppercase mb-4">Apicultor</h3>
+
+                                <div class="space-y-4">
+                                    <div>
+                                        <label
+                                            class="block text-xs text-slate-400 mb-2 uppercase font-mono">Nombre</label>
+                                        <input type="text" id="beekeeper-name"
+                                            class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
+                                            placeholder="Ej: Don Héctor" required>
+                                    </div>
+
+                                    <div>
+                                        <label
+                                            class="block text-xs text-slate-400 mb-2 uppercase font-mono">Historia</label>
+                                        <textarea id="beekeeper-story" rows="4"
+                                            class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
+                                            placeholder="Cuenta la historia del apicultor..." required></textarea>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label
+                                                class="block text-xs text-slate-400 mb-2 uppercase font-mono">Generación</label>
+                                            <input type="text" id="generation"
+                                                class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
+                                                placeholder="Ej: 3ra Generación" required>
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block text-xs text-slate-400 mb-2 uppercase font-mono">Territorio</label>
+                                            <input type="text" id="territory"
+                                                class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
+                                                placeholder="Ej: Secano Costero" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tasting Notes -->
+                            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                                <h3 class="text-sm font-bold text-amber-500 uppercase mb-4">Notas de Cata</h3>
+
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-xs text-slate-400 mb-2 uppercase font-mono">Notas del
+                                            Sommelier</label>
+                                        <textarea id="sommelier-notes" rows="3"
+                                            class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
+                                            placeholder="Describe el perfil sensorial..." required></textarea>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-xs text-slate-400 mb-2 uppercase font-mono">Intensidad
+                                            Floral (0-100)</label>
+                                        <input type="range" id="intensity" min="0" max="100" value="80"
+                                            class="w-full accent-amber-500"
+                                            oninput="document.getElementById('intensity-value').textContent = this.value">
+                                        <div class="text-right text-sm text-amber-500 mt-1">
+                                            <span id="intensity-value">80</span>%
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-xs text-slate-400 mb-2 uppercase font-mono">Dulzura
+                                            (0-100)</label>
+                                        <input type="range" id="sweetness" min="0" max="100" value="60"
+                                            class="w-full accent-amber-500"
+                                            oninput="document.getElementById('sweetness-value').textContent = this.value">
+                                        <div class="text-right text-sm text-amber-500 mt-1">
+                                            <span id="sweetness-value">60</span>%
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-xs text-slate-400 mb-2 uppercase font-mono">Textura
+                                            (0-100)</label>
+                                        <input type="range" id="texture" min="0" max="100" value="85"
+                                            class="w-full accent-amber-500"
+                                            oninput="document.getElementById('texture-value').textContent = this.value">
+                                        <div class="text-right text-sm text-amber-500 mt-1">
+                                            <span id="texture-value">85</span>%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pricing -->
+                            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                                <h3 class="text-sm font-bold text-amber-500 uppercase mb-4">Precio</h3>
+
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label
+                                            class="block text-xs text-slate-400 mb-2 uppercase font-mono">Monto</label>
+                                        <input type="number" id="price-amount"
+                                            class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
+                                            placeholder="12990" required>
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="block text-xs text-slate-400 mb-2 uppercase font-mono">Moneda</label>
+                                        <select id="price-currency"
+                                            class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500">
+                                            <option value="CLP">CLP</option>
+                                            <option value="USD">USD</option>
+                                            <option value="EUR">EUR</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit"
+                                class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-4 rounded-xl transition-colors shadow-lg">
+                                Crear Lote y Generar QR
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Preview Column -->
+                    <div>
+                        <div class="sticky top-24">
+                            <h2 class="text-2xl font-serif text-white mb-6">Vista Previa</h2>
+
+                            <div id="qr-preview"
+                                class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center">
+                                <div class="text-slate-500 py-12">
+                                    <svg class="w-16 h-16 mx-auto mb-4 opacity-30" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                                    </svg>
+                                    <p class="text-sm">El código QR aparecerá aquí después de crear el lote</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MANAGE LOTS TAB -->
+            <div id="admin-tab-manage" class="hidden fade-in">
+                <div class="mb-6 flex items-center justify-between">
+                    <h2 class="text-2xl font-serif text-white">Lotes Creados</h2>
+                    <button onclick="exportLots()"
+                        class="text-sm text-slate-400 hover:text-amber-500 transition-colors flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Exportar JSON
+                    </button>
+                </div>
+
+                <div id="lots-list" class="space-y-4">
+                    <!-- Lots will be dynamically inserted here -->
+                </div>
+
+                <div id="empty-state" class="hidden text-center py-16">
+                    <svg class="w-20 h-20 mx-auto mb-4 text-slate-700" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                    </svg>
+                    <p class="text-slate-500 text-lg mb-2">No hay lotes creados</p>
+                    <p class="text-slate-600 text-sm">Crea tu primer lote en la pestaña "Crear Lote"</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- QR Modal -->
+    <div id="qr-modal" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4">
+        <div onclick="closeQRModal()" class="absolute inset-0 bg-slate-950/90 backdrop-blur-sm"></div>
+
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-3xl p-6 relative shadow-2xl fade-in"
+            style="z-index: 61;">
+            <button onclick="closeQRModal()"
+                class="absolute top-4 right-4 p-2 text-slate-500 hover:text-white transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <h3 class="font-serif text-2xl text-white mb-6">Código QR Generado</h3>
+
+            <div id="qr-modal-content" class="bg-white p-6 rounded-xl mb-6">
+                <!-- QR will be inserted here -->
+            </div>
+
+            <div class="space-y-3">
+                <button onclick="downloadQR()"
+                    class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Descargar QR
+                </button>
+                <button onclick="printQR()"
+                    class="w-full bg-slate-800 hover:bg-slate-700 text-white font-medium py-3 rounded-xl transition-colors flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                    </svg>
+                    Imprimir
+                </button>
+            </div>
+
+            <div class="mt-4 p-3 bg-slate-950/50 rounded-lg">
+                <p class="text-xs text-slate-400 text-center" id="qr-lot-id">Lote: #LIT-24-QUILLAY-001</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="public/scripts/admin.js"></script>
+</body>
+
+</html>

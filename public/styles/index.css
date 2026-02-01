@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.font-serif {
+    font-family: 'Crimson Pro', serif;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin-reverse {
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+.animate-spin-reverse {
+    animation: spin-reverse 1.5s linear infinite;
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Map Container Styles */
+#map {
+    height: 280px;
+    border-radius: 16px;
+    z-index: 1;
+}
+
+.leaflet-popup-content-wrapper {
+    background: #0f172a;
+    color: #e2e8f0;
+    border: 1px solid #334155;
+    border-radius: 12px;
+}
+
+.leaflet-popup-tip {
+    background: #0f172a;
+}
+
+/* Floral Card Hover Effect */
+.floral-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.floral-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(245, 158, 11, 0.1), 0 10px 10px -5px rgba(245, 158, 11, 0.04);
+}
