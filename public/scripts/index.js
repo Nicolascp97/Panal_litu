@@ -20,22 +20,22 @@ let currentLotData = null;
 
 // Demo data (fallback)
 const demoData = {
-    lotId: "#LIT-24-ULMO-001",
-    harvestDate: "2024-03-14",
+    lotId: "#LIT-25-LECH-001",
+    harvestDate: "2025-01-01",
     location: {
-        farm: "Fundo Sta. María",
+        farm: "Colmenar Litueche",
         region: "Litueche, Región de O'Higgins",
         coordinates: { lat: -34.1500, lng: -71.7500 }
     },
-    variety: "QUILLAY",
+    variety: "LECHUGUILLA",
     beekeeper: {
-        name: "Don Héctor",
+        name: "El Guardián del Secano",
         story: "En las quebradas de Litueche, donde el viento costero golpea los quillayes centenarios, Don Héctor cosecha esta miel cruda siguiendo tradiciones familiares desde 1950. Tercera generación de apicultores del secano costero chileno.",
         generation: "3ra Generación",
         territory: "Secano Costero"
     },
     tasting: {
-        sommelierNotes: "Entrada intensa con notas a madera y caramelo quemado. Final persistente con sutiles toques mentolados propios de la flor de Ulmo tardía.",
+        sommelierNotes: "Entrada suave con notas florales frescas y un toque herbáceo delicado. Dulzura equilibrada con final limpio y persistente, característico de la Lechuguilla endémica del secano costero de Litueche.",
         intensity: 92,
         sweetness: 60,
         texture: 85
