@@ -26,8 +26,8 @@
     <!-- HERO SECTION: Miel de Fondo -->
     <div class="relative h-[70vh] w-full overflow-hidden">
         <div class="absolute inset-0 bg-slate-950">
-            <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?q=80&w=2080&auto=format&fit=crop"
-                alt="Textura Miel Quillay" class="w-full h-full object-cover opacity-50" />
+            <img src="public/images/frasco_etiqueta.png" alt="Textura Miel Quillay"
+                class="w-full h-full object-cover opacity-50" style="object-position: center 60%;" />
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-black/30"></div>
         </div>
 
@@ -37,7 +37,7 @@
                     class="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-amber-500/30 rounded-full bg-amber-950/40 backdrop-blur-md shadow-lg">
                     <span class="w-1.5 h-1.5 rounded-full bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]"></span>
                     <span class="text-amber-500 text-[10px] font-mono tracking-[0.2em] uppercase">Lote Cero · Edición
-                        Fundacional</span>
+                        Limitada</span>
                 </div>
 
                 <h1 class="text-5xl font-serif text-white mb-2 leading-[0.9] tracking-tight drop-shadow-xl">
@@ -121,39 +121,41 @@
                         <div class="space-y-5">
                             <div class="group/item">
                                 <p class="text-[10px] text-slate-500 font-mono uppercase mb-1">ID Único (NFT)</p>
-                                <p class="text-lg font-serif text-slate-200">#LIT-25-LECH-001</p>
+                                <p class="text-lg font-serif text-slate-200" data-lote-id="true">#LIT-25-LECH-001</p>
                             </div>
                             <div class="h-px bg-slate-800"></div>
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
                                     <p class="text-[10px] text-slate-500 font-mono uppercase mb-1">Cosecha</p>
-                                    <p class="text-sm text-slate-300">Temporada 2025</p>
+                                    <p class="text-sm text-slate-300" data-cosecha="true">Temporada 2025</p>
                                 </div>
                                 <div>
                                     <p class="text-[10px] text-slate-500 font-mono uppercase mb-1">Ubicación</p>
-                                    <p class="text-sm text-slate-300">Colmenar Litueche</p>
+                                    <p class="text-sm text-slate-300" data-fundo="true">Colmenar Culenar, Litueche</p>
                                 </div>
                             </div>
 
                             <div class="mt-6 bg-black/40 rounded-lg p-4 border border-slate-800/50">
                                 <div class="flex justify-between items-center mb-2">
-                                    <span class="text-[10px] text-amber-600 font-mono">RED POLYGON</span>
-                                    <div class="flex gap-1">
+                                    <span class="text-[10px] text-amber-600 font-mono">BASE NETWORK · MAINNET</span>
+                                    <div class="flex gap-1 items-center">
                                         <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
                                         <span class="text-[10px] text-emerald-500">Live</span>
                                     </div>
                                 </div>
-                                <p class="font-mono text-[10px] text-slate-500 break-all leading-relaxed">
-                                    0x71c765...b5f6d8976f4
+                                <p class="font-mono text-[10px] text-slate-500 break-all leading-relaxed" data-hash="true">
+                                    0xa3f8c2e1d4b7f9a0e5c8d2b1f4a7e0c3d6b9f2a5e8c1d4b7f0a3e6c9d2b5f8a1
                                 </p>
-                                <a href="#"
-                                    class="mt-3 text-xs text-amber-500 hover:text-amber-400 flex items-center gap-1 transition-colors">
-                                    Ver en Explorer
-                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
+                                <div class="mt-2 flex items-center justify-between">
+                                    <span class="text-[10px] text-slate-600 font-mono">Contrato: 0x4b7f...e3a1</span>
+                                    <a href="https://basescan.org" target="_blank"
+                                        class="text-xs text-amber-500 hover:text-amber-400 flex items-center gap-1 transition-colors">
+                                        Ver en BaseScan
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -193,7 +195,7 @@
                         </svg>
                     </div>
                     <h2 class="text-2xl font-serif text-white mb-2">El Guardián del Secano</h2>
-                    <p class="text-slate-300 text-sm leading-relaxed">
+                    <p class="text-slate-300 text-sm leading-relaxed" data-historia="true">
                         En las quebradas de Litueche, donde el viento costero golpea los quillayes centenarios, Don
                         Héctor
                         cosecha esta miel cruda siguiendo tradiciones familiares desde 1950. Tercera generación de
@@ -251,33 +253,6 @@
                 <p class="text-xs text-slate-500 mb-5">Análisis polínico certificado</p>
 
                 <div class="space-y-3">
-                    <!-- Quillay -->
-                    <div class="floral-card bg-slate-950/50 border border-slate-800/50 rounded-xl p-4">
-                        <div class="flex items-start gap-3">
-                            <div
-                                class="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center flex-shrink-0">
-                                <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                                </svg>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex items-center justify-between mb-1">
-                                    <h4 class="text-sm font-bold text-white">Quillay</h4>
-                                    <span class="text-xs font-mono text-amber-400">65%</span>
-                                </div>
-                                <p class="text-xs text-slate-400 leading-relaxed mb-2">
-                                    <em>Quillaja saponaria</em> - Árbol nativo del bosque esclerófilo. Aporta notas
-                                    amaderadas y caramelo.
-                                </p>
-                                <div class="h-1 bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-amber-500 w-[65%] rounded-full"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Lechuguilla -->
                     <div class="floral-card bg-slate-950/50 border border-slate-800/50 rounded-xl p-4">
                         <div class="flex items-start gap-3">
@@ -292,14 +267,41 @@
                             <div class="flex-1">
                                 <div class="flex items-center justify-between mb-1">
                                     <h4 class="text-sm font-bold text-white">Lechuguilla</h4>
-                                    <span class="text-xs font-mono text-emerald-400">25%</span>
+                                    <span class="text-xs font-mono text-emerald-400">65%</span>
                                 </div>
                                 <p class="text-xs text-slate-400 leading-relaxed mb-2">
-                                    <em>Perezia recurvata</em> - Hierba perenne endémica. Agrega toques herbáceos y
-                                    mentolados.
+                                    <em>Perezia recurvata</em> - Hierba perenne endémica del secano costero. Aporta
+                                    notas florales frescas y un toque herbáceo delicado.
                                 </p>
                                 <div class="h-1 bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-emerald-500 w-[25%] rounded-full"></div>
+                                    <div class="h-full bg-emerald-500 w-[65%] rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quillay -->
+                    <div class="floral-card bg-slate-950/50 border border-slate-800/50 rounded-xl p-4">
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-1">
+                                    <h4 class="text-sm font-bold text-white">Quillay</h4>
+                                    <span class="text-xs font-mono text-amber-400">25%</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-relaxed mb-2">
+                                    <em>Quillaja saponaria</em> - Árbol nativo del bosque esclerófilo. Aporta cuerpo y
+                                    un suave fondo amaderado.
+                                </p>
+                                <div class="h-1 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-amber-500 w-[25%] rounded-full"></div>
                                 </div>
                             </div>
                         </div>
@@ -353,7 +355,7 @@
                 </div>
 
                 <h3 class="font-serif text-xl text-white mb-4">Notas del Sommelier</h3>
-                <p class="text-slate-400 text-sm leading-relaxed italic mb-8 border-l-2 border-amber-500/50 pl-4">
+                <p class="text-slate-400 text-sm leading-relaxed italic mb-8 border-l-2 border-amber-500/50 pl-4" data-notas-sommelier="true">
                     "Entrada suave con notas florales frescas y un toque herbáceo delicado. Dulzura equilibrada con
                     final limpio y persistente, característico de la Lechuguilla endémica del secano costero de
                     Litueche."
@@ -512,23 +514,92 @@
                     Compartir este lote
                 </button>
                 <div class="flex-1"></div>
-                <span class="text-[9px] text-slate-600 font-mono uppercase tracking-wider">Lote #LIT-25-LECH-001</span>
+                <span class="text-[9px] text-slate-600 font-mono uppercase tracking-wider" data-lote-footer="true">Lote #LIT-25-LECH-001</span>
             </div>
             <div class="flex items-center gap-4">
                 <div class="flex-1">
                     <p class="text-[10px] text-slate-500 uppercase font-mono tracking-wider">Precio Lote Beta</p>
-                    <p class="text-xl font-serif text-white">$12.990 <span
+                    <p class="text-xl font-serif text-white" data-precio="true">$12.990 <span
                             class="text-xs text-slate-500 font-sans font-normal">CLP</span></p>
                 </div>
                 <button
-                    onclick="window.open('https://wa.me/56953665863?text=Hola%20Panal%20de%20Litu%2C%20quiero%20reservar%20mi%20frasco%20del%20Lote%20Cero%20%23LIT-25-LECH-001%20%F0%9F%8D%AF', '_blank')"
+                    onclick="window.open('https://wa.me/56953665863?text=Hola!%20Vi%20la%20p%C3%A1gina%20de%20trazabilidad%20del%20Lote%20Cero%20y%20quiero%20reservar%20mi%20frasco%20de%20Miel%20de%20Lechuguilla%20Panal%20de%20Litu.%20%C2%BFC%C3%B3mo%20coordino%20el%20pago%20y%20el%20env%C3%ADo%3F', '_blank')"
                     class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-8 py-3 rounded-xl font-bold text-sm tracking-wide shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all active:scale-95">
-                    COMPRAR
+                    QUIERO EL MÍO
                 </button>
             </div>
         </div>
     </div>
 
+    <script>
+// Sistema de Trazabilidad Dinámica - Panal de Litu
+async function cargarDatosLote() {
+  // Leer el ID del lote desde la URL: /index.html?lote=LIT-25-LECH-001
+  // o usar el lote por defecto
+  const params = new URLSearchParams(window.location.search);
+  const loteId = params.get('lote') || 'LIT-25-LECH-001';
+
+  try {
+    const response = await fetch('/public/lotes.json');
+    const data = await response.json();
+    const lote = data.lotes.find(l => l.id === loteId);
+
+    if (!lote) {
+      document.getElementById('loading').innerHTML = '<p class="text-red-400 text-sm font-mono">LOTE NO ENCONTRADO</p>';
+      return;
+    }
+
+    // Actualizar todos los elementos de la UI con datos reales
+
+    // Hero
+    document.querySelector('h1').innerHTML =
+      'Miel de <span class="text-amber-400 italic">' + lote.variedad + '</span>';
+
+    // Certificado - ID del lote (todos los lugares donde aparece)
+    document.querySelectorAll('[data-lote-id]').forEach(el => el.textContent = '#' + lote.id);
+
+    // Certificado - fecha y ubicación
+    document.querySelectorAll('[data-cosecha]').forEach(el => el.textContent = lote.fecha_cosecha);
+    document.querySelectorAll('[data-fundo]').forEach(el => el.textContent = lote.fundo);
+
+    // Hash blockchain
+    document.querySelectorAll('[data-hash]').forEach(el => el.textContent = lote.hash_sha256);
+
+    // Red
+    document.querySelectorAll('[data-red]').forEach(el => el.textContent = lote.red);
+
+    // Historia del apicultor
+    const historiaEl = document.querySelector('[data-historia]');
+    if (historiaEl) historiaEl.textContent = lote.historia;
+
+    // Notas sommelier
+    const notasEl = document.querySelector('[data-notas-sommelier]');
+    if (notasEl) notasEl.textContent = lote.notas_sommelier;
+
+    // Precio en botón comprar
+    document.querySelectorAll('[data-precio]').forEach(el =>
+      el.textContent = '$' + lote.precio_clp.toLocaleString('es-CL'));
+
+    // Lote en footer sticky
+    document.querySelectorAll('[data-lote-footer]').forEach(el =>
+      el.textContent = 'Lote #' + lote.id);
+
+    // Mostrar contenido, ocultar loading
+    document.getElementById('loading').classList.add('hidden');
+    document.getElementById('content').classList.remove('hidden');
+
+    console.log('Lote cargado:', lote.id, '| Hash:', lote.hash_sha256);
+
+  } catch (error) {
+    console.error('Error cargando lote:', error);
+    document.getElementById('loading').innerHTML =
+      '<p class="text-red-400 text-xs font-mono">ERROR DE VERIFICACIÓN</p>';
+  }
+}
+
+// Ejecutar al cargar la página
+document.addEventListener('DOMContentLoaded', cargarDatosLote);
+</script>
     <script src="public/scripts/index.js"></script>
 </body>
 

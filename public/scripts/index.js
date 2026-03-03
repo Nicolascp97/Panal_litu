@@ -2,7 +2,7 @@
 function shareProduct() {
     if (navigator.share) {
         navigator.share({
-            title: 'Miel de Quillay - Litueche',
+            title: 'Miel de Lechuguilla - Litueche',
             text: 'Descubre esta miel premium con trazabilidad digital certificada',
             url: window.location.href
         }).catch(() => { });
@@ -21,7 +21,7 @@ let currentLotData = null;
 // Demo data (fallback)
 const demoData = {
     lotId: "#LIT-25-LECH-001",
-    harvestDate: "2025-01-01",
+    harvestDate: "Temporada 2025",
     location: {
         farm: "Colmenar Litueche",
         region: "Litueche, Región de O'Higgins",
@@ -83,12 +83,7 @@ function populatePageWithData(data) {
     // Update certificate tab
     document.querySelector('#tab-certificate .text-lg.font-serif').textContent = data.lotId;
 
-    const harvestDate = new Date(data.harvestDate).toLocaleDateString('es-CL', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
-    document.querySelectorAll('#tab-certificate .grid.grid-cols-2 .text-sm')[0].textContent = harvestDate;
+    document.querySelectorAll('#tab-certificate .grid.grid-cols-2 .text-sm')[0].textContent = data.harvestDate;
     document.querySelectorAll('#tab-certificate .grid.grid-cols-2 .text-sm')[1].textContent = data.location.farm;
 
     document.querySelector('#tab-certificate .font-mono.text-\\[10px\\].text-slate-500.break-all').textContent = data.blockchain.contractAddress;
