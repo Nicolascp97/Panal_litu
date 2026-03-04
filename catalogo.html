@@ -244,7 +244,7 @@
             hero: {
                 id: 'genesis',
                 name: 'Lote Cero: La Primera Gota',
-                price: 10000,
+                price: 9900,
                 description: 'Una edición irrepetible. Miel cruda de floración nativa única de Litueche. Cosechada bajo la luna llena de marzo. Solo 50 unidades.',
                 tag: 'Edición Limitada',
                 image: 'public/images/Miel_lechuguilla.png'
@@ -539,93 +539,108 @@
         <div class="min-h-screen w-full flex items-start justify-center px-3 py-4 pt-12 md:pt-16 md:px-4 md:pb-8">
             <div
                 class="relative bg-neutral-900 border border-white/10 text-white rounded-2xl md:rounded-[2rem] w-full max-w-lg p-4 md:p-8 shadow-2xl mx-auto">
-            <!-- Decorative Background -->
-            <div class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
-
-            <div class="relative z-10">
-                <div class="flex justify-between items-start mb-4 md:mb-6">
-                    <div>
-                        <span class="text-amber-500 font-bold text-xs tracking-widest uppercase mb-1 block">La
-                            Excelencia</span>
-                        <h3 class="text-3xl font-serif font-bold">¿Por qué Lote Cero?</h3>
-                    </div>
-                    <button onclick="toggleInfoHero()"
-                        class="p-2 hover:bg-white/10 rounded-full transition text-gray-400 hover:text-white">
-                        <i data-lucide="x" class="w-6 h-6"></i>
-                    </button>
+                <!-- Decorative Background -->
+                <div
+                    class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-amber-500/20 rounded-full blur-3xl pointer-events-none">
                 </div>
 
-                <div class="space-y-4 md:space-y-6 text-gray-300">
-                    <div class="flex gap-3 md:gap-4">
-                        <div class="bg-amber-500/10 p-2 md:p-3 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
-                            <i data-lucide="award" class="w-5 h-5 md:w-6 md:h-6 text-amber-500"></i>
-                        </div>
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start mb-4 md:mb-6">
                         <div>
-                            <h4 class="text-white font-bold mb-1 text-sm md:text-base">El "Lote Cero": Origen de la Red</h4>
-                            <p class="text-xs md:text-sm leading-relaxed">Este es el primer lote certificado en la historia de
-                                nuestra plataforma. Al adquirirlo, no solo compras miel, te conviertes en parte del
-                                grupo fundador que valida el modelo de trazabilidad inmutable en Chile.</p>
+                            <span class="text-amber-500 font-bold text-xs tracking-widest uppercase mb-1 block">La
+                                Excelencia</span>
+                            <h3 class="text-3xl font-serif font-bold">¿Por qué Lote Cero?</h3>
+                        </div>
+                        <button onclick="toggleInfoHero()"
+                            class="p-2 hover:bg-white/10 rounded-full transition text-gray-400 hover:text-white">
+                            <i data-lucide="x" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+
+                    <div class="space-y-4 md:space-y-6 text-gray-300">
+                        <div class="flex gap-3 md:gap-4">
+                            <div
+                                class="bg-amber-500/10 p-2 md:p-3 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
+                                <i data-lucide="award" class="w-5 h-5 md:w-6 md:h-6 text-amber-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1 text-sm md:text-base">El "Lote Cero": Origen de la
+                                    Red</h4>
+                                <p class="text-xs md:text-sm leading-relaxed">Este es el primer lote certificado en la
+                                    historia de
+                                    nuestra plataforma. Al adquirirlo, no solo compras miel, te conviertes en parte del
+                                    grupo fundador que valida el modelo de trazabilidad inmutable en Chile.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 md:gap-4">
+                            <div
+                                class="bg-amber-500/10 p-2 md:p-3 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
+                                <i data-lucide="link" class="w-5 h-5 md:w-6 md:h-6 text-amber-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1 text-sm md:text-base">Inmutabilidad Blockchain</h4>
+                                <p class="text-xs md:text-sm leading-relaxed">Sello digital único en la red. El hash
+                                    generado al cerrar
+                                    este lote garantiza que la fecha de cosecha y el origen son verídicos y permanentes
+                                    para
+                                    siempre.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 md:gap-4">
+                            <div
+                                class="bg-amber-500/10 p-2 md:p-3 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
+                                <i data-lucide="map" class="w-5 h-5 md:w-6 md:h-6 text-amber-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1 text-sm md:text-base">Pasaporte Digital de Origen
+                                </h4>
+                                <p class="text-xs md:text-sm leading-relaxed">Escanea el QR para acceder a la ubicación
+                                    satelital
+                                    exacta del apiario en Litueche y ver el video cinematográfico del apicultor
+                                    responsable.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 md:gap-4">
+                            <div
+                                class="bg-amber-500/10 p-2 md:p-3 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
+                                <i data-lucide="sparkles" class="w-5 h-5 md:w-6 md:h-6 text-amber-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1 text-sm md:text-base">Análisis Sensorial IA</h4>
+                                <p class="text-xs md:text-sm leading-relaxed">Nuestra IA procesa los datos de floración
+                                    y humedad para
+                                    generar una nota de cata personalizada, describiendo notas que solo este lote posee.
+                                </p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="flex gap-3 md:gap-4">
-                        <div class="bg-amber-500/10 p-2 md:p-3 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
-                            <i data-lucide="link" class="w-5 h-5 md:w-6 md:h-6 text-amber-500"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-white font-bold mb-1 text-sm md:text-base">Inmutabilidad Blockchain</h4>
-                            <p class="text-xs md:text-sm leading-relaxed">Sello digital único en la red. El hash generado al cerrar
-                                este lote garantiza que la fecha de cosecha y el origen son verídicos y permanentes para
-                                siempre.</p>
-                        </div>
+                    <div class="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-white/10 flex justify-center">
+                        <button onclick="toggleInfoHero(); addToCart(products.hero)"
+                            class="w-full bg-white text-black font-bold py-3 md:py-4 rounded-xl hover:bg-amber-500 hover:scale-[1.02] transition shadow-lg flex justify-center items-center gap-2 text-sm md:text-base">
+                            Quiero reservar mi frasco <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
                     </div>
-
-                    <div class="flex gap-3 md:gap-4">
-                        <div class="bg-amber-500/10 p-2 md:p-3 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
-                            <i data-lucide="map" class="w-5 h-5 md:w-6 md:h-6 text-amber-500"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-white font-bold mb-1 text-sm md:text-base">Pasaporte Digital de Origen</h4>
-                            <p class="text-xs md:text-sm leading-relaxed">Escanea el QR para acceder a la ubicación satelital
-                                exacta del apiario en Litueche y ver el video cinematográfico del apicultor responsable.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="flex gap-3 md:gap-4">
-                        <div class="bg-amber-500/10 p-2 md:p-3 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
-                            <i data-lucide="sparkles" class="w-5 h-5 md:w-6 md:h-6 text-amber-500"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-white font-bold mb-1 text-sm md:text-base">Análisis Sensorial IA</h4>
-                            <p class="text-xs md:text-sm leading-relaxed">Nuestra IA procesa los datos de floración y humedad para
-                                generar una nota de cata personalizada, describiendo notas que solo este lote posee.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-white/10 flex justify-center">
-                    <button onclick="toggleInfoHero(); addToCart(products.hero)"
-                        class="w-full bg-white text-black font-bold py-3 md:py-4 rounded-xl hover:bg-amber-500 hover:scale-[1.02] transition shadow-lg flex justify-center items-center gap-2 text-sm md:text-base">
-                        Quiero reservar mi frasco <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </button>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        function toggleInfoHero() {
-            const el = document.getElementById('hero-info-modal');
-            if (el.classList.contains('hidden')) {
-                el.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            } else {
-                el.classList.add('hidden');
-                document.body.style.overflow = '';
+        <script>
+            function toggleInfoHero() {
+                const el = document.getElementById('hero-info-modal');
+                if (el.classList.contains('hidden')) {
+                    el.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    el.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
             }
-        }
-    </script>
+        </script>
 </body>
 
 </html>
