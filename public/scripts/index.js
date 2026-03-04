@@ -29,9 +29,9 @@ const demoData = {
     },
     variety: "LECHUGUILLA",
     beekeeper: {
-        name: "El Guardián del Secano",
-        story: "En las quebradas de Litueche, donde el viento costero golpea los quillayes centenarios, Don Héctor cosecha esta miel cruda siguiendo tradiciones familiares desde 1950. Tercera generación de apicultores del secano costero chileno.",
-        generation: "3ra Generación",
+        name: "Hermanos Olguín",
+        story: "Tercera generación de apicultores del secano costero de Litueche. Fueron ellos quienes extrajeron y cosecharon esta producción de Lechuguilla — conocida también como Diente de León — en la Sexta Región de Chile. 100% natural, sin intervención, sin aditivos. Solo territorio y tiempo.",
+        generation: "3ra Generación · Secano Costero",
         territory: "Secano Costero"
     },
     tasting: {
@@ -91,8 +91,9 @@ function populatePageWithData(data) {
     // Update story tab
     document.querySelector('#tab-story .text-2xl.font-serif.text-white.mb-2').textContent = data.beekeeper.name;
     document.querySelector('#tab-story .text-slate-300.text-sm.leading-relaxed').textContent = data.beekeeper.story;
+    // [0] = tarjeta Territorio → Secano Costero | [1] = tarjeta Apicultor → Hermanos Olguín
     document.querySelectorAll('#tab-story .grid.grid-cols-2 .text-sm.font-medium')[0].textContent = data.beekeeper.territory;
-    document.querySelectorAll('#tab-story .grid.grid-cols-2 .text-sm.font-medium')[1].textContent = data.beekeeper.generation;
+    document.querySelectorAll('#tab-story .grid.grid-cols-2 .text-sm.font-medium')[1].textContent = data.beekeeper.name;
 
     // Update metrics tab
     document.querySelector('#tab-metrics .italic.border-l-2').textContent = `"${data.tasting.sommelierNotes}"`;
@@ -211,7 +212,7 @@ function showTab(tabName) {
     if (tabName === 'story') {
         setTimeout(initMap, 100);
         const vid = document.querySelector('#tab-story video');
-        if (vid) vid.play().catch(() => {});
+        if (vid) vid.play().catch(() => { });
     }
 }
 
