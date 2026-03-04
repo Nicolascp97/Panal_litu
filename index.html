@@ -179,27 +179,29 @@
         <!-- VISTA 2: LA HISTORIA -->
         <div id="tab-story" class="hidden fade-in">
             <!-- Beekeeper Story Card -->
-            <div class="relative rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl mb-6 group cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1621257088176-5b72cb50302d?q=80&w=2070&auto=format&fit=crop"
+            <div class="relative rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl mb-6 group">
+                <video
+                    autoplay
+                    muted
+                    loop
+                    playsinline
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    alt="Productor" />
-                <div
-                    class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-95">
-                </div>
-
+                    poster="public/images/frasco_etiqueta.png">
+                    <source src="public/videos/video_hnos_olguin.mp4" type="video/mp4">
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-95"></div>
                 <div class="absolute bottom-6 left-6 right-6">
-                    <div
-                        class="w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-4 border border-white/20 group-hover:bg-amber-500 group-hover:border-amber-500 transition-all">
-                        <svg class="w-5 h-5 text-white ml-1 fill-current" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z" />
+                    <div class="w-12 h-12 bg-amber-500/20 backdrop-blur-md rounded-full flex items-center justify-center mb-4 border border-amber-500/30">
+                        <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.36a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/>
                         </svg>
                     </div>
                     <h2 class="text-2xl font-serif text-white mb-2">El Guardián del Secano</h2>
-                    <p class="text-slate-300 text-sm leading-relaxed" data-historia="true">
-                        En las quebradas de Litueche, donde el viento costero golpea los quillayes centenarios, Don
-                        Héctor
-                        cosecha esta miel cruda siguiendo tradiciones familiares desde 1950. Tercera generación de
-                        apicultores del secano costero chileno.
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        En las quebradas de Litueche, donde el viento costero dobla los quillayes
+                        centenarios, Cristián Olguín lleva años leyendo el territorio a través de
+                        sus abejas. No habla de su trabajo — lo demuestra frasco a frasco.
                     </p>
                 </div>
             </div>
@@ -209,20 +211,22 @@
                 <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
                     <svg class="w-6 h-6 text-amber-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                     </svg>
                     <p class="text-xs text-slate-500 uppercase font-mono">Territorio</p>
                     <p class="text-sm font-medium text-slate-200">Secano Costero</p>
+                    <p class="text-xs text-slate-500 mt-1">Litueche, O'Higgins</p>
                 </div>
                 <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
                     <svg class="w-6 h-6 text-amber-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                     </svg>
-                    <p class="text-xs text-slate-500 uppercase font-mono">Antigüedad</p>
-                    <p class="text-sm font-medium text-slate-200">3ra Generación</p>
+                    <p class="text-xs text-slate-500 uppercase font-mono">Apicultor</p>
+                    <p class="text-sm font-medium text-slate-200">Cristián Olguín</p>
+                    <p class="text-xs text-slate-500 mt-1">Hnos. Olguín · Litueche</p>
                 </div>
             </div>
 
