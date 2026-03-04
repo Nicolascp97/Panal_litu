@@ -2,7 +2,3 @@
 # Panal_litu     
 
 
-
- 
-
-
