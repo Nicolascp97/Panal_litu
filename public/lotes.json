@@ -19,15 +19,33 @@
       "dulzura": 65,
       "textura": 80,
       "composicion_floral": [
-        { "nombre": "Lechuguilla", "cientifico": "Perezia recurvata", "porcentaje": 70, "descripcion": "Hierba perenne endémica del secano costero. Aporta notas herbáceas y mentoladas únicas.", "color": "emerald" },
-        { "nombre": "Quillay", "cientifico": "Quillaja saponaria", "porcentaje": 20, "descripcion": "Árbol nativo del bosque esclerófilo. Agrega notas amaderadas y de caramelo.", "color": "amber" },
-        { "nombre": "Corontillo", "cientifico": "Escallonia pulverulenta", "porcentaje": 10, "descripcion": "Arbusto costero nativo. Contribuye con dulzura floral delicada.", "color": "purple" }
+        {
+          "nombre": "Lechuguilla",
+          "cientifico": "Perezia recurvata",
+          "porcentaje": 70,
+          "descripcion": "Hierba perenne endémica del secano costero. Aporta notas herbáceas y mentoladas únicas.",
+          "color": "emerald"
+        },
+        {
+          "nombre": "Quillay",
+          "cientifico": "Quillaja saponaria",
+          "porcentaje": 20,
+          "descripcion": "Árbol nativo del bosque esclerófilo. Agrega notas amaderadas y de caramelo.",
+          "color": "amber"
+        },
+        {
+          "nombre": "Corontillo",
+          "cientifico": "Escallonia pulverulenta",
+          "porcentaje": 10,
+          "descripcion": "Arbusto costero nativo. Contribuye con dulzura floral delicada.",
+          "color": "purple"
+        }
       ],
       "hash_sha256": "a3f8c2e1d4b7f9a0e5c8d2b1f4a7e0c3d6b9f2a5e8c1d4b7f0a3e6c9d2b5f8a1",
       "timestamp_certificacion": "2025-03-01T12:00:00Z",
       "red": "SHA-256 · Certificación Propia",
       "estado": "AUTENTICADO",
-      "precio_clp": 12990,
+      "precio_clp": 9900,
       "whatsapp": "56953665863"
     }
   ]

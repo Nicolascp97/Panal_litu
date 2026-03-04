@@ -46,9 +46,9 @@ const demoData = {
         verified: true
     },
     pricing: {
-        amount: 12990,
+        amount: 9900,
         currency: "CLP",
-        label: "Precio Lote Beta"
+        label: "Precio Lote Cero"
     }
 };
 
