@@ -210,6 +210,8 @@ function showTab(tabName) {
     // Inicializar mapa cuando se abre la tab de historia
     if (tabName === 'story') {
         setTimeout(initMap, 100);
+        const vid = document.querySelector('#tab-story video');
+        if (vid) vid.play().catch(() => {});
     }
 }
 
