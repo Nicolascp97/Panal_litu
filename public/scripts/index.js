@@ -24,32 +24,33 @@ const demoData = {
     harvestDate: "Temporada 2025",
     location: {
         farm: "Colmenar Litueche",
-        region: "Litueche, Región de O'Higgins",
-        coordinates: { lat: -34.1500, lng: -71.7500 }
+        region: "Litueche, Región del Libertador O'Higgins",
+        coordinates: { lat: -34.1611, lng: -71.7689 }
     },
     variety: "LECHUGUILLA",
     beekeeper: {
         name: "Hermanos Olguín",
-        story: "Tercera generación de apicultores del secano costero de Litueche. Fueron ellos quienes extrajeron y cosecharon esta producción de Lechuguilla — conocida también como Diente de León — en la Sexta Región de Chile. 100% natural, sin intervención, sin aditivos. Solo territorio y tiempo.",
+        story: "En los campos indómitos de Litueche, el tiempo se mide en floraciones y el silencio solo lo rompe el aleteo de nuestras abejas. Esta miel es un testimonio de respeto por la matriz de la vida, extraída con paciencia y honestidad.",
         generation: "3ra Generación · Secano Costero",
         territory: "Secano Costero"
     },
     tasting: {
         sommelierNotes: "Entrada suave con notas florales frescas y un toque herbáceo delicado. Dulzura equilibrada con final limpio y persistente, característico de la Lechuguilla endémica del secano costero de Litueche.",
-        intensity: 92,
-        sweetness: 60,
-        texture: 85
+        intensity: 75,
+        sweetness: 65,
+        texture: 80
     },
     blockchain: {
-        network: "Polygon",
-        contractAddress: "0x71c765...b5f6d8976f4",
+        network: "Base Network",
+        contractAddress: "0xa3f8c2e1d4b7f9a0e5c8d2b1f4a7e0c3d6b9f2a5e8c1d4b7f0a3e6c9d2b5f8a1",
         verified: true
     },
     pricing: {
         amount: 9900,
         currency: "CLP",
         label: "Precio Lote Cero"
-    }
+    },
+    whatsapp: "56983665863"
 };
 
 // Load lot data
@@ -104,6 +105,14 @@ function populatePageWithData(data) {
     // Update pricing
     document.querySelector('.text-xl.font-serif.text-white').innerHTML = `$${data.pricing.amount.toLocaleString()} <span class="text-xs text-slate-500 font-sans font-normal">${data.pricing.currency}</span>`;
     document.querySelectorAll('.text-\\[9px\\].text-slate-600')[0].textContent = `Lote ${data.lotId}`;
+
+    // Update WhatsApp button
+    const buyButton = document.querySelector('button[onclick*="wa.me"]');
+    if (buyButton) {
+        const phone = data.whatsapp || "56983665863";
+        const message = encodeURIComponent(`Hola! Vi la página de trazabilidad del Lote Cero y quiero reservar mi frasco de Miel de ${data.variety.charAt(0) + data.variety.slice(1).toLowerCase()} Panal de Litu. ¿Cómo coordino el pago y el envío?`);
+        buyButton.setAttribute('onclick', `window.open('https://wa.me/${phone}?text=${message}', '_blank')`);
+    }
 
     // Update share function
     window.shareProduct = function () {
