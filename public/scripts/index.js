@@ -79,7 +79,8 @@ function populatePageWithData(data) {
     document.title = `Miel de ${data.variety} - Litueche, Chile`;
 
     // Update hero section
-    document.querySelector('.text-5xl .italic').textContent = data.variety.charAt(0) + data.variety.slice(1).toLowerCase();
+    const varietyLabel = document.getElementById('label-variedad');
+    if (varietyLabel) varietyLabel.textContent = data.variety.charAt(0) + data.variety.slice(1).toLowerCase();
 
     // Update certificate tab
     document.querySelector('#tab-certificate .text-lg.font-serif').textContent = data.lotId;
