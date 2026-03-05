@@ -42,11 +42,20 @@
                 </div>
 
                 <h1
-                    class="text-4xl sm:text-5xl font-serif text-white mb-2 leading-tight sm:leading-[0.9] tracking-tight drop-shadow-xl flex flex-wrap items-end gap-x-2 gap-y-1">
-                    Miel de <span id="label-variedad" class="text-amber-400 italic">Lechuguilla</span>
-                    <button onclick="toggleLechuguilla()"
-                        class="mb-1 text-slate-400 hover:text-amber-400 transition-colors text-base leading-none"
-                        aria-label="¿Qué es la Lechuguilla?">ⓘ</button>
+                    class="text-4xl sm:text-5xl font-serif text-white mb-2 leading-tight sm:leading-[0.9] tracking-tight drop-shadow-xl">
+                    Miel de <span class="inline-flex items-end gap-1.5">
+                        <span id="label-variedad" class="text-amber-400 italic">Lechuguilla</span>
+                        <span class="relative mb-1.5 flex-shrink-0" id="btn-lechuguilla-wrap">
+                            <span class="absolute inset-0 rounded-full bg-amber-400/40 animate-ping"></span>
+                            <button onclick="toggleLechuguilla()"
+                                class="relative w-5 h-5 rounded-full bg-amber-500/20 border border-amber-500/60 text-amber-300 hover:bg-amber-500/40 transition-colors text-xs flex items-center justify-center"
+                                aria-label="¿Qué es la Lechuguilla?">i</button>
+                            <span id="lechuguilla-hint" class="lechuguilla-float absolute left-1/2 mt-2 top-full whitespace-nowrap text-[10px] font-bold uppercase tracking-wider text-amber-300 bg-slate-900/95 border border-amber-500/40 rounded-lg px-2 py-1 pointer-events-none z-10">
+                                ¿Qué es Lechuguilla?
+                                <span class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-slate-900 border-l border-t border-amber-500/40 rotate-45"></span>
+                            </span>
+                        </span>
+                    </span>
                 </h1>
                 <p class="text-slate-200 font-light text-lg mt-2 border-l-2 border-amber-500 pl-4 drop-shadow-md">
                     Lote Cero · Litueche, Chile
@@ -681,6 +690,8 @@
         }
         function toggleLechuguilla() {
             document.getElementById('modal-lechuguilla').classList.toggle('hidden');
+            const hint = document.getElementById('lechuguilla-hint');
+            if (hint) hint.classList.add('hidden');
         }
     </script>
 
