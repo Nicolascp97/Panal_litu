@@ -41,8 +41,12 @@
                         Limitada</span>
                 </div>
 
-                <h1 class="text-5xl font-serif text-white mb-2 leading-[0.9] tracking-tight drop-shadow-xl">
+                <h1
+                    class="text-5xl font-serif text-white mb-2 leading-[0.9] tracking-tight drop-shadow-xl flex items-end gap-2">
                     Miel de <span class="text-amber-400 italic">Lechuguilla</span>
+                    <button onclick="toggleLechuguilla()"
+                        class="mb-1 text-slate-400 hover:text-amber-400 transition-colors text-base leading-none"
+                        aria-label="¿Qué es la Lechuguilla?">ⓘ</button>
                 </h1>
                 <p class="text-slate-200 font-light text-lg mt-2 border-l-2 border-amber-500 pl-4 drop-shadow-md">
                     Lote Cero · Litueche, Chile
@@ -564,7 +568,7 @@
                             class="text-xs text-slate-500 font-sans font-normal">CLP</span></p>
                 </div>
                 <button
-                    onclick="window.open('https://wa.me/56953665863?text=Hola!%20Vi%20la%20p%C3%A1gina%20de%20trazabilidad%20del%20Lote%20Cero%20y%20quiero%20reservar%20mi%20frasco%20de%20Miel%20de%20Lechuguilla%20Panal%20de%20Litu.%20%C2%BFC%C3%B3mo%20coordino%20el%20pago%20y%20el%20env%C3%ADo%3F', '_blank')"
+                    onclick="window.open('https://wa.me/56983665863?text=Hola!%20Vi%20la%20p%C3%A1gina%20de%20trazabilidad%20del%20Lote%20Cero%20y%20quiero%20reservar%20mi%20frasco%20de%20Miel%20de%20Lechuguilla%20Panal%20de%20Litu.%20%C2%BFC%C3%B3mo%20coordino%20el%20pago%20y%20el%20env%C3%ADo%3F', '_blank')"
                     class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-8 py-3 rounded-xl font-bold text-sm tracking-wide shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all active:scale-95">
                     QUIERO EL MÍO
                 </button>
@@ -675,7 +679,56 @@
                 iconPlay.classList.remove('hidden');
             }
         }
+        function toggleLechuguilla() {
+            document.getElementById('modal-lechuguilla').classList.toggle('hidden');
+        }
     </script>
+
+    <!-- Modal: ¿Qué es la Lechuguilla? -->
+    <div id="modal-lechuguilla"
+        class="hidden fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-4 sm:p-6">
+        <div onclick="toggleLechuguilla()" class="absolute inset-0 bg-slate-950/90 backdrop-blur-sm"></div>
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-3xl p-6 relative shadow-2xl fade-in">
+            <button onclick="toggleLechuguilla()"
+                class="absolute top-4 right-4 text-slate-500 hover:text-slate-300 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-2xl bg-amber-500/20 flex items-center justify-center text-2xl">🌼</div>
+                <div>
+                    <h3 class="font-serif text-white font-bold">Lechuguilla</h3>
+                    <p class="text-xs text-slate-500 font-mono">Perezia recurvata</p>
+                </div>
+            </div>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                Conocida popularmente como <span class="text-amber-400 font-medium">diente de león</span>, la
+                lechuguilla es una flor silvestre que crece en los campos y bordes de caminos del sur de Chile. Sus
+                cabezuelas amarillas, perfectas para las abejas, florecen entre <span
+                    class="text-white font-medium">septiembre y noviembre</span>.
+            </p>
+            <div class="bg-slate-800/60 rounded-2xl p-4 mb-4 border border-slate-700/50">
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="text-amber-400 text-sm">🌿</span>
+                    <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">Temporada 2025</span>
+                </div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    La floración dura apenas unas semanas. Nuestras abejas trabajan intensamente durante ese período
+                    para producir una miel única, de aroma floral y sabor suave.
+                </p>
+            </div>
+            <div class="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4">
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="text-amber-400 text-sm">⚠️</span>
+                    <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Producción Limitada</span>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Solo cosechamos una vez al año. Cuando se acaba, se acaba — hasta la próxima primavera.
+                </p>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
