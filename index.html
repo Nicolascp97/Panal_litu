@@ -606,8 +606,8 @@
                 // Actualizar todos los elementos de la UI con datos reales
 
                 // Hero
-                document.querySelector('h1').innerHTML =
-                    'Miel de <span class="text-amber-400 italic">' + lote.variedad + '</span>';
+                const variedadEl = document.getElementById('label-variedad');
+                if (variedadEl) variedadEl.textContent = lote.variedad;
 
                 // Certificado - ID del lote (todos los lugares donde aparece)
                 document.querySelectorAll('[data-lote-id]').forEach(el => el.textContent = '#' + lote.id);
