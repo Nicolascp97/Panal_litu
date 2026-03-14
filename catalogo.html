@@ -8,6 +8,26 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="public/scripts/tailwind-config.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Meta Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'TU_PIXEL_ID');
+        fbq('track', 'PageView');
+        fbq('track', 'ViewContent', { content_name: 'Catalogo Panal de Litu', content_category: 'Catalogo' });
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=TU_PIXEL_ID&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- Fin Meta Pixel -->
+
     <style>
         .no-scrollbar::-webkit-scrollbar {
             display: none;
@@ -259,10 +279,10 @@
                 { id: 7, name: 'Miel de Arrope', price: 7500, weight: '1KG', origin: 'Tradición Ancestral Litueche', image: 'public/images/catalog_arrope.png' },
             ],
             promotions: [
-                { id: 201, name: 'Pack Dúo Regalo', price: 15500, desc: 'Corontillo 1KG + Quillay 1KG + 1 Vela de cera de abeja + Palita de madera', discount: 'Regalo' },
-                { id: 202, name: 'Trío Degusta', price: 12000, desc: '3 Variedades de 1/2KG a elección', discount: 'Más Vendido' },
-                { id: 203, name: 'Kit Emprendedor', price: 29000, desc: '5 Mieles de 1KG', discount: '27% OFF' },
-                { id: 204, name: 'Pack Arrope Intenso', price: 25900, desc: '2 Mieles de 1KG + 1 KG de Arrope', discount: 'Vela de regalo' },
+                { id: 201, name: 'Pack Dúo Origen', price: 15000, desc: 'Lechuguilla 1KG (lote 0) + Quillay-Mora 1KG + 1 Vela de cera de abeja', discount: 'Regalo', image: 'public/images/pack-duo-origen.png' },
+                { id: 202, name: 'Pack completo', price: 20000, desc: 'Prueba las 3 variedades disponibles + vela de cera de abeja', discount: 'Más Vendido', image: 'public/images/pack-completo.png' },
+                { id: 203, name: 'Kit Emprendedor', price: 34500, desc: '5 Mieles de 1KG', discount: '27% OFF', image: '' },
+                { id: 204, name: 'Pack Regalo PREMIUM', price: 15000, desc: '1 Miel 1KG (lote 0) + 1 Vela de cera a elección', discount: 'Vela de regalo', image: 'public/images/pack-regalo.png' },
             ],
             candles: [
                 { id: 101, name: 'Vela Abeja real', price: 7000, image: 'public/images/vela_abejareina.png' },
@@ -280,6 +300,27 @@
 
         let cart = [];
 
+        // Meta Pixel: engagement signal (5s en página = interés real)
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                fbq('track', 'ViewContent', {
+                    content_name: 'Catalogo Hero',
+                    content_category: 'Engagement'
+                });
+            }, 5000);
+        });
+
+        // Meta Pixel: evento por pack según id
+        function fbqPack(id) {
+            const events = {
+                201: { content_name: 'Pack Dúo Origen',     content_ids: ['pack-origen'],   value: 15000, currency: 'CLP', num_items: 2 },
+                202: { content_name: 'Pack Completo',        content_ids: ['pack-completo'], value: 20000, currency: 'CLP', num_items: 3 },
+                203: { content_name: 'Kit Emprendedor',      content_ids: ['kit-emprendedor'], value: 34500, currency: 'CLP', num_items: 5 },
+                204: { content_name: 'Pack Regalo PREMIUM',  content_ids: ['pack-regalo'],   value: 15000, currency: 'CLP', num_items: 1 },
+            };
+            if (events[id]) fbq('track', 'InitiateCheckout', { content_category: 'Pack Promocional', ...events[id] });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             renderHero();
             renderPromotions();
@@ -293,26 +334,44 @@
             document.getElementById('hero-desc').textContent = products.hero.description;
             document.getElementById('hero-price').textContent = '$' + products.hero.price.toLocaleString();
             document.getElementById('hero-image').src = products.hero.image;
-            document.getElementById('hero-add').onclick = () => addToCart(products.hero);
+            document.getElementById('hero-add').onclick = () => {
+                fbq('track', 'InitiateCheckout', {
+                    content_name: 'Lechuguilla Lote Cero',
+                    content_category: 'Miel Artesanal',
+                    content_ids: ['lechuguilla-lote-cero'],
+                    value: 9900,
+                    currency: 'CLP',
+                    num_items: 1
+                });
+                addToCart(products.hero);
+            };
         }
 
         function renderPromotions() {
             const container = document.getElementById('promotions-container');
             container.innerHTML = products.promotions.map(pack => `
-                <div class="min-w-[280px] md:min-w-[320px] bg-white p-6 rounded-3xl shadow-xl border border-amber-100 snap-center flex flex-col justify-between group hover:-translate-y-2 transition-transform duration-300">
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-start">
-                            <div class="bg-amber-100 text-amber-800 p-2 rounded-2xl"><i data-lucide="package" class="w-6 h-6"></i></div>
-                            <span class="text-[10px] font-black uppercase tracking-tighter bg-amber-500 text-white px-3 py-1 rounded-full">${pack.discount}</span>
+                <div class="min-w-[280px] md:min-w-[320px] bg-white rounded-3xl shadow-xl border border-amber-100 snap-center flex flex-col justify-between group hover:-translate-y-2 transition-transform duration-300 overflow-hidden">
+                    ${pack.image ? `
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img src="${pack.image}" alt="${pack.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+                    </div>` : `
+                    <div class="aspect-[4/3] bg-amber-50 flex items-center justify-center">
+                        <i data-lucide="package" class="w-12 h-12 text-amber-300"></i>
+                    </div>`}
+                    <div class="p-6 space-y-3 flex flex-col flex-1 justify-between">
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-xl font-bold leading-tight">${pack.name}</h3>
+                                <span class="text-[10px] font-black uppercase tracking-tighter bg-amber-500 text-white px-3 py-1 rounded-full ml-2 shrink-0">${pack.discount}</span>
+                            </div>
+                            <p class="text-gray-500 text-sm">${pack.desc}</p>
                         </div>
-                        <h3 class="text-xl font-bold leading-tight">${pack.name}</h3>
-                        <p class="text-gray-500 text-sm">${pack.desc}</p>
-                    </div>
-                    <div class="mt-6 flex items-center justify-between">
-                        <span class="text-2xl font-black text-amber-600">$${pack.price.toLocaleString()}</span>
-                        <button onclick='addToCart(${JSON.stringify(pack).replace(/'/g, "&#39;")})' class="bg-neutral-900 text-white p-3 rounded-2xl hover:bg-amber-600 transition shadow-lg active:scale-90 flex items-center justify-center">
-                            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                        </button>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-2xl font-black text-amber-600">$${pack.price.toLocaleString()}</span>
+                            <button onclick='fbqPack(${pack.id});addToCart(${JSON.stringify(pack).replace(/'/g, "&#39;")})' class="bg-neutral-900 text-white p-3 rounded-2xl hover:bg-amber-600 transition shadow-lg active:scale-90 flex items-center justify-center">
+                                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             `).join('');
@@ -512,6 +571,15 @@
 
         function checkoutWhatsApp() {
             if (cart.length === 0) return;
+
+            fbq('track', 'InitiateCheckout', {
+                content_name: 'Pedido WhatsApp',
+                content_category: 'Checkout',
+                content_ids: cart.map(i => String(i.id)),
+                value: cart.reduce((sum, i) => sum + i.price, 0),
+                currency: 'CLP',
+                num_items: cart.length
+            });
 
             // Group for clearer message
             const grouped = {};
