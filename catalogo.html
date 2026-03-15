@@ -19,12 +19,12 @@
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', 'TU_PIXEL_ID');
+        fbq('init', '1427182865825042');
         fbq('track', 'PageView');
         fbq('track', 'ViewContent', { content_name: 'Catalogo Panal de Litu', content_category: 'Catalogo' });
     </script>
     <noscript><img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=TU_PIXEL_ID&ev=PageView&noscript=1"
+        src="https://www.facebook.com/tr?id=1427182865825042&ev=PageView&noscript=1"
     /></noscript>
     <!-- Fin Meta Pixel -->
 
@@ -320,10 +320,10 @@
         // Meta Pixel: evento por pack según id
         function fbqPack(id) {
             const events = {
-                201: { content_name: 'Pack Dúo Origen',     content_ids: ['pack-origen'],   value: 15000, currency: 'CLP', num_items: 2 },
+                201: { content_name: 'Pack Origen',     content_ids: ['pack-origen'],   value: 15000, currency: 'CLP', num_items: 2 },
                 202: { content_name: 'Pack Completo',        content_ids: ['pack-completo'], value: 20000, currency: 'CLP', num_items: 3 },
                 203: { content_name: 'Kit Emprendedor',      content_ids: ['kit-emprendedor'], value: 34500, currency: 'CLP', num_items: 5 },
-                204: { content_name: 'Pack Regalo PREMIUM',  content_ids: ['pack-regalo'],   value: 15000, currency: 'CLP', num_items: 1 },
+                204: { content_name: 'Pack Regalo',  content_ids: ['pack-regalo'],   value: 15000, currency: 'CLP', num_items: 1 },
             };
             if (events[id]) fbq('track', 'InitiateCheckout', { content_category: 'Pack Promocional', ...events[id] });
         }
@@ -342,14 +342,7 @@
             document.getElementById('hero-price').textContent = '$' + products.hero.price.toLocaleString();
             document.getElementById('hero-image').src = products.hero.image;
             document.getElementById('hero-add').onclick = () => {
-                fbq('track', 'InitiateCheckout', {
-                    content_name: 'Lechuguilla Lote Cero',
-                    content_category: 'Miel Artesanal',
-                    content_ids: ['lechuguilla-lote-cero'],
-                    value: 9900,
-                    currency: 'CLP',
-                    num_items: 1
-                });
+                fbq('track', 'InitiateCheckout', { content_name: 'Lote Cero - Reservar' });
                 addToCart(products.hero);
             };
         }
@@ -375,7 +368,7 @@
                         </div>
                         <div class="mt-4 flex items-center justify-between">
                             <span class="text-2xl font-black text-amber-600">$${pack.price.toLocaleString()}</span>
-                            <button onclick='addToCart(${JSON.stringify(pack).replace(/'/g, "&#39;")})' class="bg-neutral-900 text-white p-3 rounded-2xl hover:bg-amber-600 transition shadow-lg active:scale-90 flex items-center justify-center">
+                            <button onclick='fbqPack(${pack.id}); addToCart(${JSON.stringify(pack).replace(/'/g, "&#39;")})' class="bg-neutral-900 text-white p-3 rounded-2xl hover:bg-amber-600 transition shadow-lg active:scale-90 flex items-center justify-center">
                                 <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                             </button>
                         </div>
