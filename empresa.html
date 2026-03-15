@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Empresa - Panal de Litu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="public/scripts/tailwind-config.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="min-h-screen bg-[#faf9f6] font-sans text-gray-900">
+
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md shadow-sm z-50 border-b border-amber-100 px-4">
+        <div class="max-w-5xl mx-auto h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='catalogo.html'">
+                <i data-lucide="hexagon" class="text-amber-600 fill-amber-600 w-6 h-6"></i>
+                <span class="text-xl font-bold tracking-tighter uppercase italic">Panal de Litu</span>
+            </div>
+            <a href="catalogo.html" class="text-sm text-amber-600 hover:text-amber-700 font-medium transition">← Volver al catálogo</a>
+        </div>
+    </nav>
+
+    <main class="pt-28 pb-20 px-4 max-w-3xl mx-auto">
+
+        <!-- Hero de empresa -->
+        <div class="mb-12">
+            <p class="text-xs text-amber-600 font-bold uppercase tracking-widest mb-2">Conocenos</p>
+            <h1 class="text-4xl font-serif font-bold text-gray-900 mb-4">Nuestra Empresa</h1>
+            <p class="text-lg text-gray-600 leading-relaxed">Miel artesanal cosechada directamente desde la colmena, en Litueche, Región de O'Higgins, Chile.</p>
+            <div class="h-1 w-16 bg-amber-500 rounded-full mt-4"></div>
+        </div>
+
+        <div class="space-y-12 text-gray-700 text-[15px] leading-relaxed">
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-gray-900 mb-4">Nuestra Historia</h2>
+                <p class="mb-3">Panal de Litu nació en el corazón de Litueche, una pequeña localidad rural de la Región de O'Higgins, Chile. Somos una marca familiar de miel artesanal que extrae, procesa y comercializa miel directamente desde el apiario, sin intermediarios y con el profundo respeto que merece cada colmena.</p>
+                <p>Nuestra historia comenzó con la fascinación por las abejas y la riqueza botánica de la zona central de Chile — una tierra privilegiada donde florecen especies únicas como la Lechuguilla, el Corontillo y el Quillay, fuentes de mieles de sabor y propiedades excepcionales.</p>
+            </section>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-neutral-900 text-white rounded-3xl p-6">
+                    <i data-lucide="target" class="w-7 h-7 text-amber-500 mb-4"></i>
+                    <h3 class="text-lg font-serif font-bold mb-3">Nuestra Misión</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">Acercar la miel artesanal de calidad al consumidor chileno, directamente desde la colmena, preservando sus propiedades naturales, apoyando la biodiversidad local y ofreciendo un producto honesto, trazable y lleno de sabor.</p>
+                </div>
+                <div class="bg-amber-50 border border-amber-100 rounded-3xl p-6">
+                    <i data-lucide="eye" class="w-7 h-7 text-amber-600 mb-4"></i>
+                    <h3 class="text-lg font-serif font-bold text-gray-900 mb-3">Nuestra Visión</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Convertirnos en la marca de referencia de miel artesanal de la Región de O'Higgins, reconocida a nivel nacional por la autenticidad de su origen, la pureza de sus productos y el compromiso con el bienestar de las abejas y el medioambiente.</p>
+                </div>
+            </div>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-gray-900 mb-6">Nuestros Valores</h2>
+                <div class="space-y-4">
+                    <div class="flex gap-4 items-start">
+                        <div class="bg-amber-100 p-2 rounded-xl flex-shrink-0">
+                            <i data-lucide="shield-check" class="w-5 h-5 text-amber-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-800">Autenticidad</p>
+                            <p class="text-gray-600 text-sm">Miel 100% natural, sin aditivos, sin mezclas, sin procesos industriales.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="bg-amber-100 p-2 rounded-xl flex-shrink-0">
+                            <i data-lucide="search" class="w-5 h-5 text-amber-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-800">Transparencia</p>
+                            <p class="text-gray-600 text-sm">Te decimos exactamente qué variedad es, de dónde viene y cómo fue cosechada.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="bg-amber-100 p-2 rounded-xl flex-shrink-0">
+                            <i data-lucide="heart" class="w-5 h-5 text-amber-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-800">Respeto por las abejas</p>
+                            <p class="text-gray-600 text-sm">Trabajamos con prácticas apícolas responsables que priorizan la salud de las colmenas.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="bg-amber-100 p-2 rounded-xl flex-shrink-0">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-amber-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-800">Compromiso local</p>
+                            <p class="text-gray-600 text-sm">Somos parte de Litueche y apoyamos la economía y cultura de nuestra comunidad.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="bg-amber-100 p-2 rounded-xl flex-shrink-0">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-800">Calidad sin concesiones</p>
+                            <p class="text-gray-600 text-sm">Cada frasco pasa por control personal antes de llegar a tus manos.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-gray-900 mb-6">Nuestros Productos</h2>
+                <p class="mb-5">Ofrecemos mieles monoflorales y multiflorales cosechadas artesanalmente, disponibles en presentaciones de 500g y 1kg:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5">
+                        <p class="font-bold text-gray-800 mb-1">Miel de Lechuguilla</p>
+                        <p class="text-gray-500 text-sm">Sabor suave y floral, ideal para el desayuno. Perezia recurvata — especie endémica del secano costero.</p>
+                    </div>
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5">
+                        <p class="font-bold text-gray-800 mb-1">Miel de Corontillo</p>
+                        <p class="text-gray-500 text-sm">Aromática y de color ámbar, característica de la zona costera de O'Higgins.</p>
+                    </div>
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5">
+                        <p class="font-bold text-gray-800 mb-1">Miel de Quillay</p>
+                        <p class="text-gray-500 text-sm">Notas herbales únicas, con alto valor medicinal tradicional. Árbol nativo del bosque esclerófilo.</p>
+                    </div>
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5">
+                        <p class="font-bold text-gray-800 mb-1">Miel Multifloral</p>
+                        <p class="text-gray-500 text-sm">Mezcla natural de distintas flores silvestres de la temporada de Litueche.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-gray-900 mb-3">Compromiso con la Calidad</h2>
+                <p class="mb-3">Cada lote de miel es cosechado, centrifugado y envasado de forma artesanal en nuestras instalaciones en Litueche. No utilizamos conservantes, colorantes ni procesos de pasteurización que alteren las propiedades naturales del producto.</p>
+                <div class="bg-amber-50 border border-amber-100 rounded-2xl p-5 mt-4">
+                    <p class="font-medium text-amber-700 text-sm">¿Tu miel se cristalizó?</p>
+                    <p class="text-gray-600 text-sm mt-1">La cristalización es señal de pureza — es un proceso completamente natural. Para licuarla, caliéntala suavemente al baño maría sin superar los <strong>40°C</strong>.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-gray-900 mb-4">Atención al Cliente</h2>
+                <p class="mb-5">Creemos en el trato directo y personalizado. Puedes contactarnos por cualquiera de estos medios y te responderemos a la brevedad:</p>
+                <div class="space-y-3">
+                    <a href="https://wa.me/56982935424" target="_blank"
+                        class="flex items-center gap-4 bg-white border border-gray-100 hover:border-green-200 hover:bg-green-50 rounded-2xl p-4 transition group">
+                        <i data-lucide="message-circle" class="w-5 h-5 text-green-500 flex-shrink-0"></i>
+                        <div>
+                            <p class="font-medium text-gray-800">WhatsApp</p>
+                            <p class="text-gray-500 text-sm">+56 9 8293 5424 · Lunes a Sábado, 9:00 – 20:00 hrs</p>
+                        </div>
+                    </a>
+                    <a href="mailto:soluciones.ncp@gmail.com"
+                        class="flex items-center gap-4 bg-white border border-gray-100 hover:border-amber-200 hover:bg-amber-50 rounded-2xl p-4 transition">
+                        <i data-lucide="mail" class="w-5 h-5 text-amber-500 flex-shrink-0"></i>
+                        <div>
+                            <p class="font-medium text-gray-800">Correo electrónico</p>
+                            <p class="text-gray-500 text-sm">soluciones.ncp@gmail.com</p>
+                        </div>
+                    </a>
+                    <a href="https://www.instagram.com/panal.litu" target="_blank"
+                        class="flex items-center gap-4 bg-white border border-gray-100 hover:border-purple-200 hover:bg-purple-50 rounded-2xl p-4 transition">
+                        <i data-lucide="instagram" class="w-5 h-5 text-purple-500 flex-shrink-0"></i>
+                        <div>
+                            <p class="font-medium text-gray-800">Instagram</p>
+                            <p class="text-gray-500 text-sm">@panal.litu</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-serif font-bold text-gray-900 mb-3">Política de Satisfacción</h2>
+                <p>Si por algún motivo no estás satisfecho con tu compra, contáctanos dentro de los <strong>7 días siguientes</strong> a la recepción del producto. Evaluaremos cada caso con disposición para ofrecer una solución justa: reposición del producto, crédito para próxima compra o reembolso, según corresponda.</p>
+                <p class="mt-3 text-amber-700 font-medium italic">Nuestra prioridad es que cada cliente quede feliz con su miel.</p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="bg-neutral-900 text-white py-12 px-4 mt-20 rounded-t-[3rem]">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+            <div>
+                <div class="flex items-center gap-2 justify-center md:justify-start mb-2">
+                    <i data-lucide="hexagon" class="text-amber-500 fill-amber-500 w-6 h-6"></i>
+                    <span class="text-2xl font-serif font-bold italic">Panal de Litu</span>
+                </div>
+                <p class="text-gray-500 text-sm">Litueche, VI Región, Chile</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://www.tiktok.com/@panal.de.litu" target="_blank"
+                    class="flex items-center gap-2 bg-white/5 border border-white/10 px-5 py-3 rounded-2xl hover:bg-black hover:text-[#00f2ea] hover:border-[#00f2ea] transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" /></svg>
+                    <span class="font-bold text-sm">@panal.de.litu</span>
+                </a>
+                <a href="https://www.instagram.com/panal.litu" target="_blank"
+                    class="flex items-center gap-2 bg-white/5 border border-white/10 px-5 py-3 rounded-2xl hover:bg-gradient-to-br hover:from-purple-600 hover:to-orange-500 hover:border-transparent transition-all">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                    <span class="font-bold text-sm">@panal.litu</span>
+                </a>
+                <a href="https://wa.me/56983665863" target="_blank"
+                    class="flex items-center gap-2 bg-white/5 border border-white/10 px-5 py-3 rounded-2xl hover:bg-green-500 hover:text-black hover:border-green-500 transition-all">
+                    <i data-lucide="message-circle" class="w-5 h-5"></i>
+                    <span class="font-bold text-sm">WhatsApp</span>
+                </a>
+            </div>
+        </div>
+        <div class="border-t border-white/5 mt-12 pt-8 text-center">
+            <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6">
+                <a href="privacidad.html" class="text-gray-500 text-xs hover:text-gray-300 transition">Política de Privacidad</a>
+                <a href="eliminacion-datos.html" class="text-gray-500 text-xs hover:text-gray-300 transition">Eliminación de Datos</a>
+                <a href="politica-envios.html" class="text-gray-500 text-xs hover:text-gray-300 transition">Política de Envíos</a>
+                <a href="empresa.html" class="text-amber-500 text-xs font-medium">Nuestra Empresa</a>
+            </div>
+            <p class="text-gray-600 text-xs">© 2026 Panal de Litu. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+</body>
+</html>

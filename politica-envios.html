@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Envíos - Panal de Litu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="public/scripts/tailwind-config.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="min-h-screen bg-[#faf9f6] font-sans text-gray-900">
+
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md shadow-sm z-50 border-b border-amber-100 px-4">
+        <div class="max-w-5xl mx-auto h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='catalogo.html'">
+                <i data-lucide="hexagon" class="text-amber-600 fill-amber-600 w-6 h-6"></i>
+                <span class="text-xl font-bold tracking-tighter uppercase italic">Panal de Litu</span>
+            </div>
+            <a href="catalogo.html" class="text-sm text-amber-600 hover:text-amber-700 font-medium transition">← Volver al catálogo</a>
+        </div>
+    </nav>
+
+    <main class="pt-28 pb-20 px-4 max-w-3xl mx-auto">
+
+        <div class="mb-10">
+            <p class="text-xs text-amber-600 font-bold uppercase tracking-widest mb-2">Compras</p>
+            <h1 class="text-4xl font-serif font-bold text-gray-900 mb-3">Política de Envíos</h1>
+            <p class="text-sm text-gray-400">Última actualización: 14 de marzo de 2026</p>
+            <div class="h-1 w-16 bg-amber-500 rounded-full mt-4"></div>
+        </div>
+
+        <!-- Cards resumen -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+            <div class="bg-white border border-gray-100 rounded-2xl p-5 text-center">
+                <i data-lucide="map-pin" class="w-6 h-6 text-amber-500 mx-auto mb-2"></i>
+                <p class="font-bold text-gray-800 text-sm">Todo Chile</p>
+                <p class="text-gray-500 text-xs mt-1">Starken, Chilexpress y más</p>
+            </div>
+            <div class="bg-white border border-gray-100 rounded-2xl p-5 text-center">
+                <i data-lucide="clock" class="w-6 h-6 text-amber-500 mx-auto mb-2"></i>
+                <p class="font-bold text-gray-800 text-sm">1–7 días hábiles</p>
+                <p class="text-gray-500 text-xs mt-1">Según tu región</p>
+            </div>
+            <div class="bg-white border border-gray-100 rounded-2xl p-5 text-center">
+                <i data-lucide="package" class="w-6 h-6 text-amber-500 mx-auto mb-2"></i>
+                <p class="font-bold text-gray-800 text-sm">Envío gratis</p>
+                <p class="text-gray-500 text-xs mt-1">Litueche, pedidos +$15.000</p>
+            </div>
+        </div>
+
+        <div class="space-y-10 text-gray-700 text-[15px] leading-relaxed">
+
+            <section>
+                <h2 class="text-xl font-serif font-bold text-gray-900 mb-3">1. Zonas de Despacho</h2>
+                <p class="mb-3">Realizamos envíos a todo Chile. Nuestras modalidades de entrega son:</p>
+                <ul class="list-disc list-inside space-y-1 text-gray-600">
+                    <li><strong>Entrega en mano</strong> — Litueche y comunas cercanas de la Región de O'Higgins (sin costo adicional)</li>
+                    <li><strong>Envío por Starken, Chilexpress o similar</strong> — a cualquier región del país</li>
+                    <li><strong>Retiro en punto acordado</strong> — coordinado directamente por WhatsApp</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-serif font-bold text-gray-900 mb-3">2. Costos de Envío</h2>
+                <p class="mb-4">El costo del envío depende del destino y el peso del pedido:</p>
+                <div class="space-y-3">
+                    <div class="bg-white border border-gray-100 rounded-xl p-4 flex justify-between items-center">
+                        <div>
+                            <p class="font-medium text-gray-800">Litueche y alrededores (~30 km)</p>
+                            <p class="text-gray-500 text-sm">Gratis en pedidos iguales o superiores a $15.000</p>
+                        </div>
+                        <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full">GRATIS</span>
+                    </div>
+                    <div class="bg-white border border-gray-100 rounded-xl p-4 flex justify-between items-center">
+                        <div>
+                            <p class="font-medium text-gray-800">Región de O'Higgins</p>
+                            <p class="text-gray-500 text-sm">Costo fijo según localidad</p>
+                        </div>
+                        <span class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full">$3.500–$5.000</span>
+                    </div>
+                    <div class="bg-white border border-gray-100 rounded-xl p-4 flex justify-between items-center">
+                        <div>
+                            <p class="font-medium text-gray-800">Otras regiones</p>
+                            <p class="text-gray-500 text-sm">Cotización según courier elegido</p>
+                        </div>
+                        <span class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full">$5.000–$9.000</span>
+                    </div>
+                </div>
+                <p class="mt-3 text-sm text-gray-500">Los costos de envío serán informados antes de confirmar el pedido. Nos reservamos el derecho de actualizar estas tarifas según variaciones del courier.</p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-serif font-bold text-gray-900 mb-3">3. Tiempos de Entrega</h2>
+                <div class="space-y-3">
+                    <div class="flex gap-4 items-center bg-white border border-gray-100 rounded-xl p-4">
+                        <i data-lucide="map-pin" class="w-5 h-5 text-amber-500 flex-shrink-0"></i>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-800">Litueche y alrededores</p>
+                        </div>
+                        <span class="text-amber-600 font-bold text-sm">1–2 días hábiles</span>
+                    </div>
+                    <div class="flex gap-4 items-center bg-white border border-gray-100 rounded-xl p-4">
+                        <i data-lucide="map" class="w-5 h-5 text-amber-500 flex-shrink-0"></i>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-800">Región de O'Higgins</p>
+                        </div>
+                        <span class="text-amber-600 font-bold text-sm">2–4 días hábiles</span>
+                    </div>
+                    <div class="flex gap-4 items-center bg-white border border-gray-100 rounded-xl p-4">
+                        <i data-lucide="truck" class="w-5 h-5 text-amber-500 flex-shrink-0"></i>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-800">Resto del país</p>
+                        </div>
+                        <span class="text-amber-600 font-bold text-sm">3–7 días hábiles</span>
+                    </div>
+                </div>
+                <p class="mt-3 text-sm text-gray-500">Los plazos son referenciales y pueden verse afectados por temporada alta, feriados, condiciones climáticas o eventos ajenos a nuestra voluntad.</p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-serif font-bold text-gray-900 mb-3">4. Preparación y Despacho</h2>
+                <p class="mb-3">Los pedidos se preparan y despachan entre lunes y viernes en horario de <strong>9:00 a 18:00 hrs</strong>. Pedidos realizados después de las 15:00 hrs o en días no hábiles serán procesados el siguiente día hábil.</p>
+                <p>Recibirás confirmación del despacho junto al número de seguimiento (cuando aplique) vía WhatsApp o correo electrónico.</p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-serif font-bold text-gray-900 mb-3">5. Seguimiento del Pedido</h2>
+                <p>Una vez despachado tu pedido, te enviaremos el número de seguimiento del courier para que puedas rastrearlo directamente en el sitio web de la empresa de transporte correspondiente.</p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-serif font-bold text-gray-900 mb-3">6. Embalaje</h2>
+                <p>Nuestros productos son envasados con especial cuidado para garantizar su llegada en perfectas condiciones. Los frascos de miel van protegidos con material de amortiguación y cinta de seguridad.</p>
+                <p class="mt-2">En caso de que el producto llegue dañado por problemas de transporte, infórmanos dentro de las <strong>24 horas siguientes a la recepción</strong>.</p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-serif font-bold text-gray-900 mb-3">7. Problemas con el Envío</h2>
+                <p class="mb-4">Si tu pedido no llega en el plazo estimado o llega con daños, contáctanos de inmediato:</p>
+                <div class="bg-amber-50 border border-amber-100 rounded-2xl p-5 space-y-1">
+                    <p><span class="font-medium text-gray-800">WhatsApp:</span> +56 9 8293 5424</p>
+                    <p><span class="font-medium text-gray-800">Correo:</span> soluciones.ncp@gmail.com</p>
+                </div>
+                <p class="mt-3">Gestionaremos la situación directamente con el courier y te daremos una solución en el menor tiempo posible. En caso de producto dañado durante el transporte, repondremos el producto o realizaremos el reembolso correspondiente.</p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-serif font-bold text-gray-900 mb-3">8. Dirección de Despacho Incorrecta</h2>
+                <p>Es responsabilidad del comprador proporcionar una dirección de entrega correcta y completa al momento del pedido. Panal de Litu no se hace responsable por retrasos o pérdidas causadas por información incorrecta o incompleta.</p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="bg-neutral-900 text-white py-12 px-4 mt-20 rounded-t-[3rem]">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+            <div>
+                <div class="flex items-center gap-2 justify-center md:justify-start mb-2">
+                    <i data-lucide="hexagon" class="text-amber-500 fill-amber-500 w-6 h-6"></i>
+                    <span class="text-2xl font-serif font-bold italic">Panal de Litu</span>
+                </div>
+                <p class="text-gray-500 text-sm">Litueche, VI Región, Chile</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://www.tiktok.com/@panal.de.litu" target="_blank"
+                    class="flex items-center gap-2 bg-white/5 border border-white/10 px-5 py-3 rounded-2xl hover:bg-black hover:text-[#00f2ea] hover:border-[#00f2ea] transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" /></svg>
+                    <span class="font-bold text-sm">@panal.de.litu</span>
+                </a>
+                <a href="https://www.instagram.com/panal.litu" target="_blank"
+                    class="flex items-center gap-2 bg-white/5 border border-white/10 px-5 py-3 rounded-2xl hover:bg-gradient-to-br hover:from-purple-600 hover:to-orange-500 hover:border-transparent transition-all">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                    <span class="font-bold text-sm">@panal.litu</span>
+                </a>
+                <a href="https://wa.me/56983665863" target="_blank"
+                    class="flex items-center gap-2 bg-white/5 border border-white/10 px-5 py-3 rounded-2xl hover:bg-green-500 hover:text-black hover:border-green-500 transition-all">
+                    <i data-lucide="message-circle" class="w-5 h-5"></i>
+                    <span class="font-bold text-sm">WhatsApp</span>
+                </a>
+            </div>
+        </div>
+        <div class="border-t border-white/5 mt-12 pt-8 text-center">
+            <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6">
+                <a href="privacidad.html" class="text-gray-500 text-xs hover:text-gray-300 transition">Política de Privacidad</a>
+                <a href="eliminacion-datos.html" class="text-gray-500 text-xs hover:text-gray-300 transition">Eliminación de Datos</a>
+                <a href="politica-envios.html" class="text-amber-500 text-xs font-medium">Política de Envíos</a>
+                <a href="empresa.html" class="text-gray-500 text-xs hover:text-gray-300 transition">Nuestra Empresa</a>
+            </div>
+            <p class="text-gray-600 text-xs">© 2026 Panal de Litu. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+</body>
+</html>
