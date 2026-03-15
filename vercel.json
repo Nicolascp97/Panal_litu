@@ -25,6 +25,22 @@
     {
       "source": "/blockchain",
       "destination": "/blockchain.html"
+    },
+    {
+      "source": "/privacidad",
+      "destination": "/privacidad.html"
+    },
+    {
+      "source": "/eliminacion-datos",
+      "destination": "/eliminacion-datos.html"
+    },
+    {
+      "source": "/politica-envios",
+      "destination": "/politica-envios.html"
+    },
+    {
+      "source": "/empresa",
+      "destination": "/empresa.html"
     }
   ]
 }
