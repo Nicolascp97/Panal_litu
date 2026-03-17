@@ -176,6 +176,7 @@
                 </a>
 
                 <a href="https://wa.me/56983665863" target="_blank"
+                    onclick="fbq('track', 'Contact', { content_name: 'WhatsApp Footer' })"
                     class="flex items-center gap-2 bg-white/5 border border-white/10 px-5 py-3 rounded-2xl hover:bg-green-500 hover:text-black hover:border-green-500 transition-all">
                     <i data-lucide="message-circle" class="w-5 h-5"></i>
                     <span class="font-bold text-sm">WhatsApp</span>
@@ -317,15 +318,31 @@
             }, 5000);
         });
 
-        // Meta Pixel: evento por pack según id
+        // Meta Pixel: datos por pack
+        const packPixelData = {
+            201: { content_name: 'Pack Origen',     content_ids: ['pack-origen'],     value: 15000, currency: 'CLP', num_items: 2 },
+            202: { content_name: 'Pack Completo',   content_ids: ['pack-completo'],   value: 20000, currency: 'CLP', num_items: 3 },
+            203: { content_name: 'Kit Emprendedor', content_ids: ['kit-emprendedor'], value: 34500, currency: 'CLP', num_items: 5 },
+            204: { content_name: 'Pack Regalo',     content_ids: ['pack-regalo'],     value: 15000, currency: 'CLP', num_items: 1 },
+        };
+
+        // Dispara cuando el usuario scrollea y VE un pack (interés)
+        const viewedPacks = new Set();
+        const packObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = parseInt(entry.target.dataset.packId);
+                    if (id && packPixelData[id] && !viewedPacks.has(id)) {
+                        viewedPacks.add(id);
+                        fbq('track', 'ViewContent', { content_category: 'Pack Promocional', ...packPixelData[id] });
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Dispara cuando el usuario agrega al carrito (intención de compra)
         function fbqPack(id) {
-            const events = {
-                201: { content_name: 'Pack Origen',     content_ids: ['pack-origen'],   value: 15000, currency: 'CLP', num_items: 2 },
-                202: { content_name: 'Pack Completo',        content_ids: ['pack-completo'], value: 20000, currency: 'CLP', num_items: 3 },
-                203: { content_name: 'Kit Emprendedor',      content_ids: ['kit-emprendedor'], value: 34500, currency: 'CLP', num_items: 5 },
-                204: { content_name: 'Pack Regalo',  content_ids: ['pack-regalo'],   value: 15000, currency: 'CLP', num_items: 1 },
-            };
-            if (events[id]) fbq('track', 'InitiateCheckout', { content_category: 'Pack Promocional', ...events[id] });
+            if (packPixelData[id]) fbq('track', 'InitiateCheckout', { content_category: 'Pack Promocional', ...packPixelData[id] });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -350,7 +367,7 @@
         function renderPromotions() {
             const container = document.getElementById('promotions-container');
             container.innerHTML = products.promotions.map(pack => `
-                <div class="min-w-[280px] md:min-w-[320px] bg-white rounded-3xl shadow-xl border border-amber-100 snap-center flex flex-col justify-between group hover:-translate-y-2 transition-transform duration-300 overflow-hidden">
+                <div data-pack-id="${pack.id}" class="pack-card min-w-[280px] md:min-w-[320px] bg-white rounded-3xl shadow-xl border border-amber-100 snap-center flex flex-col justify-between group hover:-translate-y-2 transition-transform duration-300 overflow-hidden">
                     ${pack.image ? `
                     <div class="aspect-[4/3] overflow-hidden">
                         <img src="${pack.image}" alt="${pack.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
@@ -375,6 +392,9 @@
                     </div>
                 </div>
             `).join('');
+
+            // Observar cada tarjeta para saber cuándo el usuario la ve
+            container.querySelectorAll('.pack-card').forEach(card => packObserver.observe(card));
         }
 
         function renderHoney() {
@@ -571,6 +591,7 @@
 
         function checkoutWhatsApp() {
             if (cart.length === 0) return;
+            fbq('track', 'Contact', { content_name: 'WhatsApp Checkout', value: cart.reduce((s, i) => s + i.price, 0), currency: 'CLP' });
 
             // Group for clearer message
             const grouped = {};
