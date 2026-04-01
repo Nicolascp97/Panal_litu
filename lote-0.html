@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lote Cero: La Primera Gota — Panal de Litu</title>
+    <meta name="description" content="Edición irrepetible. Miel cruda de floración nativa única de Litueche. Solo 50 unidades con trazabilidad QR y sello blockchain.">
+
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="public/scripts/tailwind-config.js"></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+
+    <!-- Meta Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1427182865825042');
+        fbq('track', 'PageView');
+        fbq('track', 'ViewContent', {
+            content_name: 'Lote Cero QR Landing',
+            content_category: 'Producto',
+            content_ids: ['lote-0'],
+            value: 9900,
+            currency: 'CLP'
+        });
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1427182865825042&ev=PageView&noscript=1"
+    /></noscript>
+
+    <style>
+        .font-serif, h1, h2, h3 {
+            font-family: 'Cormorant Garamond', Georgia, serif !important;
+        }
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .btn-shimmer {
+            background: linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b);
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .float-anim {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .fade-up { animation: fade-up 0.7s ease-out forwards; }
+        .fade-up-2 { animation: fade-up 0.7s ease-out 0.15s forwards; opacity: 0; }
+        .fade-up-3 { animation: fade-up 0.7s ease-out 0.3s forwards; opacity: 0; }
+        .fade-up-4 { animation: fade-up 0.7s ease-out 0.45s forwards; opacity: 0; }
+    </style>
+</head>
+
+<body class="min-h-screen">
+
+    <!-- Header minimal -->
+    <nav class="fixed top-0 w-full z-50 px-4" style="background:rgba(10,10,10,0.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);">
+        <div class="max-w-lg mx-auto h-14 flex items-center justify-between">
+            <a href="/catalogo" class="flex items-center gap-2">
+                <i data-lucide="hexagon" class="text-amber-500 fill-amber-500 w-5 h-5"></i>
+                <span class="text-base font-bold tracking-tighter uppercase italic" style="font-family:'Cormorant Garamond',serif;">Panal de Litu</span>
+            </a>
+            <a href="/catalogo"
+               class="text-xs text-gray-400 hover:text-amber-400 transition flex items-center gap-1 font-medium">
+                Ver catálogo <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-24 pb-12 px-4 max-w-lg mx-auto text-center">
+
+        <!-- Badge edición limitada -->
+        <div class="fade-up flex justify-center mb-6">
+            <span class="inline-flex items-center gap-2 bg-amber-500/15 text-amber-400 border border-amber-500/30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                Edición Limitada · Solo 50 unidades
+            </span>
+        </div>
+
+        <!-- Imagen flotante -->
+        <div class="fade-up-2 flex justify-center mb-8">
+            <div class="relative w-56 h-56">
+                <div class="absolute inset-0 bg-amber-500/20 rounded-full blur-3xl"></div>
+                <img src="public/images/frasco_etiqueta.png"
+                     alt="Lote Cero — Panal de Litu"
+                     width="224" height="224"
+                     fetchpriority="high" loading="eager"
+                     class="relative z-10 w-full h-full object-contain float-anim drop-shadow-2xl" />
+            </div>
+        </div>
+
+        <!-- Nombre y precio -->
+        <div class="fade-up-3 space-y-3 mb-6">
+            <p class="text-amber-500 text-xs font-bold uppercase tracking-widest">Litueche · Cosecha Luna Llena de Marzo</p>
+            <h1 class="text-5xl font-serif font-bold italic leading-tight">Lote Cero:<br>La Primera Gota</h1>
+            <p class="text-gray-400 leading-relaxed text-sm px-4">
+                Una edición irrepetible. Miel cruda de floración nativa única de Litueche,
+                cosechada bajo la luna llena de marzo. Con sello digital de trazabilidad inmutable.
+            </p>
+            <div class="flex items-center justify-center gap-3 pt-2">
+                <span class="text-4xl font-light text-white">$9.900</span>
+                <span class="text-xs text-gray-500 font-medium">/ frasco</span>
+            </div>
+        </div>
+
+        <!-- Urgencia -->
+        <div class="fade-up-4 flex items-center justify-center gap-2 text-xs font-bold uppercase text-amber-400/90 mb-8">
+            <span class="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse flex-shrink-0"></span>
+            12 personas mirando esto · Quedan 38 unidades
+        </div>
+
+        <!-- CTA principal -->
+        <div class="fade-up-4 flex flex-col gap-3 px-2">
+            <a href="https://wa.me/56983665863?text=Hola%2C%20escanee%20el%20QR%20del%20frasco%20Lote%20Cero%20y%20quiero%20reservar%20mi%20unidad%20%E2%80%94%20%C2%BFest%C3%A1%20disponible%3F"
+               target="_blank" rel="noopener"
+               onclick="fbq('track','InitiateCheckout',{content_name:'Lote Cero QR',content_ids:['lote-0'],value:9900,currency:'CLP'})"
+               class="btn-shimmer text-black font-bold py-4 rounded-2xl text-base flex items-center justify-center gap-3 shadow-xl shadow-amber-500/25 active:scale-95 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="black"><path d="M16 .5C7.44.5.5 7.44.5 16c0 2.82.74 5.51 2.15 7.88L.5 31.5l7.85-2.05A15.43 15.43 0 0016 31.5C24.56 31.5 31.5 24.56 31.5 16S24.56.5 16 .5zm0 28.07a13.56 13.56 0 01-6.89-1.88l-.49-.29-5.13 1.34 1.37-5-.32-.52A13.57 13.57 0 1116 28.57zm7.44-10.17c-.41-.2-2.4-1.18-2.77-1.32-.37-.13-.64-.2-.9.2-.27.4-1.03 1.32-1.26 1.59-.23.27-.46.3-.87.1-.41-.2-1.73-.64-3.3-2.03-1.22-1.09-2.04-2.43-2.28-2.84-.24-.41-.03-.63.18-.83.18-.18.41-.47.61-.7.2-.24.27-.41.4-.68.13-.27.07-.5-.03-.7-.1-.2-.9-2.17-1.23-2.97-.32-.78-.65-.67-.9-.68h-.77c-.27 0-.7.1-1.07.5-.37.4-1.4 1.37-1.4 3.34s1.43 3.87 1.63 4.14c.2.27 2.82 4.3 6.83 6.03.95.41 1.7.66 2.28.84.96.3 1.83.26 2.52.16.77-.12 2.4-.98 2.74-1.93.34-.95.34-1.76.24-1.93-.1-.17-.37-.27-.77-.47z"/></svg>
+                RESERVAR MI FRASCO
+            </a>
+            <a href="/catalogo"
+               class="border border-white/10 bg-white/5 text-gray-300 font-bold py-3.5 rounded-2xl text-sm flex items-center justify-center gap-2 hover:bg-white/10 transition active:scale-95">
+                <i data-lucide="layout-grid" class="w-4 h-4"></i>
+                Ver catálogo completo
+            </a>
+        </div>
+
+        <!-- Trust microcopy -->
+        <p class="mt-4 text-[11px] text-gray-600 flex items-center justify-center gap-1.5">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-green-500 flex-shrink-0"></i>
+            Pago al confirmar · Sin cobros ocultos · Envío coordinado por WhatsApp
+        </p>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-lg mx-auto px-4 mb-12">
+        <div class="h-[1px] bg-white/5"></div>
+    </div>
+
+    <!-- Por qué es única -->
+    <section class="px-4 max-w-lg mx-auto mb-12 space-y-4">
+        <div class="text-center mb-6">
+            <p class="text-amber-500 text-xs font-bold uppercase tracking-widest mb-1">Lo que hace único a este frasco</p>
+            <h2 class="text-3xl font-serif font-bold italic">¿Por qué Lote Cero?</h2>
+        </div>
+
+        <div class="bg-white/5 border border-white/8 rounded-2xl p-5 flex gap-4">
+            <div class="bg-amber-500/10 p-2.5 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
+                <i data-lucide="award" class="w-5 h-5 text-amber-500"></i>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-1 text-sm">El "Lote Cero": Origen de la Red</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">Este es el primer lote certificado en la historia de nuestra plataforma. Al adquirirlo, no solo compras miel — te conviertes en parte del grupo fundador que valida el modelo de trazabilidad inmutable en Chile.</p>
+            </div>
+        </div>
+
+        <div class="bg-white/5 border border-white/8 rounded-2xl p-5 flex gap-4">
+            <div class="bg-amber-500/10 p-2.5 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
+                <i data-lucide="link" class="w-5 h-5 text-amber-500"></i>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-1 text-sm">Sello Digital Inmutable</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">Hash único registrado en la red. Garantiza que la fecha de cosecha y el origen son verídicos y permanentes para siempre. Nadie puede alterar este registro.</p>
+            </div>
+        </div>
+
+        <div class="bg-white/5 border border-white/8 rounded-2xl p-5 flex gap-4">
+            <div class="bg-amber-500/10 p-2.5 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
+                <i data-lucide="map-pin" class="w-5 h-5 text-amber-500"></i>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-1 text-sm">Pasaporte Digital de Origen</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">Accede a la ubicación satelital exacta del apiario en Litueche y al video cinematográfico del apicultor responsable. Trazabilidad total de la colmena a tu mesa.</p>
+            </div>
+        </div>
+
+        <div class="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-5 flex gap-4">
+            <div class="bg-amber-500/15 p-2.5 rounded-xl h-fit border border-amber-500/30 flex-shrink-0">
+                <i data-lucide="sparkles" class="w-5 h-5 text-amber-400"></i>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-1 text-sm">Análisis Sensorial IA</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">Nuestra IA procesa los datos de floración y humedad para generar una nota de cata personalizada, describiendo aromas y sabores que solo este lote posee.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-lg mx-auto px-4 mb-12">
+        <div class="h-[1px] bg-white/5"></div>
+    </div>
+
+    <!-- Datos del producto -->
+    <section class="px-4 max-w-lg mx-auto mb-12">
+        <h2 class="text-2xl font-serif font-bold italic mb-4 text-center">Ficha del producto</h2>
+        <div class="bg-white/5 border border-white/8 rounded-2xl overflow-hidden divide-y divide-white/5">
+            <div class="flex justify-between px-5 py-3.5 text-sm">
+                <span class="text-gray-500">Variedad</span>
+                <span class="font-bold text-white">Floración Nativa Mixta</span>
+            </div>
+            <div class="flex justify-between px-5 py-3.5 text-sm">
+                <span class="text-gray-500">Origen</span>
+                <span class="font-bold text-white">Litueche, VI Región, Chile</span>
+            </div>
+            <div class="flex justify-between px-5 py-3.5 text-sm">
+                <span class="text-gray-500">Fecha de cosecha</span>
+                <span class="font-bold text-white">Luna llena, Marzo 2025</span>
+            </div>
+            <div class="flex justify-between px-5 py-3.5 text-sm">
+                <span class="text-gray-500">Proceso</span>
+                <span class="font-bold text-white">Miel cruda, sin filtrar</span>
+            </div>
+            <div class="flex justify-between px-5 py-3.5 text-sm">
+                <span class="text-gray-500">Unidades disponibles</span>
+                <span class="font-bold text-amber-400">38 de 50</span>
+            </div>
+            <div class="flex justify-between px-5 py-3.5 text-sm">
+                <span class="text-gray-500">Trazabilidad</span>
+                <span class="font-bold text-green-400 flex items-center gap-1">
+                    <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verificada
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA final -->
+    <section class="px-4 max-w-lg mx-auto mb-20">
+        <div class="bg-neutral-900 border border-white/10 rounded-3xl p-8 text-center relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl pointer-events-none translate-x-1/2 -translate-y-1/2"></div>
+            <div class="relative z-10">
+                <p class="text-amber-500 text-xs font-bold uppercase tracking-widest mb-2">Agotándose rápido</p>
+                <h2 class="text-3xl font-serif font-bold italic mb-2">Tu frasco te espera</h2>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">Una vez agotado el Lote Cero no habrá reposición. Esta cosecha es única e irrepetible.</p>
+                <a href="https://wa.me/56983665863?text=Hola%2C%20escanee%20el%20QR%20del%20frasco%20Lote%20Cero%20y%20quiero%20reservar%20mi%20unidad%20%E2%80%94%20%C2%BFest%C3%A1%20disponible%3F"
+                   target="_blank" rel="noopener"
+                   onclick="fbq('track','Contact',{content_name:'Lote Cero QR Final CTA',value:9900,currency:'CLP'})"
+                   class="btn-shimmer text-black font-bold py-4 rounded-2xl text-base w-full flex items-center justify-center gap-3 shadow-xl shadow-amber-500/25 active:scale-95 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="black"><path d="M16 .5C7.44.5.5 7.44.5 16c0 2.82.74 5.51 2.15 7.88L.5 31.5l7.85-2.05A15.43 15.43 0 0016 31.5C24.56 31.5 31.5 24.56 31.5 16S24.56.5 16 .5zm0 28.07a13.56 13.56 0 01-6.89-1.88l-.49-.29-5.13 1.34 1.37-5-.32-.52A13.57 13.57 0 1116 28.57zm7.44-10.17c-.41-.2-2.4-1.18-2.77-1.32-.37-.13-.64-.2-.9.2-.27.4-1.03 1.32-1.26 1.59-.23.27-.46.3-.87.1-.41-.2-1.73-.64-3.3-2.03-1.22-1.09-2.04-2.43-2.28-2.84-.24-.41-.03-.63.18-.83.18-.18.41-.47.61-.7.2-.24.27-.41.4-.68.13-.27.07-.5-.03-.7-.1-.2-.9-2.17-1.23-2.97-.32-.78-.65-.67-.9-.68h-.77c-.27 0-.7.1-1.07.5-.37.4-1.4 1.37-1.4 3.34s1.43 3.87 1.63 4.14c.2.27 2.82 4.3 6.83 6.03.95.41 1.7.66 2.28.84.96.3 1.83.26 2.52.16.77-.12 2.4-.98 2.74-1.93.34-.95.34-1.76.24-1.93-.1-.17-.37-.27-.77-.47z"/></svg>
+                    QUIERO RESERVAR AHORA
+                </a>
+                <p class="mt-3 text-[11px] text-gray-600 flex items-center justify-center gap-1.5">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-green-500 flex-shrink-0"></i>
+                    Pago al confirmar · Sin cobros previos
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer minimal -->
+    <footer class="border-t border-white/5 py-8 px-4 text-center">
+        <div class="flex items-center justify-center gap-2 mb-2">
+            <i data-lucide="hexagon" class="text-amber-500 fill-amber-500 w-4 h-4"></i>
+            <span class="text-sm font-bold italic" style="font-family:'Cormorant Garamond',serif;">Panal de Litu</span>
+        </div>
+        <p class="text-gray-600 text-xs">Litueche, VI Región, Chile · © 2026</p>
+        <div class="flex justify-center gap-4 mt-3">
+            <a href="/privacidad" class="text-gray-600 text-[10px] hover:text-gray-400 transition">Privacidad</a>
+            <a href="/politica-envios" class="text-gray-600 text-[10px] hover:text-gray-400 transition">Envíos</a>
+            <a href="/catalogo" class="text-amber-500 text-[10px] hover:text-amber-400 transition font-bold">Ver catálogo</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

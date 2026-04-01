@@ -4,15 +4,19 @@
   "rewrites": [
     {
       "source": "/",
-      "destination": "/index.html"
+      "destination": "/catalogo.html"
     },
     {
       "source": "/home",
-      "destination": "/home.html"
+      "destination": "/index.html"
     },
     {
       "source": "/catalogo",
       "destination": "/catalogo.html"
+    },
+    {
+      "source": "/lote-0",
+      "destination": "/lote-0.html"
     },
     {
       "source": "/admin",
