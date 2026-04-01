@@ -4,21 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miel de Lechuguilla - Panal de Litu | Litueche, Chile</title>
-    <link rel="icon" type="image/png" href="public/favicon/favicon.png">
-
-    <!-- Leaflet CSS for Interactive Map -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-
+    <title>Catálogo - Panal de Litu</title>
+    <!-- Performance: preconnect externos para reducir latencia DNS+TLS -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="dns-prefetch" href="https://connect.facebook.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Leaflet JS for Interactive Map -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
     <script src="public/scripts/tailwind-config.js"></script>
-    <link rel="stylesheet" href="public/styles/index.css">
+    <script src="https://unpkg.com/lucide@latest" defer></script>
 
     <!-- Meta Pixel -->
     <script>
@@ -32,732 +28,937 @@
         'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '1427182865825042');
         fbq('track', 'PageView');
+        fbq('track', 'ViewContent', { content_name: 'Catalogo Panal de Litu', content_category: 'Catalogo' });
     </script>
     <noscript><img height="1" width="1" style="display:none"
         src="https://www.facebook.com/tr?id=1427182865825042&ev=PageView&noscript=1"
     /></noscript>
     <!-- Fin Meta Pixel -->
+
+    <style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        @keyframes slide-up {
+            from {
+                transform: translate(-50%, 100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+        }
+
+        .animate-slide-up {
+            animation: slide-up 0.5s ease-out forwards;
+        }
+
+        /* Fuentes premium */
+        .font-serif, h1, h2, h3, .font-serif * {
+            font-family: 'Cormorant Garamond', Georgia, serif !important;
+        }
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+        }
+
+        /* Shimmer en botones CTA primarios */
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .btn-shimmer {
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+
+        /* Pulse badge urgencia */
+        @keyframes badge-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5); }
+            50% { box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
+        }
+        .badge-urgency {
+            animation: badge-pulse 2s ease-in-out infinite;
+        }
+    </style>
 </head>
 
-<body
-    class="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-amber-500/30 selection:text-amber-200 relative">
+<body class="min-h-screen bg-[#faf9f6] font-sans text-gray-900">
 
-    <!-- HERO SECTION: Miel de Fondo -->
-    <div class="relative h-[70vh] w-full overflow-hidden">
-        <div class="absolute inset-0 bg-slate-950">
-            <img src="public/images/frasco_etiqueta.png" alt="Textura Miel Quillay"
-                class="w-full h-full object-cover opacity-50" style="object-position: center 60%;" />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-black/30"></div>
-        </div>
-
-        <div class="absolute bottom-0 left-0 right-0 px-6 pb-12 z-20">
-            <div class="max-w-md mx-auto">
-                <div
-                    class="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-amber-500/30 rounded-full bg-amber-950/40 backdrop-blur-md shadow-lg">
-                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]"></span>
-                    <span class="text-amber-500 text-[10px] font-mono tracking-[0.2em] uppercase">Lote Cero · Edición
-                        Limitada</span>
-                </div>
-
-                <h1
-                    class="text-4xl sm:text-5xl font-serif text-white mb-2 leading-tight sm:leading-[0.9] tracking-tight drop-shadow-xl">
-                    Miel de <span class="inline-flex items-end gap-1.5">
-                        <span id="label-variedad" class="text-amber-400 italic">Lechuguilla</span>
-                        <span class="relative mb-1.5 flex-shrink-0" id="btn-lechuguilla-wrap">
-                            <span class="absolute inset-0 rounded-full bg-amber-400/40 animate-ping"></span>
-                            <button onclick="toggleLechuguilla()"
-                                class="relative w-5 h-5 rounded-full bg-amber-500/20 border border-amber-500/60 text-amber-300 hover:bg-amber-500/40 transition-colors text-xs flex items-center justify-center"
-                                aria-label="¿Qué es la Lechuguilla?">i</button>
-                            <span id="lechuguilla-hint" class="lechuguilla-float absolute left-1/2 mb-2 bottom-full whitespace-nowrap text-[10px] font-bold uppercase tracking-wider text-amber-300 bg-slate-900/95 border border-amber-500/40 rounded-lg px-2 py-1 pointer-events-none z-10">
-                                ¿Qué es Lechuguilla?
-                                <span class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-slate-900 border-r border-b border-amber-500/40 rotate-45"></span>
-                            </span>
-                        </span>
-                    </span>
-                </h1>
-                <p class="text-slate-200 font-light text-lg mt-2 border-l-2 border-amber-500 pl-4 drop-shadow-md">
-                    Lote Cero · Litueche, Chile
-                </p>
+    <!-- Header -->
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md shadow-sm z-50 border-b border-amber-100 px-4">
+        <div class="max-w-5xl mx-auto h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='/'">    
+                <i data-lucide="hexagon" class="text-amber-600 fill-amber-600 w-6 h-6"></i>
+                <span class="text-xl font-bold tracking-tighter uppercase italic">Panal de Litu</span>
+            </div>
+            <div id="cart-btn" class="relative cursor-pointer bg-amber-100 p-2 rounded-full hidden"
+                onclick="toggleCart()">
+                <i data-lucide="shopping-bag" class="text-amber-900 w-5 h-5"></i>
+                <span id="cart-count"
+                    class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full">0</span>
             </div>
         </div>
-    </div>
+    </nav>
 
-
-    <!-- MENU DE NAVEGACIÓN FLOTANTE -->
-    <div class="sticky top-4 z-30 px-4 mb-8">
+    <!-- Hero: Lote Cero -->
+    <section class="pt-24 px-4 max-w-5xl mx-auto mb-12">
         <div
-            class="max-w-md mx-auto bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-2xl p-1.5 flex justify-between shadow-2xl">
-            <button onclick="showTab('certificate')" id="btn-certificate"
-                class="flex-1 py-2 text-xs font-medium rounded-xl transition-all duration-300 bg-amber-500 text-slate-950 shadow-lg">
-                CERTIFICADO
-            </button>
-            <button onclick="showTab('story')" id="btn-story"
-                class="flex-1 py-2 text-xs font-medium rounded-xl transition-all duration-300 text-slate-400 hover:text-white">
-                ORIGEN
-            </button>
-            <button onclick="showTab('metrics')" id="btn-metrics"
-                class="flex-1 py-2 text-xs font-medium rounded-xl transition-all duration-300 text-slate-400 hover:text-white">
-                CATA
-            </button>
-        </div>
-    </div>
-
-
-    <!-- CONTENIDO DINÁMICO -->
-    <div class="px-4 pb-32 max-w-md mx-auto min-h-[400px]">
-
-        <!-- VISTA 1: EL CERTIFICADO (Tech) -->
-        <div id="tab-certificate" class="fade-in">
-            <div
-                class="bg-gradient-to-br from-slate-900 to-slate-900 border border-slate-800 rounded-3xl p-1 shadow-2xl relative overflow-hidden group">
+            class="bg-neutral-900 rounded-[2.5rem] overflow-hidden shadow-2xl text-white flex flex-col md:flex-row border border-white/10">
+            <div class="p-8 md:p-16 md:w-1/2 space-y-6 flex flex-col justify-center">
                 <div
-                    class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent opacity-50">
+                    class="inline-flex items-center gap-2 bg-amber-500/20 text-amber-400 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-amber-500/30">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Exclusividad Litueche
                 </div>
-
-                <div class="bg-slate-950/50 rounded-[20px] p-6 backdrop-blur-sm relative z-10">
-                    <!-- Loading State -->
-                    <div id="loading" class="py-12 flex flex-col items-center text-center">
-                        <div class="relative w-16 h-16 mb-4">
-                            <div class="absolute inset-0 border-t-2 border-amber-500 rounded-full animate-spin"></div>
-                            <div class="absolute inset-2 border-r-2 border-slate-700 rounded-full animate-spin-reverse">
-                            </div>
-                            <svg class="absolute inset-0 m-auto text-amber-500/20 w-8 h-8 animate-pulse" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                            </svg>
-                        </div>
-                        <p class="text-amber-500 font-mono text-xs tracking-widest animate-pulse">VERIFICANDO HASH...
+                <h1 id="hero-name" class="text-5xl font-serif font-bold leading-[1.1]"></h1>
+                <p id="hero-desc" class="text-gray-400 text-lg leading-relaxed"></p>
+                <div class="flex flex-col gap-4 pt-4">
+                    <span id="hero-price" class="text-4xl font-light"></span>
+                    <!-- Urgencia + prueba social -->
+                    <div class="flex flex-col gap-2">
+                        <p class="flex items-center gap-2 text-xs font-bold tracking-wide uppercase text-amber-400/90">
+                            <span class="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse flex-shrink-0"></span>
+                            12 personas mirando esto ahora &nbsp;·&nbsp; Quedan 38 unidades
                         </p>
+                        <div class="flex items-center gap-2 text-[11px] text-gray-400">
+                            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-green-400 flex-shrink-0"></i>
+                            <span>Pago solo al confirmar · Sin cobros ocultos · Despacho coordinado por WhatsApp</span>
+                        </div>
                     </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button id="hero-add"
+                            class="btn-shimmer bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-black px-6 py-3 rounded-full font-bold hover:scale-105 transition flex items-center gap-2 text-sm md:text-base shadow-lg shadow-amber-500/30">
+                            RESERVAR MI FRASCO <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                        <button onclick="toggleInfoHero()"
+                            class="border border-amber-500/30 bg-amber-500/10 text-amber-300 px-6 py-3 rounded-full font-bold hover:bg-amber-500/20 transition flex items-center gap-2 text-sm md:text-base">
+                            <i data-lucide="sparkles" class="w-4 h-4"></i> Ver por qué es única
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 relative min-h-[400px]">
+                <img id="hero-image" src="" alt="Hero Honey"
+                    fetchpriority="high" loading="eager"
+                    class="absolute inset-0 w-full h-full object-cover opacity-80" />
+                <div class="absolute inset-0 bg-gradient-to-r from-neutral-900 via-transparent to-transparent"></div>
+            </div>
+        </div>
+    </section>
 
-                    <!-- Loaded Content -->
-                    <div id="content" class="hidden">
-                        <div class="flex justify-between items-start mb-8">
+    <!-- Trust Strip -->
+    <section class="px-4 max-w-5xl mx-auto mb-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="flex flex-col items-center gap-2 bg-white border border-amber-100 rounded-2xl p-4 text-center shadow-sm">
+                <div class="bg-amber-50 p-2.5 rounded-xl">
+                    <i data-lucide="leaf" class="w-5 h-5 text-amber-600"></i>
+                </div>
+                <span class="text-xs font-bold text-gray-800">100% Natural</span>
+                <span class="text-[10px] text-gray-400 leading-tight">Sin aditivos ni conservantes</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 bg-white border border-amber-100 rounded-2xl p-4 text-center shadow-sm">
+                <div class="bg-amber-50 p-2.5 rounded-xl">
+                    <i data-lucide="map-pin" class="w-5 h-5 text-amber-600"></i>
+                </div>
+                <span class="text-xs font-bold text-gray-800">Cosecha Propia</span>
+                <span class="text-[10px] text-gray-400 leading-tight">Directo del apiario en Litueche</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 bg-white border border-amber-100 rounded-2xl p-4 text-center shadow-sm">
+                <div class="bg-amber-50 p-2.5 rounded-xl">
+                    <i data-lucide="qr-code" class="w-5 h-5 text-amber-600"></i>
+                </div>
+                <span class="text-xs font-bold text-gray-800">Trazabilidad QR</span>
+                <span class="text-[10px] text-gray-400 leading-tight">Verifica el origen de tu miel</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 bg-white border border-amber-100 rounded-2xl p-4 text-center shadow-sm">
+                <div class="bg-amber-50 p-2.5 rounded-xl">
+                    <i data-lucide="truck" class="w-5 h-5 text-amber-600"></i>
+                </div>
+                <span class="text-xs font-bold text-gray-800">Envío a Chile</span>
+                <span class="text-[10px] text-gray-400 leading-tight">Coordinado por WhatsApp</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seccion Packs Promocionales -->
+    <section class="px-4 max-w-5xl mx-auto mb-20 overflow-hidden">
+        <div class="flex flex-col mb-8 text-center">
+            <span class="badge-urgency inline-flex items-center justify-center gap-1.5 bg-amber-500 text-white text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full w-fit mx-auto mb-3">
+                <i data-lucide="flame" class="w-3 h-3"></i> Los más pedidos esta semana
+            </span>
+            <h2 class="text-3xl font-serif font-bold text-gray-900 mb-2 italic">Packs con Descuento</h2>
+            <p class="text-gray-500 text-sm max-w-sm mx-auto">Ahorra combinando. Cada pack está armado para quien quiere lo mejor sin pagar de más.</p>
+            <div class="h-1 w-20 bg-amber-500 mx-auto rounded-full mt-3"></div>
+        </div>
+
+        <div id="promotions-container" class="flex overflow-x-auto pb-8 gap-6 snap-x no-scrollbar">
+            <!-- Rendered by JS -->
+        </div>
+    </section>
+
+    <!-- Seccion Mieles -->
+    <section class="px-4 max-w-5xl mx-auto mb-20">
+        <div class="flex flex-col md:flex-row md:items-end gap-2 mb-8">
+            <div>
+                <p class="text-amber-600 text-xs font-bold uppercase tracking-widest mb-1">Cosecha 2025 · Litueche, VI Región</p>
+                <h2 class="text-3xl font-serif font-bold">Mieles de Cosecha Propia</h2>
+            </div>
+            <div class="flex-1 h-[1px] bg-gray-200 hidden md:block mb-2"></div>
+            <span class="text-xs text-gray-500 font-medium whitespace-nowrap mb-2">Stock actual limitado</span>
+        </div>
+
+        <div id="honey-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Rendered by JS -->
+        </div>
+    </section>
+
+    <!-- Prueba Social / Testimonios -->
+    <section class="px-4 max-w-5xl mx-auto mb-16">
+        <div class="bg-neutral-900 rounded-[2.5rem] p-8 md:p-12 text-white overflow-hidden relative">
+            <div class="absolute top-0 left-0 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <p class="text-amber-500 text-xs font-bold uppercase tracking-widest mb-1">Lo que dicen nuestros clientes</p>
+                        <h2 class="text-3xl font-serif font-bold italic">Sabor que habla solo</h2>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <div class="flex">
+                            <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                        </div>
+                        <span class="text-gray-400 text-xs font-bold">5.0 / 5</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3">
+                        <div class="flex gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed italic">"La miel de Quillay es increíble. Se nota que es de verdad — el sabor es completamente diferente a las de supermercado."</p>
+                        <div class="flex items-center gap-2 pt-1">
+                            <div class="w-7 h-7 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-xs">M</div>
                             <div>
-                                <p class="text-[10px] text-slate-500 font-mono uppercase tracking-wider mb-1">Estado del
-                                    Activo</p>
-                                <div class="flex items-center gap-2 text-emerald-400">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                                    </svg>
-                                    <span class="font-bold text-sm tracking-wide">AUTENTICADO</span>
-                                </div>
-                            </div>
-                            <svg class="w-8 h-8 text-slate-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
-                            </svg>
-                        </div>
-
-                        <div class="space-y-5">
-                            <div class="group/item">
-                                <p class="text-[10px] text-slate-500 font-mono uppercase mb-1">ID Único (NFT)</p>
-                                <p class="text-lg font-serif text-slate-200" data-lote-id="true">#LIT-25-LECH-001</p>
-                            </div>
-                            <div class="h-px bg-slate-800"></div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <p class="text-[10px] text-slate-500 font-mono uppercase mb-1">Cosecha</p>
-                                    <p class="text-sm text-slate-300" data-cosecha="true">Temporada 2025</p>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] text-slate-500 font-mono uppercase mb-1">Ubicación</p>
-                                    <p class="text-sm text-slate-300" data-fundo="true">Colmenar Culenar, Litueche</p>
-                                </div>
-                            </div>
-
-                            <div class="mt-6 bg-black/40 rounded-lg p-4 border border-slate-800/50">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-[10px] text-amber-600 font-mono">BASE NETWORK · MAINNET</span>
-                                    <div class="flex gap-1 items-center">
-                                        <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                                        <span class="text-[10px] text-emerald-500">Live</span>
-                                    </div>
-                                </div>
-                                <p class="font-mono text-[10px] text-slate-500 break-all leading-relaxed"
-                                    data-hash="true">
-                                    0xa3f8c2e1d4b7f9a0e5c8d2b1f4a7e0c3d6b9f2a5e8c1d4b7f0a3e6c9d2b5f8a1
-                                </p>
-                                <div class="mt-2 flex items-center justify-between">
-                                    <span class="text-[10px] text-slate-600 font-mono">Contrato: 0x4b7f...e3a1</span>
-                                    <a href="https://basescan.org" target="_blank"
-                                        class="text-xs text-amber-500 hover:text-amber-400 flex items-center gap-1 transition-colors">
-                                        Ver en BaseScan
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </a>
-                                </div>
+                                <p class="text-white text-xs font-bold">María José R.</p>
+                                <p class="text-gray-500 text-[10px]">Santiago · Miel de Quillay 1KG</p>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- BOTÓN DESPLEGABLE EDUCATIVO -->
-            <div class="mt-6 text-center">
-                <button onclick="toggleModal()"
-                    class="text-slate-500 text-xs font-medium hover:text-amber-400 transition-colors flex items-center justify-center gap-2 mx-auto border-b border-transparent hover:border-amber-400 pb-0.5">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
-                    </svg>
-                    ¿Qué significa tecnología Blockchain?
-                </button>
-            </div>
-        </div>
-
-
-        <!-- VISTA 2: LA HISTORIA -->
-        <div id="tab-story" class="hidden fade-in">
-            <!-- Beekeeper Story Card -->
-            <div class="relative rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl mb-6 group">
-                <video id="video-apicultor" autoplay muted loop playsinline
-                    class="w-full h-full object-contain bg-slate-950 transition-transform duration-700 group-hover:scale-105"
-                    poster="public/images/frasco_etiqueta.png">
-                    <source src="public/videos/video_hnos_olguin.mp4" type="video/mp4">
-                </video>
-                <div
-                    class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-95">
-                </div>
-                <button id="btn-playpause" onclick="togglePlayPause()"
-                    class="absolute top-4 left-4 z-10 bg-slate-900/70 backdrop-blur-sm border border-slate-700 text-white p-2.5 rounded-full hover:bg-amber-500/20 hover:border-amber-500 transition-all">
-                    <svg id="icon-pause" class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6" />
-                    </svg>
-                    <svg id="icon-play" class="w-4 h-4 text-amber-400 hidden" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </button>
-                <button id="btn-audio" onclick="toggleAudioVideo()"
-                    class="absolute top-4 right-4 z-10 bg-slate-900/70 backdrop-blur-sm border border-slate-700 text-white p-2.5 rounded-full hover:bg-amber-500/20 hover:border-amber-500 transition-all">
-                    <svg id="icon-muted" class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
-                    </svg>
-                    <svg id="icon-unmuted" class="w-4 h-4 text-amber-400 hidden" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15.536 8.464a5 5 0 010 7.072M12 6v12m-3.536-9.536a5 5 0 000 7.072M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                    </svg>
-                </button>
-                <div class="absolute bottom-6 left-6 right-6">
-                    <div
-                        class="w-12 h-12 bg-amber-500/20 backdrop-blur-md rounded-full flex items-center justify-center mb-4 border border-amber-500/30">
-                        <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.36a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
-                        </svg>
-                    </div>
-                    <h2 class="text-2xl font-serif text-white mb-2">
-                        Los Hermanos Olguín
-                    </h2>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        Tercera generación de apicultores del secano costero de Litueche.
-                        Fueron ellos quienes extrajeron y cosecharon esta producción de
-                        Lechuguilla — conocida también como Diente de León —
-                        en la Sexta Región de Chile. 100% natural,
-                        sin intervención, sin aditivos. Solo territorio y tiempo.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Territory & Heritage Cards -->
-            <div class="grid grid-cols-2 gap-4 mb-6">
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
-                    <svg class="w-6 h-6 text-amber-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    <p class="text-xs text-slate-500 uppercase font-mono">Territorio</p>
-                    <p class="text-sm font-medium text-slate-200">Secano Costero</p>
-                    <p class="text-xs text-slate-500 mt-1">Litueche, O'Higgins</p>
-                </div>
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
-                    <svg class="w-6 h-6 text-amber-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                    <p class="text-xs text-slate-500 uppercase font-mono">Apicultor</p>
-                    <p class="text-sm font-medium text-slate-200">Hermanos Olguín</p>
-                    <p class="text-xs text-slate-500 mt-1">3ra Generación · Secano Costero</p>
-                </div>
-            </div>
-
-            <!-- Interactive Map Section -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 mb-6">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-serif text-lg text-white">Ubicación Geográfica</h3>
-                    <div class="flex items-center gap-2">
-                        <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                        <span class="text-xs text-emerald-500 font-mono">GPS Verificado</span>
-                    </div>
-                </div>
-
-                <div id="map" class="mb-4 border border-slate-800 overflow-hidden"></div>
-
-                <div class="flex items-center gap-2 text-xs text-slate-400">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>Litueche, Región de O'Higgins, Chile</span>
-                </div>
-            </div>
-
-            <!-- Floral Variety Composition -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
-                <h3 class="font-serif text-lg text-white mb-1">Composición Floral</h3>
-                <p class="text-xs text-slate-500 mb-5">Análisis polínico certificado</p>
-
-                <div class="space-y-3">
-                    <!-- Lechuguilla -->
-                    <div class="floral-card bg-slate-950/50 border border-slate-800/50 rounded-xl p-4">
-                        <div class="flex items-start gap-3">
-                            <div
-                                class="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
-                                <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                                </svg>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex items-center justify-between mb-1">
-                                    <h4 class="text-sm font-bold text-white">Lechuguilla</h4>
-                                    <span class="text-xs font-mono text-emerald-400">65%</span>
-                                </div>
-                                <p class="text-xs text-slate-400 leading-relaxed mb-2">
-                                    <em>Perezia recurvata</em> - Hierba perenne endémica del secano costero. Aporta
-                                    notas florales frescas y un toque herbáceo delicado.
-                                </p>
-                                <div class="h-1 bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-emerald-500 w-[65%] rounded-full"></div>
-                                </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3">
+                        <div class="flex gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed italic">"Pedí el Pack Dúo para regalar y fue un éxito total. La presentación es impecable y la vela de cera huele delicioso."</p>
+                        <div class="flex items-center gap-2 pt-1">
+                            <div class="w-7 h-7 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-xs">C</div>
+                            <div>
+                                <p class="text-white text-xs font-bold">Cristóbal V.</p>
+                                <p class="text-gray-500 text-[10px]">Rancagua · Pack Dúo Origen</p>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Quillay -->
-                    <div class="floral-card bg-slate-950/50 border border-slate-800/50 rounded-xl p-4">
-                        <div class="flex items-start gap-3">
-                            <div
-                                class="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center flex-shrink-0">
-                                <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                                </svg>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex items-center justify-between mb-1">
-                                    <h4 class="text-sm font-bold text-white">Quillay</h4>
-                                    <span class="text-xs font-mono text-amber-400">25%</span>
-                                </div>
-                                <p class="text-xs text-slate-400 leading-relaxed mb-2">
-                                    <em>Quillaja saponaria</em> - Árbol nativo del bosque esclerófilo. Aporta cuerpo y
-                                    un suave fondo amaderado.
-                                </p>
-                                <div class="h-1 bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-amber-500 w-[25%] rounded-full"></div>
-                                </div>
-                            </div>
+                    <div class="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-5 space-y-3">
+                        <div class="flex gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
                         </div>
-                    </div>
-
-                    <!-- Corontillo -->
-                    <div class="floral-card bg-slate-950/50 border border-slate-800/50 rounded-xl p-4">
-                        <div class="flex items-start gap-3">
-                            <div
-                                class="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center flex-shrink-0">
-                                <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                                </svg>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex items-center justify-between mb-1">
-                                    <h4 class="text-sm font-bold text-white">Corontillo</h4>
-                                    <span class="text-xs font-mono text-purple-400">10%</span>
-                                </div>
-                                <p class="text-xs text-slate-400 leading-relaxed mb-2">
-                                    <em>Escallonia pulverulenta</em> - Arbusto costero. Contribuye dulzura floral
-                                    delicada.
-                                </p>
-                                <div class="h-1 bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-purple-500 w-[10%] rounded-full"></div>
-                                </div>
+                        <p class="text-gray-300 text-sm leading-relaxed italic">"La miel de Corontillo tiene un aroma floral impresionante. Nunca había probado algo así. Ya hice mi segundo pedido."</p>
+                        <div class="flex items-center gap-2 pt-1">
+                            <div class="w-7 h-7 rounded-full bg-amber-500/30 border border-amber-500/40 flex items-center justify-center text-amber-300 font-bold text-xs">A</div>
+                            <div>
+                                <p class="text-white text-xs font-bold">Andrea M.</p>
+                                <p class="text-gray-500 text-[10px]">Valparaíso · Miel de Corontillo 1KG</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-
-        <!-- VISTA 3: CATA -->
-        <div id="tab-metrics" class="hidden fade-in">
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-4 opacity-10">
-                    <svg class="w-32 h-32 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                    </svg>
-                </div>
-
-                <div class="flex items-center gap-2 mb-6">
-                    <span
-                        class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">EXPERIENCIA
-                        SENSORIAL</span>
-                </div>
-
-                <h3 class="font-serif text-xl text-white mb-4">Notas del Sommelier</h3>
-                <p class="text-slate-400 text-sm leading-relaxed italic mb-8 border-l-2 border-amber-500/50 pl-4"
-                    data-notas-sommelier="true">
-                    "Entrada suave con notas florales frescas y un toque herbáceo delicado. Dulzura equilibrada con
-                    final limpio y persistente, característico de la Lechuguilla endémica del secano costero de
-                    Litueche."
-                </p>
-
-                <div class="space-y-6">
-                    <div>
-                        <div class="flex justify-between text-xs mb-2">
-                            <span class="text-slate-400">Intensidad Floral</span>
-                            <span class="text-white font-medium">Alta</span>
-                        </div>
-                        <div class="h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                            <div
-                                class="h-full bg-amber-500 w-[92%] rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)]">
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs mb-2">
-                            <span class="text-slate-400">Dulzura</span>
-                            <span class="text-white font-medium">Media</span>
-                        </div>
-                        <div class="h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                            <div
-                                class="h-full bg-amber-500 w-[60%] rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)]">
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs mb-2">
-                            <span class="text-slate-400">Textura</span>
-                            <span class="text-white font-medium">Cremosa</span>
-                        </div>
-                        <div class="h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                            <div
-                                class="h-full bg-amber-500 w-[85%] rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)]">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Seccion Velas -->
+    <section class="px-4 max-w-5xl mx-auto mb-24">
+        <div class="bg-orange-600 rounded-[3rem] p-8 md:p-12 text-white relative overflow-hidden mb-12">
+            <i data-lucide="flame" class="absolute -right-8 -bottom-8 opacity-20 w-60 h-60"></i>
+            <div class="relative z-10 max-w-md">
+                <span class="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-orange-100 text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-4">
+                    <i data-lucide="flame" class="w-3 h-3"></i> Cera 100% de abeja · Stock limitado
+                </span>
+                <h2 class="text-4xl font-serif font-bold mb-4">Luz de Panal</h2>
+                <p class="text-orange-100 mb-0 italic">"Cera virgen recolectada de forma ética, para iluminar tus
+                    espacios con el aroma puro de la colmena."</p>
+                <p class="text-orange-200/70 text-xs mt-3">Cada vela es única — moldeada a mano en Litueche. Ideal como regalo o para tu hogar.</p>
             </div>
         </div>
 
+        <div id="candles-container" class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <!-- Rendered by JS -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 text-white py-12 px-4 mt-20 relative z-40 rounded-t-[3rem] pb-32">
+        <div
+            class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+            <div>
+                <div class="flex items-center gap-2 justify-center md:justify-start mb-2">
+                    <i data-lucide="hexagon" class="text-amber-500 fill-amber-500 w-6 h-6"></i>
+                    <span class="text-2xl font-serif font-bold italic">Panal de Litu</span>
+                </div>
+                <p class="text-gray-500 text-sm">Litueche, VI Región, Chile</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://www.tiktok.com/@panal.de.litu" target="_blank"
+                    class="flex items-center gap-2 bg-white/5 border border-white/10 px-5 py-3 rounded-2xl hover:bg-black hover:text-[#00f2ea] hover:border-[#00f2ea] transition-all group">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                    </svg>
+                    <span class="font-bold text-sm">@panal.de.litu</span>
+                </a>
+
+                <a href="https://www.instagram.com/panal.litu" target="_blank"
+                    class="flex items-center gap-2 bg-white/5 border border-white/10 px-5 py-3 rounded-2xl hover:bg-gradient-to-br hover:from-purple-600 hover:to-orange-500 hover:border-transparent transition-all">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                    <span class="font-bold text-sm">@panal.litu</span>
+                </a>
+
+                <a href="https://wa.me/56983665863" target="_blank"
+                    onclick="fbq('track', 'Contact', { content_name: 'WhatsApp Footer' })"
+                    class="flex items-center gap-2 bg-white/5 border border-white/10 px-5 py-3 rounded-2xl hover:bg-green-500 hover:text-black hover:border-green-500 transition-all">
+                    <i data-lucide="message-circle" class="w-5 h-5"></i>
+                    <span class="font-bold text-sm">WhatsApp</span>
+                </a>
+            </div>
+        </div>
+        <div class="border-t border-white/5 mt-12 pt-8 text-center">
+            <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6">
+                <a href="/privacidad" class="text-gray-500 text-xs hover:text-gray-300 transition">Política de Privacidad</a>
+                <a href="/eliminacion-datos" class="text-gray-500 text-xs hover:text-gray-300 transition">Eliminación de Datos</a>
+                <a href="/politica-envios" class="text-gray-500 text-xs hover:text-gray-300 transition">Política de Envíos</a>
+                <a href="/empresa" class="text-gray-500 text-xs hover:text-gray-300 transition">Nuestra Empresa</a>
+            </div>
+            <p class="text-gray-600 text-xs">© 2026 Panal de Litu. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Checkout Bar -->
+    <div id="checkout-bar"
+        class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-neutral-900 text-white p-4 rounded-[2rem] shadow-2xl z-50 flex items-center justify-between border border-white/10 animate-slide-up">
+        <div class="pl-4">
+            <p class="text-[10px] text-gray-400 uppercase font-black">Tu pedido</p>
+            <p id="total-amount" class="text-xl font-bold"></p>
+        </div>
+        <button onclick="toggleCart()"
+            class="bg-amber-500 text-black px-6 py-3 rounded-2xl font-black text-sm flex items-center gap-2">
+            VER CANASTA <i data-lucide="shopping-bag" class="w-4 h-4 ml-2"></i>
+        </button>
     </div>
 
-
-    <!-- POP-UP: ¿CÓMO FUNCIONA? (MODAL) -->
-    <div id="modal" class="hidden fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-4 sm:p-6">
-        <!-- Backdrop con blur -->
-        <div onclick="toggleModal()" class="absolute inset-0 bg-slate-950/90 backdrop-blur-sm"></div>
-
-        <!-- Modal Content -->
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-3xl p-6 relative shadow-2xl fade-in"
-            style="z-index: 61;">
-            <button onclick="toggleModal()"
-                class="absolute top-4 right-4 p-2 text-slate-500 hover:text-white transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-
-            <div class="mb-6">
-                <h3 class="font-serif text-2xl text-white mb-2">Transparencia Total</h3>
-                <p class="text-slate-400 text-sm">Explicado simple, sin tecnicismos.</p>
-            </div>
-
-            <div class="space-y-6">
-                <!-- Paso 1 -->
-                <div class="flex gap-4">
-                    <div
-                        class="flex-shrink-0 w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700">
-                        <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-bold text-sm mb-1">1. El Origen</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed">
-                            Don Héctor cosecha la miel y la envasa. En ese momento, creamos una "huella digital" única
-                            para este lote.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Paso 2 -->
-                <div class="flex gap-4">
-                    <div
-                        class="flex-shrink-0 w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700">
-                        <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-bold text-sm mb-1">2. El "Notario Digital"</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed">
-                            Esa huella se guarda en <strong>Blockchain</strong>. Imagínalo como un libro de actas
-                            público que nadie puede borrar ni modificar. Es nuestra garantía de que no hay mezclas
-                            ocultas.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Paso 3 -->
-                <div class="flex gap-4">
-                    <div
-                        class="flex-shrink-0 w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700">
-                        <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-bold text-sm mb-1">3. Tu Garantía</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed">
-                            Al escanear este código, estás leyendo directamente de ese libro. Tienes la certeza
-                            matemática de que esta miel es pura y de Litueche.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <button onclick="toggleModal()"
-                class="w-full mt-8 bg-amber-500 text-slate-950 font-bold py-3 rounded-xl hover:bg-amber-400 transition-colors">
-                Entendido
-            </button>
-        </div>
+    <!-- Notificacion -->
+    <div id="notification"
+        class="hidden fixed top-20 right-4 bg-green-500 text-white px-6 py-3 rounded-2xl shadow-2xl z-[60] font-bold flex items-center gap-2 text-sm transition-opacity duration-300">
+        <i data-lucide="star" class="w-4 h-4 fill-white"></i> Item Agregado
     </div>
 
+    <!-- CART MODAL / SIDEBAR -->
+    <div id="cart-modal" class="hidden fixed inset-0 z-[70]">
+        <!-- Backdrop -->
+        <div onclick="toggleCart()" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"></div>
 
-    <!-- Floating Blockchain Info Button -->
-    <a href="blockchain.html"
-        class="fixed bottom-28 right-6 z-40 group bg-gradient-to-br from-forest-600 to-forest-800 text-white p-4 rounded-full shadow-2xl hover:shadow-honey-500/50 transition-all duration-300 hover:scale-110 active:scale-95 flex items-center gap-3 border-2 border-white/10 hover:border-honey-500/50">
-        <div class="relative">
-            <svg class="w-6 h-6 text-honey-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <div class="absolute -top-1 -right-1 w-3 h-3 bg-honey-500 rounded-full animate-ping"></div>
-            <div class="absolute -top-1 -right-1 w-3 h-3 bg-honey-500 rounded-full"></div>
-        </div>
-        <span class="text-sm font-medium whitespace-nowrap">¿Que es Blockchain?</span>
-    </a>
+        <!-- Sidebar -->
+        <div
+            class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col transform transition-transform duration-300 translate-x-full cart-slide">
 
-    <!-- STICKY BUY BUTTON -->
-    <div class="fixed bottom-0 left-0 right-0 bg-slate-950/80 backdrop-blur-xl border-t border-slate-800 p-4 z-40">
-        <div class="max-w-md mx-auto">
-            <div class="flex items-center gap-3 mb-2">
-                <button onclick="shareProduct()"
-                    class="flex items-center gap-2 text-xs text-slate-400 hover:text-amber-400 transition-colors">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                    </svg>
-                    Compartir este lote
+            <!-- Cart Header -->
+            <div class="p-6 border-b border-gray-100 flex items-center justify-between bg-white z-10">
+                <h2 class="text-2xl font-serif font-bold text-gray-900">Tu Canasta</h2>
+                <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                    <i data-lucide="x" class="w-6 h-6 text-gray-400"></i>
                 </button>
-                <div class="flex-1"></div>
-                <span class="text-[9px] text-slate-600 font-mono uppercase tracking-wider" data-lote-footer="true">Lote
-                    #LIT-25-LECH-001</span>
             </div>
-            <div class="flex items-center gap-4">
-                <div class="flex-1">
-                    <p class="text-[10px] text-slate-500 uppercase font-mono tracking-wider">Precio Lote Cero</p>
-                    <p class="text-xl font-serif text-white" data-precio="true">$9.900 <span
-                            class="text-xs text-slate-500 font-sans font-normal">CLP</span></p>
+
+            <!-- Cart Items -->
+            <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-6">
+                <!-- Items rendered by JS -->
+                <div class="flex flex-col items-center justify-center h-full text-center space-y-4 text-gray-400">
+                    <i data-lucide="shopping-bag" class="w-16 h-16 opacity-20"></i>
+                    <p>Tu canasta está vacía</p>
+                    <button onclick="toggleCart()" class="text-amber-500 font-bold text-sm hover:underline">Seguir
+                        comprando</button>
                 </div>
-                <button
-                    onclick="window.fbq('track', 'InitiateCheckout', { content_name: 'Quiero el Mio - Index' }); window.open('https://wa.me/56983665863?text=Hola!%20Vi%20la%20p%C3%A1gina%20de%20trazabilidad%20del%20Lote%20Cero%20y%20quiero%20reservar%20mi%20frasco%20de%20Miel%20de%20Lechuguilla%20Panal%20de%20Litu.%20%C2%BFC%C3%B3mo%20coordino%20el%20pago%20y%20el%20env%C3%ADo%3F', '_blank')"
-                    class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-8 py-3 rounded-xl font-bold text-sm tracking-wide shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all active:scale-95">
-                    QUIERO EL MÍO
+            </div>
+
+            <!-- Cart Footer -->
+            <div class="p-6 border-t border-gray-100 bg-gray-50">
+                <div class="flex justify-between items-center mb-6">
+                    <span class="text-gray-500 font-medium">Total Estimado</span>
+                    <span id="cart-total" class="text-3xl font-serif font-bold text-gray-900">$0</span>
+                </div>
+                <button onclick="checkoutWhatsApp()"
+                    class="w-full text-white py-4 rounded-xl font-bold flex items-center justify-center gap-3 transition-all active:scale-95 shadow-xl"
+                    style="background:linear-gradient(135deg,#25D366 0%,#1aab57 100%);box-shadow:0 4px 20px rgba(37,211,102,.35);">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="white"><path d="M16 .5C7.44.5.5 7.44.5 16c0 2.82.74 5.51 2.15 7.88L.5 31.5l7.85-2.05A15.43 15.43 0 0016 31.5C24.56 31.5 31.5 24.56 31.5 16S24.56.5 16 .5zm0 28.07a13.56 13.56 0 01-6.89-1.88l-.49-.29-5.13 1.34 1.37-5-.32-.52A13.57 13.57 0 1116 28.57zm7.44-10.17c-.41-.2-2.4-1.18-2.77-1.32-.37-.13-.64-.2-.9.2-.27.4-1.03 1.32-1.26 1.59-.23.27-.46.3-.87.1-.41-.2-1.73-.64-3.3-2.03-1.22-1.09-2.04-2.43-2.28-2.84-.24-.41-.03-.63.18-.83.18-.18.41-.47.61-.7.2-.24.27-.41.4-.68.13-.27.07-.5-.03-.7-.1-.2-.9-2.17-1.23-2.97-.32-.78-.65-.67-.9-.68h-.77c-.27 0-.7.1-1.07.5-.37.4-1.4 1.37-1.4 3.34s1.43 3.87 1.63 4.14c.2.27 2.82 4.3 6.83 6.03.95.41 1.7.66 2.28.84.96.3 1.83.26 2.52.16.77-.12 2.4-.98 2.74-1.93.34-.95.34-1.76.24-1.93-.1-.17-.37-.27-.77-.47z"/></svg>
+                    CONFIRMAR POR WHATSAPP
                 </button>
             </div>
         </div>
     </div>
+    <style>
+        .cart-open .cart-slide {
+            transform: translateX(0);
+        }
+
+        .cart-open #cart-modal {
+            display: block;
+        }
+    </style>
 
     <script>
-        // Sistema de Trazabilidad Dinámica - Panal de Litu
-        async function cargarDatosLote() {
-            // Leer el ID del lote desde la URL: /index.html?lote=LIT-25-LECH-001
-            // o usar el lote por defecto
-            const params = new URLSearchParams(window.location.search);
-            const loteId = params.get('lote') || 'LIT-25-LECH-001';
+        // DATA
+        const products = {
+            hero: {
+                id: 'genesis',
+                name: 'Lote Cero: La Primera Gota',
+                price: 9900,
+                description: 'Una edición irrepetible. Miel cruda de floración nativa única de Litueche. Cosechada bajo la luna llena de marzo. Solo 50 unidades.',
+                tag: 'Edición Limitada',
+                image: 'public/images/frasco_etiqueta.png'
+            },
+            honey: [
+                { id: 1, name: 'Miel de Corontillo', price: 7000, weight: '1KG', origin: 'Litueche, Bosque Esclerófilo', image: "public/images/catalog_coron.png" },
+                { id: 2, name: 'Miel de Corontillo', price: 4500, weight: '1/2KG', origin: 'Litueche, Bosque Esclerófilo', image: 'public/images/catalog_coron.png' },
+                { id: 3, name: 'Miel de Quillay', price: 7000, weight: '1KG', origin: 'Litueche, Ladera Norte', image: 'public/images/catalog_quillay.jpg' },
+                { id: 4, name: 'Miel de Quillay', price: 4500, weight: '1/2KG', origin: 'Litueche, Ladera Norte', image: 'public/images/catalog_quillay.jpg' },
+                { id: 5, name: 'Miel Multifloral', price: 7000, weight: '1KG', origin: 'Litueche, Praderas Silvestres', image: 'public/images/catalog_multi.png' },
+                { id: 6, name: 'Miel Multifloral', price: 4500, weight: '1/2KG', origin: 'Litueche, Praderas Silvestres', image: 'public/images/catalog_multi.png' },
+                { id: 7, name: 'Miel de Arrope', price: 7500, weight: '1KG', origin: 'Tradición Ancestral Litueche', image: 'public/images/catalog_arrope.png' },
+            ],
+            promotions: [
+                { id: 201, name: 'Pack Dúo Origen', price: 15000, desc: 'Lechuguilla 1KG (lote 0) + Quillay-Mora 1KG + 1 Vela de cera de abeja', discount: 'Regalo', image: 'public/images/pack-duo-origen.png' },
+                { id: 202, name: 'Pack completo', price: 20000, desc: 'Prueba las 3 variedades disponibles', discount: 'Más Vendido', image: 'public/images/pack-completo.png' },
+                { id: 204, name: 'Pack Regalo PREMIUM', price: 15000, desc: '1 Miel 1KG (lote 0) + 1 Vela de cera a elección', discount: 'Vela de regalo', image: 'public/images/pack-regalo.png' },
+                { id: 203, name: 'Kit Emprendedor', price: 34500, desc: '5 Mieles de 1KG', discount: '27% OFF', image: '' },
+                
+            ],
+            candles: [
+                { id: 101, name: 'Vela Abeja real', price: 7000, image: 'public/images/vela_abejareina.png' },
+                { id: 102, name: 'Vela Muñeco de Nieve', price: 5200, image: 'public/images/vela_muñeco.png' },
+                { id: 103, name: 'Vela Navideña', price: 6500, image: 'public/images/vela_navidad.png' },
+                { id: 104, name: 'Vela Love', price: 6000, image: 'public/images/vela_love.png' },
+                { id: 105, name: 'Vela Papa Noel', price: 6500, image: 'public/images/vela_papanoel.png' },
+                { id: 106, name: 'Vela Pascuero', price: 6400, image: 'public/images/vela_pascuero.png' },
+                { id: 107, name: 'Vela Perro', price: 4300, image: 'public/images/vela_perro.png' },
+                { id: 108, name: 'Vela Reno', price: 7200, image: 'public/images/vela_reno.png' },
+                { id: 109, name: 'Vela Perrita', price: 4500, image: 'public/images/vela_perrita.png' },
+                { id: 110, name: 'Vela Perrito', price: 4500, image: 'public/images/vela_perrito.png' }
+            ]
+        };
 
-            try {
-                const response = await fetch('/public/lotes.json');
-                const data = await response.json();
-                const lote = data.lotes.find(l => l.id === loteId);
+        let cart = [];
 
-                if (!lote) {
-                    document.getElementById('loading').innerHTML = '<p class="text-red-400 text-sm font-mono">LOTE NO ENCONTRADO</p>';
-                    return;
+        // Meta Pixel: engagement signal (5s en página = interés real)
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                fbq('track', 'ViewContent', {
+                    content_name: 'Catalogo Hero',
+                    content_category: 'Engagement'
+                });
+            }, 5000);
+        });
+
+        // Meta Pixel: datos por pack
+        const packPixelData = {
+            201: { content_name: 'Pack Origen',     content_ids: ['pack-origen'],     value: 15000, currency: 'CLP', num_items: 2 },
+            202: { content_name: 'Pack Completo',   content_ids: ['pack-completo'],   value: 20000, currency: 'CLP', num_items: 3 },
+            203: { content_name: 'Kit Emprendedor', content_ids: ['kit-emprendedor'], value: 34500, currency: 'CLP', num_items: 5 },
+            204: { content_name: 'Pack Regalo',     content_ids: ['pack-regalo'],     value: 15000, currency: 'CLP', num_items: 1 },
+        };
+
+        // Dispara cuando el usuario scrollea y VE un pack (interés)
+        const viewedPacks = new Set();
+        const packObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = parseInt(entry.target.dataset.packId);
+                    if (id && packPixelData[id] && !viewedPacks.has(id)) {
+                        viewedPacks.add(id);
+                        fbq('track', 'ViewContent', { content_category: 'Pack Promocional', ...packPixelData[id] });
+                    }
                 }
+            });
+        }, { threshold: 0.5 });
 
-                // Actualizar todos los elementos de la UI con datos reales
+        // Dispara cuando el usuario agrega al carrito (intención de compra)
+        function fbqPack(id) {
+            if (packPixelData[id]) fbq('track', 'InitiateCheckout', { content_category: 'Pack Promocional', ...packPixelData[id] });
+        }
 
-                // Hero
-                const variedadEl = document.getElementById('label-variedad');
-                if (variedadEl) variedadEl.textContent = lote.variedad;
+        document.addEventListener('DOMContentLoaded', () => {
+            renderHero();
+            renderPromotions();
+            renderHoney();
+            renderCandles();
+            lucide.createIcons();
+        });
 
-                // Certificado - ID del lote (todos los lugares donde aparece)
-                document.querySelectorAll('[data-lote-id]').forEach(el => el.textContent = '#' + lote.id);
+        function renderHero() {
+            document.getElementById('hero-name').textContent = products.hero.name;
+            document.getElementById('hero-desc').textContent = products.hero.description;
+            document.getElementById('hero-price').textContent = '$' + products.hero.price.toLocaleString();
+            document.getElementById('hero-image').src = products.hero.image;
+            document.getElementById('hero-add').onclick = () => {
+                fbq('track', 'InitiateCheckout', { content_name: 'Lote Cero - Reservar' });
+                addToCart(products.hero);
+            };
+        }
 
-                // Certificado - fecha y ubicación
-                document.querySelectorAll('[data-cosecha]').forEach(el => el.textContent = lote.fecha_cosecha);
-                document.querySelectorAll('[data-fundo]').forEach(el => el.textContent = lote.fundo);
+        function renderPromotions() {
+            const container = document.getElementById('promotions-container');
+            container.innerHTML = products.promotions.map(pack => `
+                <div data-pack-id="${pack.id}" class="pack-card min-w-[280px] md:min-w-[320px] bg-white rounded-3xl shadow-xl border border-amber-100 snap-center flex flex-col justify-between group hover:-translate-y-2 transition-transform duration-300 overflow-hidden">
+                    ${pack.image ? `
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img src="${pack.image}" alt="${pack.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+                    </div>` : `
+                    <div class="aspect-[4/3] bg-amber-50 flex items-center justify-center">
+                        <i data-lucide="package" class="w-12 h-12 text-amber-300"></i>
+                    </div>`}
+                    <div class="p-6 space-y-3 flex flex-col flex-1 justify-between">
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-xl font-bold leading-tight">${pack.name}</h3>
+                                <span class="text-[10px] font-black uppercase tracking-tighter bg-amber-500 text-white px-3 py-1 rounded-full ml-2 shrink-0">${pack.discount}</span>
+                            </div>
+                            <p class="text-gray-500 text-sm">${pack.desc}</p>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-2xl font-black text-amber-600">$${pack.price.toLocaleString()}</span>
+                            <button onclick='fbqPack(${pack.id}); addToCart(${JSON.stringify(pack).replace(/'/g, "&#39;")})' class="bg-neutral-900 text-white px-4 py-2.5 rounded-2xl hover:bg-amber-600 transition shadow-lg active:scale-90 flex items-center gap-2 text-xs font-bold">
+                                <i data-lucide="shopping-bag" class="w-4 h-4"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
 
-                // Hash blockchain
-                document.querySelectorAll('[data-hash]').forEach(el => el.textContent = lote.hash_sha256);
+            // Observar cada tarjeta para saber cuándo el usuario la ve
+            container.querySelectorAll('.pack-card').forEach(card => packObserver.observe(card));
+        }
 
-                // Red
-                document.querySelectorAll('[data-red]').forEach(el => el.textContent = lote.red);
+        function renderHoney() {
+            const container = document.getElementById('honey-container');
+            container.innerHTML = products.honey.map(miel => `
+                <div class="bg-white rounded-[2rem] p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all group">
+                    <div class="aspect-square bg-amber-50 rounded-2xl mb-4 overflow-hidden relative">
+                        <img src="${miel.image}" alt="${miel.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+                        <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold shadow-sm">
+                            ${miel.weight}
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold mb-1">${miel.name}</h3>
+                    <p class="text-gray-400 text-xs mb-4 flex items-center gap-1"><i data-lucide="qr-code" class="w-3 h-3"></i> ${miel.origin}</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-2xl font-black">$${miel.price.toLocaleString()}</span>
+                        <button onclick='addToCart(${JSON.stringify(miel).replace(/'/g, "&#39;")})' class="bg-amber-500 text-black px-4 py-2 rounded-xl font-bold text-sm hover:bg-amber-600 transition flex items-center gap-1.5 shadow-sm shadow-amber-500/20 active:scale-95">
+                            <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i> Agregar
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
 
-                // Historia del apicultor
-                const historiaEl = document.querySelector('[data-historia]');
-                if (historiaEl) historiaEl.textContent = lote.historia;
+        function renderCandles() {
+            const container = document.getElementById('candles-container');
+            container.innerHTML = products.candles.map(candle => `
+                <div class="group">
+                    <div class="aspect-[4/5] bg-gray-100 rounded-3xl overflow-hidden mb-3 relative">
+                        <img src="${candle.image}" alt="${candle.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-end justify-center pb-4">
+                            <button onclick='addToCart(${JSON.stringify(candle).replace(/'/g, "&#39;")})' class="bg-amber-500 text-black px-4 py-2 rounded-full font-bold text-xs opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition shadow-2xl flex items-center gap-1.5 active:scale-95">
+                                <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="text-sm font-bold truncate">${candle.name}</h3>
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm text-amber-600 font-black">$${candle.price.toLocaleString()}</p>
+                        <span class="text-[9px] text-gray-400 font-medium">Hecha a mano</span>
+                    </div>
+                </div>
+            `).join('');
+        }
 
-                // Notas sommelier
-                const notasEl = document.querySelector('[data-notas-sommelier]');
-                if (notasEl) notasEl.textContent = lote.notas_sommelier;
+        function addToCart(product) {
+            cart.push(product);
+            updateCartUI();
+            showNotification();
+            lucide.createIcons();
 
-                // Precio en botón comprar
-                document.querySelectorAll('[data-precio]').forEach(el =>
-                    el.textContent = '$' + lote.precio_clp.toLocaleString('es-CL'));
-
-                // Lote en footer sticky
-                document.querySelectorAll('[data-lote-footer]').forEach(el =>
-                    el.textContent = 'Lote #' + lote.id);
-
-                // Mostrar contenido, ocultar loading
-                document.getElementById('loading').classList.add('hidden');
-                document.getElementById('content').classList.remove('hidden');
-
-                console.log('Lote cargado:', lote.id, '| Hash:', lote.hash_sha256);
-
-            } catch (error) {
-                console.error('Error cargando lote:', error);
-                document.getElementById('loading').innerHTML =
-                    '<p class="text-red-400 text-xs font-mono">ERROR DE VERIFICACIÓN</p>';
+            // If modal is open, re-render
+            const modal = document.getElementById('cart-modal');
+            if (modal && !modal.classList.contains('hidden')) {
+                renderCartList();
             }
         }
 
-        // Ejecutar al cargar la página
-        document.addEventListener('DOMContentLoaded', cargarDatosLote);
-    </script>
-    <script src="public/scripts/index.js"></script>
-    <script>
-        function toggleAudioVideo() {
-            const video = document.getElementById('video-apicultor');
-            const iconMuted = document.getElementById('icon-muted');
-            const iconUnmuted = document.getElementById('icon-unmuted');
+        function toggleCart() {
+            const modal = document.getElementById('cart-modal');
+            const sidebar = modal.querySelector('.cart-slide');
 
-            if (video.muted) {
-                video.muted = false;
-                video.volume = 1;
-                iconMuted.classList.add('hidden');
-                iconUnmuted.classList.remove('hidden');
+            if (modal.classList.contains('hidden')) {
+                // Open
+                modal.classList.remove('hidden');
+                setTimeout(() => sidebar.classList.remove('translate-x-full'), 10);
+                renderCartList();
             } else {
-                video.muted = true;
-                iconMuted.classList.remove('hidden');
-                iconUnmuted.classList.add('hidden');
+                // Close
+                sidebar.classList.add('translate-x-full');
+                setTimeout(() => modal.classList.add('hidden'), 300);
             }
         }
 
-        function togglePlayPause() {
-            const video = document.getElementById('video-apicultor');
-            const iconPause = document.getElementById('icon-pause');
-            const iconPlay = document.getElementById('icon-play');
+        function renderCartList() {
+            const container = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total');
 
-            if (video.paused) {
-                video.play();
-                iconPause.classList.remove('hidden');
-                iconPlay.classList.add('hidden');
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center h-full text-center space-y-4 text-gray-400">
+                        <i data-lucide="shopping-bag" class="w-16 h-16 opacity-20"></i>
+                        <p>Tu canasta está vacía</p>
+                        <button onclick="toggleCart()" class="text-amber-500 font-bold text-sm hover:underline">Seguir comprando</button>
+                    </div>`;
+                totalEl.textContent = '$0';
+                return;
+            }
+
+            // Group items
+            const grouped = {};
+            cart.forEach(item => {
+                if (!grouped[item.id]) {
+                    grouped[item.id] = { ...item, quantity: 0 };
+                }
+                grouped[item.id].quantity++;
+            });
+
+            const itemsHtml = Object.values(grouped).map(item => `
+                <div class="flex gap-4 items-center">
+                    <div class="w-20 h-20 rounded-xl bg-gray-100 overflow-hidden flex-shrink-0">
+                        <img src="${item.image}" loading="lazy" class="w-full h-full object-cover" alt="${item.name}">
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-gray-900 text-sm leading-tight mb-1">${item.name}</h4>
+                        <p class="text-xs text-gray-500 mb-2">${item.weight || item.desc || ''}</p>
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-amber-600">$${(item.price * item.quantity).toLocaleString()}</span>
+                            
+                            <!-- Controls -->
+                            <div class="flex items-center gap-3 bg-gray-100 rounded-lg px-2 py-1">
+                                <button onclick="removeFromCart('${item.id}')" class="p-1 hover:text-red-500 transition-colors">
+                                    <i data-lucide="minus" class="w-3 h-3"></i>
+                                </button>
+                                <span class="text-xs font-bold w-4 text-center">${item.quantity}</span>
+                                <button onclick="addToCartById('${item.id}')" class="p-1 hover:text-green-500 transition-colors">
+                                    <i data-lucide="plus" class="w-3 h-3"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = itemsHtml;
+
+            const total = cart.reduce((sum, i) => sum + i.price, 0);
+            totalEl.textContent = '$' + total.toLocaleString();
+
+            lucide.createIcons();
+        }
+
+        function addToCartById(id) {
+            // Find product in data
+            let product = products.hero.id === id ? products.hero : null;
+            if (!product) product = products.honey.find(p => p.id == id);
+            if (!product) product = products.promotions.find(p => p.id == id);
+            if (!product) product = products.candles.find(p => p.id == id);
+
+            if (product) {
+                cart.push(product);
+                updateCartUI();
+                if (document.getElementById('cart-modal').classList.contains('hidden') === false) {
+                    renderCartList();
+                }
+            }
+        }
+
+        function removeFromCart(id) {
+            const index = cart.findIndex(item => item.id == id);
+            if (index > -1) {
+                cart.splice(index, 1);
+                updateCartUI();
+                renderCartList();
+            }
+        }
+
+        function updateCartUI() {
+            const btn = document.getElementById('cart-btn');
+            const count = document.getElementById('cart-count');
+            const checkout = document.getElementById('checkout-bar');
+            const total = document.getElementById('total-amount');
+
+            if (cart.length > 0) {
+                btn.classList.remove('hidden');
+                btn.onclick = toggleCart; // Open modal
+                count.textContent = cart.length;
             } else {
-                video.pause();
-                iconPause.classList.add('hidden');
-                iconPlay.classList.remove('hidden');
+                btn.classList.add('hidden');
+            }
+
+            // Update Floating Bar
+            const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
+            if (total) total.textContent = '$' + totalAmount.toLocaleString();
+
+            if (cart.length > 0) {
+                checkout.classList.remove('hidden');
+                // Change action to open modal
+                const cBtn = checkout.querySelector('button');
+                cBtn.onclick = toggleCart;
+                cBtn.innerHTML = 'VER CANASTA <i data-lucide="shopping-bag" class="w-4 h-4 ml-2"></i>';
+            } else {
+                checkout.classList.add('hidden');
+            }
+
+            // Mover botón WA arriba cuando el checkout bar está visible (evita solapamiento en mobile)
+            const waFloat = document.getElementById('wa-float');
+            if (waFloat) {
+                waFloat.style.bottom = cart.length > 0 ? '6.5rem' : '1.5rem';
             }
         }
-        function toggleLechuguilla() {
-            document.getElementById('modal-lechuguilla').classList.toggle('hidden');
-            const hint = document.getElementById('lechuguilla-hint');
-            if (hint) hint.classList.add('hidden');
+
+        function showNotification() {
+            const el = document.getElementById('notification');
+            el.classList.remove('hidden');
+            el.classList.add('opacity-100');
+            setTimeout(() => {
+                el.classList.remove('opacity-100');
+                el.classList.add('opacity-0');
+                setTimeout(() => el.classList.add('hidden'), 300);
+            }, 3000);
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) return;
+            fbq('track', 'Contact', { content_name: 'WhatsApp Checkout', value: cart.reduce((s, i) => s + i.price, 0), currency: 'CLP' });
+
+            // Group for clearer message
+            const grouped = {};
+            cart.forEach(item => {
+                if (!grouped[item.id]) grouped[item.id] = { ...item, quantity: 0 };
+                grouped[item.id].quantity++;
+            });
+
+            const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
+            const itemsList = Object.values(grouped)
+                .map(i => `- (${i.quantity}) ${i.name} ${i.weight || ''} ($${(i.price * i.quantity).toLocaleString()})`)
+                .join('\n');
+
+            const message = `Hola Panal de Litu, quiero realizar este pedido:\n\n${itemsList}\n\n*Total: $${totalAmount.toLocaleString()}*`;
+            const url = `https://wa.me/56983665863?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
         }
     </script>
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- BOTÓN FLOTANTE WHATSAPP                    -->
+    <!-- ═══════════════════════════════════════════ -->
+    <style>
+        @keyframes wa-enter {
+            0%   { opacity: 0; transform: translateY(32px) scale(0.75); }
+            65%  { transform: translateY(-5px) scale(1.08); }
+            85%  { transform: translateY(3px) scale(0.97); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes wa-ring {
+            0%   { transform: scale(1); opacity: 0.55; }
+            100% { transform: scale(2.4); opacity: 0; }
+        }
+        #wa-float {
+            animation: wa-enter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 2s both;
+            transition: bottom 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        #wa-ring-a { animation: wa-ring 2.8s ease-out 2.8s infinite; }
+        #wa-ring-b { animation: wa-ring 2.8s ease-out 3.55s infinite; }
+    </style>
 
-    <!-- Modal: ¿Qué es la Lechuguilla? -->
-    <div id="modal-lechuguilla"
-        class="hidden fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-4 sm:p-6">
-        <div onclick="toggleLechuguilla()" class="absolute inset-0 bg-slate-950/90 backdrop-blur-sm"></div>
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-3xl p-6 relative shadow-2xl fade-in">
-            <button onclick="toggleLechuguilla()"
-                class="absolute top-4 right-4 text-slate-500 hover:text-slate-300 transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    <div id="wa-float" class="fixed right-5 z-[90] flex items-center justify-end gap-3" style="bottom:1.5rem;">
+
+        <!-- Tooltip — visible en desktop al hover -->
+        <div id="wa-tooltip"
+             class="hidden md:flex items-center gap-2 bg-[#1A1A1A] text-[#FFF8E7] text-xs font-bold px-4 py-2.5 rounded-2xl shadow-2xl whitespace-nowrap pointer-events-none select-none"
+             style="opacity:0; transform:translateX(10px); transition: opacity .22s ease, transform .22s ease;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="14" height="14" fill="#25D366"><path d="M16 .5C7.44.5.5 7.44.5 16c0 2.82.74 5.51 2.15 7.88L.5 31.5l7.85-2.05A15.43 15.43 0 0016 31.5C24.56 31.5 31.5 24.56 31.5 16S24.56.5 16 .5zm0 28.07a13.56 13.56 0 01-6.89-1.88l-.49-.29-5.13 1.34 1.37-5-.32-.52A13.57 13.57 0 1116 28.57zm7.44-10.17c-.41-.2-2.4-1.18-2.77-1.32-.37-.13-.64-.2-.9.2-.27.4-1.03 1.32-1.26 1.59-.23.27-.46.3-.87.1-.41-.2-1.73-.64-3.3-2.03-1.22-1.09-2.04-2.43-2.28-2.84-.24-.41-.03-.63.18-.83.18-.18.41-.47.61-.7.2-.24.27-.41.4-.68.13-.27.07-.5-.03-.7-.1-.2-.9-2.17-1.23-2.97-.32-.78-.65-.67-.9-.68h-.77c-.27 0-.7.1-1.07.5-.37.4-1.4 1.37-1.4 3.34s1.43 3.87 1.63 4.14c.2.27 2.82 4.3 6.83 6.03.95.41 1.7.66 2.28.84.96.3 1.83.26 2.52.16.77-.12 2.4-.98 2.74-1.93.34-.95.34-1.76.24-1.93-.1-.17-.37-.27-.77-.47z"/></svg>
+            ¡Pide directo por WhatsApp!
+            <!-- Arrow derecha -->
+            <span style="position:absolute;right:-7px;top:50%;transform:translateY(-50%);width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:7px solid #1A1A1A;"></span>
+        </div>
+
+        <!-- Botón principal -->
+        <div class="relative">
+            <!-- Anillos de pulso -->
+            <span id="wa-ring-a" class="absolute inset-0 rounded-full pointer-events-none" style="background:#25D366;"></span>
+            <span id="wa-ring-b" class="absolute inset-0 rounded-full pointer-events-none" style="background:#25D366;"></span>
+
+            <a href="https://wa.me/56983665863?text=Hola%2C%20revis%C3%A9%20el%20catalogo%20y%20me%20interes%C3%A9%20por%20un%20producto!"
+               target="_blank"
+               rel="noopener"
+               onclick="if(typeof fbq!=='undefined') fbq('track','Contact',{content_name:'WhatsApp Flotante',content_category:'Flotante'})"
+               onmouseenter="var t=document.getElementById('wa-tooltip');if(t){t.style.opacity='1';t.style.transform='translateX(0)';}"
+               onmouseleave="var t=document.getElementById('wa-tooltip');if(t){t.style.opacity='0';t.style.transform='translateX(10px)';}"
+               class="relative z-10 flex items-center justify-center rounded-full hover:scale-110 active:scale-95 transition-transform duration-200 cursor-pointer"
+               style="width:64px;height:64px;background:linear-gradient(145deg,#25D366 0%,#1aab57 100%);box-shadow:0 8px 30px rgba(37,211,102,.45),0 2px 8px rgba(0,0,0,.15);"
+               aria-label="Pedir por WhatsApp">
+                <!-- Ícono oficial WhatsApp -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="34" height="34" fill="white" style="position:relative;z-index:1;flex-shrink:0;">
+                    <path d="M16 .5C7.44.5.5 7.44.5 16c0 2.82.74 5.51 2.15 7.88L.5 31.5l7.85-2.05A15.43 15.43 0 0016 31.5C24.56 31.5 31.5 24.56 31.5 16S24.56.5 16 .5zm0 28.07a13.56 13.56 0 01-6.89-1.88l-.49-.29-5.13 1.34 1.37-5-.32-.52A13.57 13.57 0 1116 28.57zm7.44-10.17c-.41-.2-2.4-1.18-2.77-1.32-.37-.13-.64-.2-.9.2-.27.4-1.03 1.32-1.26 1.59-.23.27-.46.3-.87.1-.41-.2-1.73-.64-3.3-2.03-1.22-1.09-2.04-2.43-2.28-2.84-.24-.41-.03-.63.18-.83.18-.18.41-.47.61-.7.2-.24.27-.41.4-.68.13-.27.07-.5-.03-.7-.1-.2-.9-2.17-1.23-2.97-.32-.78-.65-.67-.9-.68h-.77c-.27 0-.7.1-1.07.5-.37.4-1.4 1.37-1.4 3.34s1.43 3.87 1.63 4.14c.2.27 2.82 4.3 6.83 6.03.95.41 1.7.66 2.28.84.96.3 1.83.26 2.52.16.77-.12 2.4-.98 2.74-1.93.34-.95.34-1.76.24-1.93-.1-.17-.37-.27-.77-.47z"/>
                 </svg>
-            </button>
-            <div class="flex items-center gap-3 mb-4">
-                <div class="w-10 h-10 rounded-2xl bg-amber-500/20 flex items-center justify-center text-2xl">🌼</div>
-                <div>
-                    <h3 class="font-serif text-white font-bold">Lechuguilla</h3>
-                    <p class="text-xs text-slate-500 font-mono">Perezia recurvata</p>
-                </div>
-            </div>
-            <p class="text-sm text-slate-300 leading-relaxed mb-4">
-                Conocida popularmente como <span class="text-amber-400 font-medium">diente de león</span>, la
-                lechuguilla es una flor silvestre que crece en los campos y bordes de caminos del sur de Chile. Sus
-                cabezuelas amarillas, perfectas para las abejas, florecen entre <span
-                    class="text-white font-medium">octubre y diciembre</span>.
-            </p>
-            <div class="bg-slate-800/60 rounded-2xl p-4 mb-4 border border-slate-700/50">
-                <div class="flex items-center gap-2 mb-1">
-                    <span class="text-amber-400 text-sm">🌿</span>
-                    <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">Temporada 2025</span>
-                </div>
-                <p class="text-xs text-slate-400 leading-relaxed">
-                    La floración dura apenas unas semanas. Nuestras abejas trabajan intensamente durante ese período
-                    para producir una miel única, de aroma floral y sabor suave.
-                </p>
-            </div>
-            <div class="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4">
-                <div class="flex items-center gap-2 mb-1">
-                    <span class="text-amber-400 text-sm">⚠️</span>
-                    <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Producción Limitada</span>
-                </div>
-                <p class="text-xs text-slate-300 leading-relaxed">
-                    Solo cosechamos una vez al año. Cuando se acaba, se acaba — hasta la próxima primavera.
-                </p>
-            </div>
+            </a>
         </div>
     </div>
+    <!-- ═══════════════════════════════════════════ -->
+
+    <!-- Hero Info Modal -->
+    <div id="hero-info-modal" class="hidden fixed inset-0 z-[80] overflow-y-auto">
+        <!-- Backdrop -->
+        <div onclick="toggleInfoHero()" class="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity"></div>
+
+        <!-- Content -->
+        <div class="min-h-screen w-full flex items-start justify-center px-3 py-4 pt-12 md:pt-16 md:px-4 md:pb-8">
+            <div
+                class="relative bg-neutral-900 border border-white/10 text-white rounded-2xl md:rounded-[2rem] w-full max-w-lg p-4 md:p-8 shadow-2xl mx-auto">
+                <!-- Decorative Background -->
+                <div
+                    class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-amber-500/20 rounded-full blur-3xl pointer-events-none">
+                </div>
+
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start mb-4 md:mb-6">
+                        <div>
+                            <span class="text-amber-500 font-bold text-xs tracking-widest uppercase mb-1 block">La
+                                Excelencia</span>
+                            <h3 class="text-3xl font-serif font-bold">¿Por qué Lote Cero?</h3>
+                        </div>
+                        <button onclick="toggleInfoHero()"
+                            class="p-2 hover:bg-white/10 rounded-full transition text-gray-400 hover:text-white">
+                            <i data-lucide="x" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+
+                    <div class="space-y-4 md:space-y-6 text-gray-300">
+                        <div class="flex gap-3 md:gap-4">
+                            <div
+                                class="bg-amber-500/10 p-2 md:p-3 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
+                                <i data-lucide="award" class="w-5 h-5 md:w-6 md:h-6 text-amber-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1 text-sm md:text-base">El "Lote Cero": Origen de la
+                                    Red</h4>
+                                <p class="text-xs md:text-sm leading-relaxed">Este es el primer lote certificado en la
+                                    historia de
+                                    nuestra plataforma. Al adquirirlo, no solo compras miel, te conviertes en parte del
+                                    grupo fundador que valida el modelo de trazabilidad inmutable en Chile.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 md:gap-4">
+                            <div
+                                class="bg-amber-500/10 p-2 md:p-3 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
+                                <i data-lucide="link" class="w-5 h-5 md:w-6 md:h-6 text-amber-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1 text-sm md:text-base">Inmutabilidad Blockchain</h4>
+                                <p class="text-xs md:text-sm leading-relaxed">Sello digital único en la red. El hash
+                                    generado al cerrar
+                                    este lote garantiza que la fecha de cosecha y el origen son verídicos y permanentes
+                                    para
+                                    siempre.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 md:gap-4">
+                            <div
+                                class="bg-amber-500/10 p-2 md:p-3 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
+                                <i data-lucide="map" class="w-5 h-5 md:w-6 md:h-6 text-amber-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1 text-sm md:text-base">Pasaporte Digital de Origen
+                                </h4>
+                                <p class="text-xs md:text-sm leading-relaxed">Escanea el QR para acceder a la ubicación
+                                    satelital
+                                    exacta del apiario en Litueche y ver el video cinematográfico del apicultor
+                                    responsable.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 md:gap-4">
+                            <div
+                                class="bg-amber-500/10 p-2 md:p-3 rounded-xl h-fit border border-amber-500/20 flex-shrink-0">
+                                <i data-lucide="sparkles" class="w-5 h-5 md:w-6 md:h-6 text-amber-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1 text-sm md:text-base">Análisis Sensorial IA</h4>
+                                <p class="text-xs md:text-sm leading-relaxed">Nuestra IA procesa los datos de floración
+                                    y humedad para
+                                    generar una nota de cata personalizada, describiendo notas que solo este lote posee.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-white/10 flex justify-center">
+                        <button onclick="toggleInfoHero(); addToCart(products.hero)"
+                            class="w-full bg-white text-black font-bold py-3 md:py-4 rounded-xl hover:bg-amber-500 hover:scale-[1.02] transition shadow-lg flex justify-center items-center gap-2 text-sm md:text-base">
+                            Quiero reservar mi frasco <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function toggleInfoHero() {
+                const el = document.getElementById('hero-info-modal');
+                if (el.classList.contains('hidden')) {
+                    el.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    el.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            }
+        </script>
 </body>
 
 </html>

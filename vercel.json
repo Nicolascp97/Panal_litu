@@ -4,15 +4,11 @@
   "rewrites": [
     {
       "source": "/",
-      "destination": "/catalogo.html"
-    },
-    {
-      "source": "/home",
       "destination": "/index.html"
     },
     {
       "source": "/catalogo",
-      "destination": "/catalogo.html"
+      "destination": "/index.html"
     },
     {
       "source": "/lote-0",
