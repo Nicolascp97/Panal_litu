@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="dns-prefetch" href="https://connect.facebook.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="public/scripts/tailwind-config.js"></script>
     <script src="https://unpkg.com/lucide@latest" defer></script>
@@ -57,6 +60,33 @@
         .animate-slide-up {
             animation: slide-up 0.5s ease-out forwards;
         }
+
+        /* Fuentes premium */
+        .font-serif, h1, h2, h3, .font-serif * {
+            font-family: 'Cormorant Garamond', Georgia, serif !important;
+        }
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+        }
+
+        /* Shimmer en botones CTA primarios */
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .btn-shimmer {
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+
+        /* Pulse badge urgencia */
+        @keyframes badge-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5); }
+            50% { box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
+        }
+        .badge-urgency {
+            animation: badge-pulse 2s ease-in-out infinite;
+        }
     </style>
 </head>
 
@@ -92,18 +122,24 @@
                 <div class="flex flex-col gap-4 pt-4">
                     <span id="hero-price" class="text-4xl font-light"></span>
                     <!-- Urgencia + prueba social -->
-                    <p class="flex items-center gap-2 text-xs font-bold tracking-wide uppercase text-amber-400/90">
-                        <span class="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse flex-shrink-0"></span>
-                        3 pedidos esta semana &nbsp;·&nbsp; Solo 50 unidades
-                    </p>
+                    <div class="flex flex-col gap-2">
+                        <p class="flex items-center gap-2 text-xs font-bold tracking-wide uppercase text-amber-400/90">
+                            <span class="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse flex-shrink-0"></span>
+                            12 personas mirando esto ahora &nbsp;·&nbsp; Quedan 38 unidades
+                        </p>
+                        <div class="flex items-center gap-2 text-[11px] text-gray-400">
+                            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-green-400 flex-shrink-0"></i>
+                            <span>Pago solo al confirmar · Sin cobros ocultos · Despacho coordinado por WhatsApp</span>
+                        </div>
+                    </div>
                     <div class="flex flex-wrap gap-3">
                         <button id="hero-add"
-                            class="bg-amber-500 text-black px-6 py-3 rounded-full font-bold hover:scale-105 transition flex items-center gap-2 text-sm md:text-base shadow-lg shadow-amber-500/20">
-                            RESERVAR AHORA <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            class="btn-shimmer bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-black px-6 py-3 rounded-full font-bold hover:scale-105 transition flex items-center gap-2 text-sm md:text-base shadow-lg shadow-amber-500/30">
+                            RESERVAR MI FRASCO <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </button>
                         <button onclick="toggleInfoHero()"
-                            class="border border-white/20 bg-white/5 backdrop-blur-sm text-white px-6 py-3 rounded-full font-bold hover:bg-white/10 transition flex items-center gap-2 text-sm md:text-base">
-                            <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i> ¿Por qué es única?
+                            class="border border-amber-500/30 bg-amber-500/10 text-amber-300 px-6 py-3 rounded-full font-bold hover:bg-amber-500/20 transition flex items-center gap-2 text-sm md:text-base">
+                            <i data-lucide="sparkles" class="w-4 h-4"></i> Ver por qué es única
                         </button>
                     </div>
                 </div>
@@ -117,11 +153,49 @@
         </div>
     </section>
 
+    <!-- Trust Strip -->
+    <section class="px-4 max-w-5xl mx-auto mb-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="flex flex-col items-center gap-2 bg-white border border-amber-100 rounded-2xl p-4 text-center shadow-sm">
+                <div class="bg-amber-50 p-2.5 rounded-xl">
+                    <i data-lucide="leaf" class="w-5 h-5 text-amber-600"></i>
+                </div>
+                <span class="text-xs font-bold text-gray-800">100% Natural</span>
+                <span class="text-[10px] text-gray-400 leading-tight">Sin aditivos ni conservantes</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 bg-white border border-amber-100 rounded-2xl p-4 text-center shadow-sm">
+                <div class="bg-amber-50 p-2.5 rounded-xl">
+                    <i data-lucide="map-pin" class="w-5 h-5 text-amber-600"></i>
+                </div>
+                <span class="text-xs font-bold text-gray-800">Cosecha Propia</span>
+                <span class="text-[10px] text-gray-400 leading-tight">Directo del apiario en Litueche</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 bg-white border border-amber-100 rounded-2xl p-4 text-center shadow-sm">
+                <div class="bg-amber-50 p-2.5 rounded-xl">
+                    <i data-lucide="qr-code" class="w-5 h-5 text-amber-600"></i>
+                </div>
+                <span class="text-xs font-bold text-gray-800">Trazabilidad QR</span>
+                <span class="text-[10px] text-gray-400 leading-tight">Verifica el origen de tu miel</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 bg-white border border-amber-100 rounded-2xl p-4 text-center shadow-sm">
+                <div class="bg-amber-50 p-2.5 rounded-xl">
+                    <i data-lucide="truck" class="w-5 h-5 text-amber-600"></i>
+                </div>
+                <span class="text-xs font-bold text-gray-800">Envío a Chile</span>
+                <span class="text-[10px] text-gray-400 leading-tight">Coordinado por WhatsApp</span>
+            </div>
+        </div>
+    </section>
+
     <!-- Seccion Packs Promocionales -->
     <section class="px-4 max-w-5xl mx-auto mb-20 overflow-hidden">
         <div class="flex flex-col mb-8 text-center">
-            <h2 class="text-3xl font-serif font-bold text-gray-900 mb-2 italic">Promociones de Temporada</h2>
-            <div class="h-1 w-20 bg-amber-500 mx-auto rounded-full"></div>
+            <span class="badge-urgency inline-flex items-center justify-center gap-1.5 bg-amber-500 text-white text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full w-fit mx-auto mb-3">
+                <i data-lucide="flame" class="w-3 h-3"></i> Los más pedidos esta semana
+            </span>
+            <h2 class="text-3xl font-serif font-bold text-gray-900 mb-2 italic">Packs con Descuento</h2>
+            <p class="text-gray-500 text-sm max-w-sm mx-auto">Ahorra combinando. Cada pack está armado para quien quiere lo mejor sin pagar de más.</p>
+            <div class="h-1 w-20 bg-amber-500 mx-auto rounded-full mt-3"></div>
         </div>
 
         <div id="promotions-container" class="flex overflow-x-auto pb-8 gap-6 snap-x no-scrollbar">
@@ -131,13 +205,95 @@
 
     <!-- Seccion Mieles -->
     <section class="px-4 max-w-5xl mx-auto mb-20">
-        <div class="flex items-center gap-4 mb-8">
-            <h2 class="text-3xl font-serif font-bold">Variedades en Stock</h2>
-            <div class="flex-1 h-[1px] bg-gray-200"></div>
+        <div class="flex flex-col md:flex-row md:items-end gap-2 mb-8">
+            <div>
+                <p class="text-amber-600 text-xs font-bold uppercase tracking-widest mb-1">Cosecha 2025 · Litueche, VI Región</p>
+                <h2 class="text-3xl font-serif font-bold">Mieles de Cosecha Propia</h2>
+            </div>
+            <div class="flex-1 h-[1px] bg-gray-200 hidden md:block mb-2"></div>
+            <span class="text-xs text-gray-500 font-medium whitespace-nowrap mb-2">Stock actual limitado</span>
         </div>
 
         <div id="honey-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Rendered by JS -->
+        </div>
+    </section>
+
+    <!-- Prueba Social / Testimonios -->
+    <section class="px-4 max-w-5xl mx-auto mb-16">
+        <div class="bg-neutral-900 rounded-[2.5rem] p-8 md:p-12 text-white overflow-hidden relative">
+            <div class="absolute top-0 left-0 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <p class="text-amber-500 text-xs font-bold uppercase tracking-widest mb-1">Lo que dicen nuestros clientes</p>
+                        <h2 class="text-3xl font-serif font-bold italic">Sabor que habla solo</h2>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <div class="flex">
+                            <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                        </div>
+                        <span class="text-gray-400 text-xs font-bold">5.0 / 5</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3">
+                        <div class="flex gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed italic">"La miel de Quillay es increíble. Se nota que es de verdad — el sabor es completamente diferente a las de supermercado."</p>
+                        <div class="flex items-center gap-2 pt-1">
+                            <div class="w-7 h-7 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-xs">M</div>
+                            <div>
+                                <p class="text-white text-xs font-bold">María José R.</p>
+                                <p class="text-gray-500 text-[10px]">Santiago · Miel de Quillay 1KG</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3">
+                        <div class="flex gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed italic">"Pedí el Pack Dúo para regalar y fue un éxito total. La presentación es impecable y la vela de cera huele delicioso."</p>
+                        <div class="flex items-center gap-2 pt-1">
+                            <div class="w-7 h-7 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-xs">C</div>
+                            <div>
+                                <p class="text-white text-xs font-bold">Cristóbal V.</p>
+                                <p class="text-gray-500 text-[10px]">Rancagua · Pack Dúo Origen</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-5 space-y-3">
+                        <div class="flex gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed italic">"La miel de Corontillo tiene un aroma floral impresionante. Nunca había probado algo así. Ya hice mi segundo pedido."</p>
+                        <div class="flex items-center gap-2 pt-1">
+                            <div class="w-7 h-7 rounded-full bg-amber-500/30 border border-amber-500/40 flex items-center justify-center text-amber-300 font-bold text-xs">A</div>
+                            <div>
+                                <p class="text-white text-xs font-bold">Andrea M.</p>
+                                <p class="text-gray-500 text-[10px]">Valparaíso · Miel de Corontillo 1KG</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -146,9 +302,13 @@
         <div class="bg-orange-600 rounded-[3rem] p-8 md:p-12 text-white relative overflow-hidden mb-12">
             <i data-lucide="flame" class="absolute -right-8 -bottom-8 opacity-20 w-60 h-60"></i>
             <div class="relative z-10 max-w-md">
+                <span class="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-orange-100 text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-4">
+                    <i data-lucide="flame" class="w-3 h-3"></i> Cera 100% de abeja · Stock limitado
+                </span>
                 <h2 class="text-4xl font-serif font-bold mb-4">Luz de Panal</h2>
                 <p class="text-orange-100 mb-0 italic">"Cera virgen recolectada de forma ética, para iluminar tus
                     espacios con el aroma puro de la colmena."</p>
+                <p class="text-orange-200/70 text-xs mt-3">Cada vela es única — moldeada a mano en Litueche. Ideal como regalo o para tu hogar.</p>
             </div>
         </div>
 
@@ -258,9 +418,10 @@
                     <span id="cart-total" class="text-3xl font-serif font-bold text-gray-900">$0</span>
                 </div>
                 <button onclick="checkoutWhatsApp()"
-                    class="w-full bg-neutral-900 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-neutral-800 transition-all active:scale-95 shadow-xl">
-                    <i data-lucide="message-circle" class="w-5 h-5"></i>
-                    CONFIRMAR PEDIDO
+                    class="w-full text-white py-4 rounded-xl font-bold flex items-center justify-center gap-3 transition-all active:scale-95 shadow-xl"
+                    style="background:linear-gradient(135deg,#25D366 0%,#1aab57 100%);box-shadow:0 4px 20px rgba(37,211,102,.35);">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="white"><path d="M16 .5C7.44.5.5 7.44.5 16c0 2.82.74 5.51 2.15 7.88L.5 31.5l7.85-2.05A15.43 15.43 0 0016 31.5C24.56 31.5 31.5 24.56 31.5 16S24.56.5 16 .5zm0 28.07a13.56 13.56 0 01-6.89-1.88l-.49-.29-5.13 1.34 1.37-5-.32-.52A13.57 13.57 0 1116 28.57zm7.44-10.17c-.41-.2-2.4-1.18-2.77-1.32-.37-.13-.64-.2-.9.2-.27.4-1.03 1.32-1.26 1.59-.23.27-.46.3-.87.1-.41-.2-1.73-.64-3.3-2.03-1.22-1.09-2.04-2.43-2.28-2.84-.24-.41-.03-.63.18-.83.18-.18.41-.47.61-.7.2-.24.27-.41.4-.68.13-.27.07-.5-.03-.7-.1-.2-.9-2.17-1.23-2.97-.32-.78-.65-.67-.9-.68h-.77c-.27 0-.7.1-1.07.5-.37.4-1.4 1.37-1.4 3.34s1.43 3.87 1.63 4.14c.2.27 2.82 4.3 6.83 6.03.95.41 1.7.66 2.28.84.96.3 1.83.26 2.52.16.77-.12 2.4-.98 2.74-1.93.34-.95.34-1.76.24-1.93-.1-.17-.37-.27-.77-.47z"/></svg>
+                    CONFIRMAR POR WHATSAPP
                 </button>
             </div>
         </div>
@@ -395,8 +556,8 @@
                         </div>
                         <div class="mt-4 flex items-center justify-between">
                             <span class="text-2xl font-black text-amber-600">$${pack.price.toLocaleString()}</span>
-                            <button onclick='fbqPack(${pack.id}); addToCart(${JSON.stringify(pack).replace(/'/g, "&#39;")})' class="bg-neutral-900 text-white p-3 rounded-2xl hover:bg-amber-600 transition shadow-lg active:scale-90 flex items-center justify-center">
-                                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                            <button onclick='fbqPack(${pack.id}); addToCart(${JSON.stringify(pack).replace(/'/g, "&#39;")})' class="bg-neutral-900 text-white px-4 py-2.5 rounded-2xl hover:bg-amber-600 transition shadow-lg active:scale-90 flex items-center gap-2 text-xs font-bold">
+                                <i data-lucide="shopping-bag" class="w-4 h-4"></i> Agregar
                             </button>
                         </div>
                     </div>
@@ -421,8 +582,8 @@
                     <p class="text-gray-400 text-xs mb-4 flex items-center gap-1"><i data-lucide="qr-code" class="w-3 h-3"></i> ${miel.origin}</p>
                     <div class="flex items-center justify-between">
                         <span class="text-2xl font-black">$${miel.price.toLocaleString()}</span>
-                        <button onclick='addToCart(${JSON.stringify(miel).replace(/'/g, "&#39;")})' class="bg-amber-100 text-amber-900 px-4 py-2 rounded-xl font-bold text-sm hover:bg-amber-500 hover:text-white transition">
-                            Agregar
+                        <button onclick='addToCart(${JSON.stringify(miel).replace(/'/g, "&#39;")})' class="bg-amber-500 text-black px-4 py-2 rounded-xl font-bold text-sm hover:bg-amber-600 transition flex items-center gap-1.5 shadow-sm shadow-amber-500/20 active:scale-95">
+                            <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i> Agregar
                         </button>
                     </div>
                 </div>
@@ -435,14 +596,17 @@
                 <div class="group">
                     <div class="aspect-[4/5] bg-gray-100 rounded-3xl overflow-hidden mb-3 relative">
                         <img src="${candle.image}" alt="${candle.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
-                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                            <button onclick='addToCart(${JSON.stringify(candle).replace(/'/g, "&#39;")})' class="bg-white text-black p-4 rounded-full opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition shadow-2xl flex items-center justify-center">
-                                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-end justify-center pb-4">
+                            <button onclick='addToCart(${JSON.stringify(candle).replace(/'/g, "&#39;")})' class="bg-amber-500 text-black px-4 py-2 rounded-full font-bold text-xs opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition shadow-2xl flex items-center gap-1.5 active:scale-95">
+                                <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i> Agregar
                             </button>
                         </div>
                     </div>
                     <h3 class="text-sm font-bold truncate">${candle.name}</h3>
-                    <p class="text-sm text-amber-600 font-black">$${candle.price.toLocaleString()}</p>
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm text-amber-600 font-black">$${candle.price.toLocaleString()}</p>
+                        <span class="text-[9px] text-gray-400 font-medium">Hecha a mano</span>
+                    </div>
                 </div>
             `).join('');
         }
