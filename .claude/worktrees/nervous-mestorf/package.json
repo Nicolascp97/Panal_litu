@@ -1,0 +1,15 @@
+{
+  "name": "panal_litu-copia",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "echo 'Static site - no build needed'",
+    "dev": "serve ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "^14.2.5"
+  }
+}

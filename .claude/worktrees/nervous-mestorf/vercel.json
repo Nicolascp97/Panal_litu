@@ -4,23 +4,23 @@
   "rewrites": [
     {
       "source": "/",
-      "destination": "/catalogo.html"
+      "destination": "/index.html"
     },
     {
       "source": "/home",
-      "destination": "/index.html"
+      "destination": "/home.html"
     },
     {
       "source": "/catalogo",
       "destination": "/catalogo.html"
     },
     {
-      "source": "/lote-0",
-      "destination": "/lote-0.html"
-    },
-    {
       "source": "/admin",
       "destination": "/admin.html"
+    },
+    {
+      "source": "/shop",
+      "destination": "/shop.html"
     },
     {
       "source": "/blockchain",
